@@ -1,0 +1,17 @@
+/* *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
+
+.scroll::-webkit-scrollbar-thumb{
+  background: #EAB308;
+  border-radius: 20px;
+}
+
+.scroll::-webkit-scrollbar{
+  width: 5px;
+  
+
+}
+

@@ -1,0 +1,73 @@
+.card-container {
+  perspective: 1000px; /* Añade perspectiva para el efecto 3D */
+  width: 400px; /* Ajusta el tamaño según tu diseño */
+  height: 300px;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  background-size: 100%; /* Cambia el tamaño de la imagen */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  position: relative;
+  transform-style: preserve-3d;
+  transition: 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.card-container:hover .card {
+  transform: rotateY(180deg); /* Gira la tarjeta 180 grados en el eje Y */
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 30px;
+  box-shadow: 1px 2px 8px black;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+#textShadow {
+  text-shadow: 0px 0px 5px white, 0px 0px 4px black, 0px 2px 4px black, 0px 4px 4px black;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  z-index: 2;
+  position: relative;
+  transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.5s;
+  transform-origin: center; /* Origina el movimiento en el centro */
+}
+
+.text-3d {
+  /* Efecto de curvatura esférica */
+  transform: rotateY(10deg) translateZ(50px); /* Simula la curvatura de estar sobre una esfera */
+}
+
+.card-container:hover #textShadow {
+  /* Movimiento 3D al pasar el mouse por encima */
+  transform: rotateY(10deg) translateZ(50px) translateX(40px); /* Mueve el texto ligeramente a la derecha */
+  opacity: 0.9; /* Leve desvanecimiento al moverse */
+}
+
+.card-container:hover .card-back #textShadow {
+  /* Movimiento desincronizado del texto con la tarjeta */
+  transform: rotateY(0deg) translateZ(60px) translateX(-250px); /* El texto se desplaza a la izquierda al girar */
+  transition-delay: 0.1s; /* Retrasa el movimiento del texto */
+}
+
+
+
+
+
+
+
+
+

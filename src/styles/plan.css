@@ -1,0 +1,325 @@
+.outBar {
+    margin: 0 20px;
+    position: relative;
+    width: auto; /* Change to auto to fit the size of the image */
+    height: auto; /* Change to auto to fit the size of the image */
+    border: 2px solid yellow;
+    display: inline-block; /* Allows the container to adjust its size to its content */
+}
+
+.floorBar{
+    margin: 0 20px;
+    position: relative;
+    width: auto; /* Change to auto to fit the size of the image */
+    height: auto; /* Change to auto to fit the size of the image */
+    display: inline-block; 
+    
+}
+
+.topBar{
+    margin: 0 20px;
+    position: relative;
+    width: auto; /* Change to auto to fit the size of the image */
+    height: auto; /* Change to auto to fit the size of the image */
+    display: inline-block; 
+    
+}
+
+img {
+    width: 100%; /* Ensure the image takes up the entire container */
+    height: auto; /* Maintain the aspect ratio of the image */
+}
+
+.table1 {
+    position: absolute;
+    border-radius: 100%;
+    width: 16%;
+    height: 16%;
+    top: 36%;
+    left: 34.5%;
+}
+
+.table2 {
+    position: absolute;
+    border-radius: 100%;
+    width: 18%;
+    height: 18%;
+    top: 34%;
+    left: 72%;
+}
+
+.table3 {
+    position: absolute;
+    border-radius: 100%;
+    width: 18%;
+    height: 18%;
+    top: 40.5%;
+    left: 9%;
+}
+
+.table4 {
+    position: absolute;
+    border-radius: 100%;
+    width: 14%;
+    height: 14%;
+    top: 18%;
+    left: 19.5%;
+}
+
+.table5 {
+    position: absolute;
+    border-radius: 100%;
+    width: 14%;
+    height: 14%;
+    top: 18%;
+    left: 49%;
+}
+
+.table6 {
+    position: absolute;
+    border-radius: 100%;
+    width: 14%;
+    height: 14%;
+    top: 39.5%;
+    left: 55.5%;
+}
+
+.table7 {
+    position: absolute;
+    border-radius: 100%;
+    width: 14%;
+    height: 14%;
+    top: 59%;
+    left: 59.5%;
+}
+
+.table8 {
+    position: absolute;
+    border-radius: 100%;
+    width: 14%;
+    height: 14%;
+    top: 59%;
+    left: 42%;
+}
+
+.table9 {
+    position: absolute;
+    border-radius: 100%;
+    width: 14%;
+    height: 14%;
+    top: 59%;
+    left: 26%;
+}
+
+.table10{
+    position: absolute;
+    width: 22%;
+    height: 10%;
+    top: 68%;
+    left: 20%;
+
+}
+
+.table11{
+    position: absolute;
+    width: 14%;
+    height: 8%;
+    top: 64%;
+    left: 46%;
+
+}
+
+.table12{
+    position: absolute;
+    width: 20%;
+    height: 10%;
+    top: 68%;
+    left: 67%;
+
+}
+
+.table13{
+    position: absolute;
+    width: 12%;
+    height: 12%;
+    top: 43%;
+    left: 46.5%;
+
+}
+
+.table14{
+    position: absolute;
+    width: 18%;
+    height: 10%;
+    top: 41%;
+    left: 68.5%;
+
+}
+
+.table15{
+    position: absolute;
+    width: 20%;
+    height: 10%;
+    top: 17.5%;
+    left: 45.5%;
+}
+
+.table16{
+    position: absolute;
+    border-radius: 100%;
+    width: 10%;
+    height: 10%;
+    top: 14.5%;
+    left: 76%;
+}
+
+.table17{
+    position: absolute;
+    width: 20%;
+    height: 8%;
+    top: 21%;
+    left: 65%;
+}
+
+
+.table18{
+    position: absolute;
+    border-radius: 100%;
+    width: 9%;
+    height: 8%;
+    top: 35%;
+    left: 71.5%;
+}
+
+.table19{
+    position: absolute;
+    border-radius: 100%;
+    width: 9%;
+    height: 8%;
+    top: 48.5%;
+    left: 72.5%;
+}
+
+.table20{
+    position: absolute;
+    border-radius: 100%;
+    width: 9%;
+    height: 8%;
+    top: 61%;
+    left: 69%;
+}
+
+.table21{
+    position: absolute;
+    border-radius: 100%;
+    width: 9%;
+    height: 8%;
+    top: 70%;
+    left: 79%;
+}
+
+.table22{
+    position: absolute;
+    border-radius: 100%;
+    width: 9%;
+    height: 8%;
+    top: 78.5%;
+    left: 68.5%;
+}
+
+.table23{
+    position: absolute;
+    border-radius: 100%;
+    width: 9%;
+    height: 8%;
+    top: 70%;
+    left: 59%;
+}
+
+.table24{
+    position: absolute;
+    border-radius: 100%;
+    width: 9%;
+    height: 8%;
+    top: 70%;
+    left: 31%;
+}
+
+.table25{
+    position: absolute;
+    border-radius: 100%;
+    width: 9%;
+    height: 8%;
+    top: 78.5%;
+    left: 21%;
+}
+
+.table26{
+    position: absolute;
+    border-radius: 100%;
+    width: 9%;
+    height: 8%;
+    top: 69.5%;
+    left: 10.5%;
+}
+
+.table27{
+    position: absolute;
+    border-radius: 100%;
+    width: 9%;
+    height: 8%;
+    top: 60.5%;
+    left: 21%;
+}
+
+.table28{
+    position: absolute;
+    border-radius: 100%;
+    width: 9%;
+    height: 8%;
+    top: 48.5%;
+    left: 16.2%;
+}
+
+.table29{
+    position: absolute;
+    border-radius: 100%;
+    width: 9%;
+    height: 8%;
+    top: 35%;
+    left: 19%;
+}
+
+.table30{
+    position: absolute;
+    
+    width: 19%;
+    height: 8%;
+    top: 21%;
+    left: 26%;
+}
+
+.table31{
+    position: absolute;
+    border-radius: 100%;
+    width: 11%;
+    height: 11%;
+    top: 12%;
+    left: 10%;
+}
+
+
+
+
+
+
+
+.tables {
+    border: 2px solid yellow;
+    
+}
+
+.tables:hover {
+    background-color: rgba(0, 0, 0, 0.349);
+    cursor: pointer;
+}

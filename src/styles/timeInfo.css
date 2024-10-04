@@ -1,0 +1,145 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.happy-hours-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 200vh;
+    overflow-x: hidden;
+}
+
+.left-side-container-time-info,
+.right-side-container-time-info {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.left-side-container-time-info {
+    background-image: url("https://st2.depositphotos.com/2931363/6192/i/450/depositphotos_61925325-stock-photo-young-men-stretching-out-glasses.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.image-overlay-container-time-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    color: white;
+    transform: translateX(-100%);
+    transition: transform 0.5s ease-out;
+}
+
+.right-side-container-time-info {
+    background-color: #1a1a1a;
+    color: white;
+    
+    
+}
+
+.content-time-info {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-out;
+}
+
+.h2-container-time-info {
+    font-size: 3rem;
+    color: #ffd700;
+    margin-bottom: 1rem;
+}
+
+.h3-container-time-info{
+    font-size: 1.5rem;
+    color: #ffd700;
+    margin-bottom: 0.5rem;
+}
+
+.location-container-time-info p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.schedule-container-time-info {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.location-container-time-info {
+    text-align: center;
+}
+
+.location-container-time-info h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.divider-container-time-info {
+    width: 1px;
+    background-color: #ffd700;
+    margin: 0 1rem;
+}
+
+.reserve-button-container-time-info {
+    position: relative;
+    background-color: transparent;
+    color: #ffd700;
+    border: 2px solid #ffd700;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    overflow: hidden;
+    transition: color 0.3s ease;
+    right:20px
+}
+
+.reserve-button-container-time-info span {
+    position: relative;
+    z-index: 1;
+}
+
+.reserve-button-container-time-info::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #ffd700;
+    transition: width 0.3s ease;
+}
+
+.reserve-button-container-time-info:hover {
+    color: #1a1a1a;
+}
+
+.reserve-button-container-time-info:hover::before {
+    width: 100%;
+}
+
+.happy-hours-container.in-view .image-overlay-container-time-info,
+.happy-hours-container.in-view .content-time-info {
+    transform: translateX(0);
+}
+

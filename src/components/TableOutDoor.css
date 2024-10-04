@@ -1,0 +1,6 @@
+.bgTableOutDoor{
+    background-image: url('../assets/planoFueraRestaurante.jpg');
+    background-size: 116% 123%; /* Cambia el tamaño de la imagen */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+}

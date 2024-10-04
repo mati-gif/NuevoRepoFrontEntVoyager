@@ -40,7 +40,7 @@ function Login() {
     const navigate = useNavigate();
 
 
-    const status = useSelector((state) => state.authReducer.status);
+    const status = useSelector((state) => state.auth.status);
 
     console.log(status);
 

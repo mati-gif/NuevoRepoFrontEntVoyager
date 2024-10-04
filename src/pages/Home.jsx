@@ -21,9 +21,9 @@ const home = () => {
 
   
   
-//   const dispatch = useDispatch()
-//   useEffect(() => {
-//     // const token = localStorage.getItem("token");
+  const dispatch = useDispatch()
+  useEffect(() => {
+    // const token = localStorage.getItem("token");
     
     if (status != "success") {
         dispatch(loadUser());  // Cargar el usuario si hay un token presente

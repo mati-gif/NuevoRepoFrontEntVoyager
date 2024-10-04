@@ -35,13 +35,13 @@ function ProfileHeader() {
     //     addresses: [{ street: '123 Main St, City, Country', postalCode: '12345' }]
     // })
 
-    const { firstName, lastName, email, phoneNumbers } = useSelector(store => store.authReducer.user)
+    const { firstName, lastName, email, phoneNumbers } = useSelector(store => store.auth.user)
     //     console.log( address);
     //     const {zipCode,nameStreet,streetNumber} = useSelector(store => store.authReducer.client.address)
     // console.log(useSelector(store => store.authReducer.client));
-    const { address} = useSelector(store => store.authReducer.user)
+    const { address} = useSelector(store => store.auth.user)
 
-    console.log(useSelector(store => store.authReducer.user));
+    console.log(useSelector(store => store.auth.user));
 
     
 

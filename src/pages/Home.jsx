@@ -14,10 +14,10 @@ import { loadUser } from '../redux/actions/authAction'
 
 
 const home = () => {
-//   const user = useSelector((store)=> store.authReducer.user)
-//   // const isLoggedIn = useSelector((store)=> store.authReducer)
-//   const status = useSelector((store)=> store.authReducer.status)
-//   console.log(user);
+  const user = useSelector((store)=> store.auth.user)
+  // const isLoggedIn = useSelector((store)=> store.authReducer)
+  const status = useSelector((store)=> store.auth.status)
+  console.log(user);
 
   
   
@@ -25,10 +25,10 @@ const home = () => {
 //   useEffect(() => {
 //     // const token = localStorage.getItem("token");
     
-//     if (status != "success") {
-//         dispatch(loadUser());  // Cargar el usuario si hay un token presente
-//     }
-// }, [status, dispatch]);
+    if (status != "success") {
+        dispatch(loadUser());  // Cargar el usuario si hay un token presente
+    }
+}, [dispatch]);
   return (
     <div className='bgBody flex flex-col min-h-screen'>
       <div className='flex flex-col gap-[50px] mb-[50px]'>

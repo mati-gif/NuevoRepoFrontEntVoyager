@@ -23,26 +23,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import SendOrderForm from './pages/SendOrderForm.jsx';
-
-import DeliveryComponent from './components/DeliveryComponent.jsx';
 import AddAddress from './components/AddAddress.jsx';
 import { loadUser } from './redux/actions/authAction.js';
 import AdminOrder from './components/AdminOrder.jsx';
 
-
-
-
-import DeliveryAdmin from "./pages/DeliveryAdmin.jsx";
-import AdminPostProduct from "./pages/AdminPostProduct.jsx";
-
-import MenuView from "./pages/MenuView.jsx";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-
-import SendOrderForm from "./pages/SendOrderForm.jsx";
-
-import DeliveryComponent from "./components/DeliveryComponent.jsx";
-import AddAddress from "./components/AddAddress.jsx";
 
 function App() {
   // const dispatch = useDispatch();

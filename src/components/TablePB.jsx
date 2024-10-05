@@ -1,6 +1,9 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './TablePB.css'
+import axios from 'axios';
+import { header } from 'framer-motion/client';
+import { useSelector } from 'react-redux';
 
 function TablePB() {
 
@@ -29,7 +32,41 @@ function TablePB() {
     const [bgTable2, setBgTable2] = useState('')
     const [statusIsSelectedTable2, setStatusIsSelectedTable2] = useState('')
     const [isDisabledTable2, setIsDisabledTable2] = useState(false)
+
+    const [allTables, setAllTables] = useState([])
+    const [pbTables, setPbTables] = useState([])
+
+
+    const token = useSelector((state) => state.auth.token)
+    console.log(token)
+    
  
+    useEffect (() => {
+        axios.get("http://localhost:8080/api/tables/", {
+            header: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+        .then(reponse => {
+            console.log(reponse)
+            setAllTables(reponse.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }, [])
+
+    useEffect(() => {
+        if (allTables.length > 0) {
+            const filteredTables = allTables.filter((pbTable) => pbTable.sector === "GROUND_FLOOR");
+            setPbTables(filteredTables);
+            console.log(filteredTables);  // Muestra las tablas filtradas
+        }
+    }, [allTables]);  // Ejecuta el filtro cuando cambie allTables
+    
+    // setPbTables(allTables.filter((pbTable) => pbTable.sector == "GROUND_FLOOR"))
+    // console.log(pbTables)
+    
     //  bg-[#00000077]
     return (
         <div>
@@ -187,5 +224,7 @@ function TablePB() {
 }
 
 export default TablePB
+
+
 
 

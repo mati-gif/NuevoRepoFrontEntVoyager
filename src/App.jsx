@@ -22,6 +22,9 @@ import AddAddress from './components/AddAddress.jsx';
 import { loadUser } from './redux/actions/authAction.js';
 import AdminOrder from './components/AdminOrder.jsx';
 
+
+import DeliveryComponent from "./components/DeliveryComponent.jsx";
+
 function App() {
   // const dispatch = useDispatch(
   // useEffect(() => {

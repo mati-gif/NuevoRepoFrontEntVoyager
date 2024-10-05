@@ -26,7 +26,7 @@ const CartModal = ({ cartItems, onClose, onSendCart, onRemoveFromCart, onQuantit
                           type="number"
                           value={item.quantity}
                           onChange={(e) => onQuantityChange(index, parseInt(e.target.value))}
-                          className="w-16 border border-gray-300 rounded-lg ml-2 p-1 text-center focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                          className="w-16 bg-gray-100 border-2 border-gray-300 rounded-lg ml-2 p-2 text-center focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-200 shadow-sm hover:bg-white"
                         />
                       </div>
                     </div>

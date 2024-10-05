@@ -3,8 +3,11 @@ import { saveCartProducts } from "../actions/cartActions";
 
 const initialState = {
     productos:[
+        
+    
 
-    ]
+    ],
+    status : "idle"
 }
 
 export const cartReducer = createReducer(initialState, (builder) => {
@@ -12,7 +15,8 @@ export const cartReducer = createReducer(initialState, (builder) => {
         .addCase(saveCartProducts, (state,action) => {
             return{
                 ...state,
-                productos: action.payload
+                productos: action.payload,
+                status : "success"
 
             }
         })})

@@ -62,10 +62,10 @@ function Reservation() {
       {/* <ReservationComponent sector={sector} /> */}
       <div className='mb-[50px]'>
 
-       <ButtonWaveEffect />
-       <ComponenteMesaPrueba/>
-       <TablePB/>
-       <TableOutDoor/>
+        <ButtonWaveEffect />
+        <ComponenteMesaPrueba />
+        <TablePB />
+        <TableOutDoor />
 
       </div>
       {/* <button

@@ -5,7 +5,7 @@ import CustomerButton from './CustomerButton';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
-import ProfileHeader from './profileHeader';
+import ProfileHeader from './ProfileHeader';
 
 const Header = () => {
   const location = useLocation();
@@ -54,7 +54,7 @@ const Header = () => {
   //   // }
   // }
 
-console.log(status);
+  console.log(status);
 
   return (
 
@@ -77,6 +77,19 @@ console.log(status);
               {/* Navegación centrada */}
               <nav aria-label="Global" className="hidden md:flex md:justify-center flex-1">
                 <ul className="flex items-center gap-24 text-lg">
+
+                  <li
+                    className={`transition transform ${location.pathname === '/' ? 'scale-150' : 'hover:scale-125'
+                      }`}
+                  >
+                    <Link
+                      to="/"
+                      className={`text-[#E6BB4D] text-lg font-semibold transition ${location.pathname === '/' ? 'text-[#FFD700]' : 'hover:text-[#FFD700]'
+                        }`}
+                    >
+                      Home
+                    </Link>
+                  </li>
                   <li
                     className={`transition transform ${location.pathname === '/menu' ? 'scale-150' : 'hover:scale-125'
                       }`}
@@ -101,52 +114,52 @@ console.log(status);
                   <li className="transition transform hover:scale-125">
                     <Link className="text-[#E6BB4D] text-lg font-semibold transition hover:text-[#FFD700]" to="/reseña">Reseña</Link>
                   </li>
-                  <li className="transition transform hover:scale-125">
+                  {/* <li className="transition transform hover:scale-125">
                     <Link className="text-[#E6BB4D] text-lg font-semibold transition hover:text-[#FFD700]" to="/dfasdas">dfasdas</Link>
-                  </li>
+                  </li> */}
                   <ProfileHeader />
                 </ul>
               </nav>
             </div>
             :
             <div className="flex h-16 items-center justify-between">
-            {/* Logo */}
-            <div className="flex-shrink-0">
-              <Link className="block text-teal-600" to="/">
-                <img src={logo} alt="logo" className="w-[120px]" />
-              </Link>
-            </div>
+              {/* Logo */}
+              <div className="flex-shrink-0">
+                <Link className="block text-teal-600" to="/">
+                  <img src={logo} alt="logo" className="w-[120px]" />
+                </Link>
+              </div>
 
-            {/* Navegación centrada */}
-            <nav aria-label="Global" className="hidden md:flex md:justify-center flex-1">
-              <ul className="flex items-center gap-10 text-lg">
+              {/* Navegación centrada */}
+              <nav aria-label="Global" className="hidden md:flex md:justify-center flex-1">
+                <ul className="flex items-center gap-10 text-lg">
 
-                <li
-                  className={`transition transform ${location.pathname === '/' ? 'scale-150' : 'hover:scale-125'
-                    }`}
-                >
-                  <Link
-                    to="/"
-                    className={`text-[#E6BB4D] text-lg font-semibold transition ${location.pathname === '/' ? 'text-[#FFD700]' : 'hover:text-[#FFD700]'
+                  <li
+                    className={`transition transform ${location.pathname === '/' ? 'scale-150' : 'hover:scale-125'
                       }`}
                   >
-                  Home
-                  </Link>
-                </li>
-                
-                <li
-                  className={`transition transform ${location.pathname === '/menu' ? 'scale-150' : 'hover:scale-125'
-                    }`}
-                >
-                  <Link
-                    to="/menu"
-                    className={`text-[#E6BB4D] text-lg font-semibold transition ${location.pathname === '/menu' ? 'text-[#FFD700]' : 'hover:text-[#FFD700]'
+                    <Link
+                      to="/"
+                      className={`text-[#E6BB4D] text-lg font-semibold transition ${location.pathname === '/' ? 'text-[#FFD700]' : 'hover:text-[#FFD700]'
+                        }`}
+                    >
+                      Home
+                    </Link>
+                  </li>
+
+                  <li
+                    className={`transition transform ${location.pathname === '/menu' ? 'scale-150' : 'hover:scale-125'
                       }`}
                   >
-                    Menu
-                  </Link>
-                </li>
-                {/* <li className={`transition transform ${location.pathname === '/deliveryadmin' ? ' scale-150' : 'hover:scale-125'
+                    <Link
+                      to="/menu"
+                      className={`text-[#E6BB4D] text-lg font-semibold transition ${location.pathname === '/menu' ? 'text-[#FFD700]' : 'hover:text-[#FFD700]'
+                        }`}
+                    >
+                      Menu
+                    </Link>
+                  </li>
+                  {/* <li className={`transition transform ${location.pathname === '/deliveryadmin' ? ' scale-150' : 'hover:scale-125'
 
                   }`}
                 >
@@ -161,31 +174,31 @@ console.log(status);
                 <li className="transition transform hover:scale-125">
                   <Link className="text-[#E6BB4D] text-lg font-semibold transition hover:text-[#FFD700]" to="/dfasdas">dfasdas</Link>
                 </li> */}
-              </ul>
-            </nav>
+                </ul>
+              </nav>
 
-            {/* Botones de Login y Register */}
-            <div className="flex items-center gap-4">
-              <Link to="/login" >
-                <CustomerButton
-                  text="Login"
-                  onClick={() => console.log('Login clicked!')}
-                  textColor="text-[#0F1D15]" // Cambia al color deseado
-                  bgColor="bg-[#E6BB4D]" // Cambia al color de fondo deseado
-                  hoverBgColor="bg-[#FFD700]" // Cambia al color de fondo en hover deseado
-                />
-              </Link>
-              <Link to="/register">
-                <CustomerButton
-                  text="Register"
-                  onClick={() => console.log('Register clicked!')}
-                  textColor="text-[#0F1D15]" // Cambia al color deseado
-                  bgColor="bg-[#E6BB4D]" // Cambia al color de fondo deseado
-                  hoverBgColor="bg-[#FFD700]" // Cambia al color de fondo en hover deseado
-                />
-              </Link>
+              {/* Botones de Login y Register */}
+              <div className="flex items-center gap-4">
+                <Link to="/login" >
+                  <CustomerButton
+                    text="Login"
+                    onClick={() => console.log('Login clicked!')}
+                    textColor="text-[#0F1D15]" // Cambia al color deseado
+                    bgColor="bg-[#E6BB4D]" // Cambia al color de fondo deseado
+                    hoverBgColor="bg-[#FFD700]" // Cambia al color de fondo en hover deseado
+                  />
+                </Link>
+                <Link to="/register">
+                  <CustomerButton
+                    text="Register"
+                    onClick={() => console.log('Register clicked!')}
+                    textColor="text-[#0F1D15]" // Cambia al color deseado
+                    bgColor="bg-[#E6BB4D]" // Cambia al color de fondo deseado
+                    hoverBgColor="bg-[#FFD700]" // Cambia al color de fondo en hover deseado
+                  />
+                </Link>
+              </div>
             </div>
-          </div>
           }
 
         </div>

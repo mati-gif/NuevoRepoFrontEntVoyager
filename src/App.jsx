@@ -15,7 +15,7 @@ import Register from './pages/Register.jsx';
 import ProductDetails from './pages/ProductDetails.jsx';
 import Cart from './pages/Cart.jsx';
 
-import DeliveryAdmin from './pages/DeliveryAdmin.jsx';
+
 import AdminPostProduct from './pages/AdminPostProduct.jsx';
 
 import MenuView from './pages/MenuView.jsx';
@@ -33,16 +33,7 @@ import AdminOrder from './components/AdminOrder.jsx';
 
 
 import DeliveryAdmin from "./pages/DeliveryAdmin.jsx";
-import AdminPostProduct from "./pages/AdminPostProduct.jsx";
 
-import MenuView from "./pages/MenuView.jsx";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-
-import SendOrderForm from "./pages/SendOrderForm.jsx";
-
-import DeliveryComponent from "./components/DeliveryComponent.jsx";
-import AddAddress from "./components/AddAddress.jsx";
 
 function App() {
   // const dispatch = useDispatch();

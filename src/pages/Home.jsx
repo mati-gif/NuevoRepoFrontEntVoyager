@@ -8,6 +8,7 @@ import PublicityComponent from '../components/PublicityComponent'
 import MapComponent from '../components/MapComponent'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadUser } from '../redux/actions/authAction'
+import DebitCardPayment from '../components/DebitCardPayment'
 
 
 
@@ -35,7 +36,8 @@ const home = () => {
         <Carrousel />
         <Menu />
         <PopUpProductWindow/>
-        <TimeInfoComponent/>
+        <TimeInfoComponent/> 
+        <DebitCardPayment/>
         <PublicityComponent/>
         <MapComponent/>
       </div>

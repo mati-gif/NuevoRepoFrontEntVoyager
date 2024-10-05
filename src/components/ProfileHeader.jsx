@@ -39,13 +39,13 @@ function ProfileHeader() {
     //     console.log( address);
     //     const {zipCode,nameStreet,streetNumber} = useSelector(store => store.authReducer.client.address)
     // console.log(useSelector(store => store.authReducer.client));
-    const { address} = useSelector(store => store.auth.user)
+    const { address } = useSelector(store => store.auth.user)
 
     console.log(useSelector(store => store.auth.user));
 
-    
 
-    
+
+
 
     const handleToggleDropdown = () => setIsOpen(!isOpen)
 
@@ -77,6 +77,55 @@ function ProfileHeader() {
             }))
         }
     }
+
+
+    // const viewAllAddress = () => {
+
+    //     Swal.fire({
+    //         title: 'List of Items',
+    //         html: `
+    //             <>
+
+    //                 ${address.map((address, index) => (
+    //                     <div key={index} className="flex items-start mb-2">
+    //                         <MapPin size={16} className="mr-2 mt-1" />
+    //                         <div>
+    //                             <div>{address.nameStreet + " " + address.streetNumber}</div>
+    //                             <div><span className="font-bold">Postal Code:</span> {address.zipCode}</div>
+    //                         </div>
+    //                     </div>
+    //                 ))}
+    //             </>
+    //         `,
+    //         icon: 'info',
+    //         confirmButtonText: 'Close'
+    //     });
+    // }
+
+
+
+    const viewAllAddress = () => {
+        const htmlContent = address.map((address, index) => (
+            `<div key=${index} class="flex items-start mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 mt-1" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 0C5.791 0 4 1.791 4 4c0 3.48 4 8 4 8s4-4.52 4-8c0-2.209-1.791-4-4-4zm0 6a2 2 0 1 1 .001-3.999A2 2 0 0 1 8 6z"/>
+                </svg>
+                <div>
+                    <div>${address.nameStreet} ${address.streetNumber}</div>
+                    <div><span class="font-bold">Postal Code:</span> ${address.zipCode}</div>
+                </div>
+            </div>`
+        )).join(""); // Usamos join para convertir el array en una única cadena de HTML
+    
+        Swal.fire({
+            title: 'List of Items',
+            html: htmlContent, // Aquí va el HTML generado
+            icon: 'info',
+            confirmButtonText: 'Close'
+        });
+    };
+
+
 
 
     const handleClick = () => {
@@ -157,7 +206,7 @@ function ProfileHeader() {
                             </div>
 
                             <h3 className="font-bold mt-4 mb-2">Addresses:</h3>
-                            {address.map((address, index) => (
+                            {address.slice(0, 2).map((address, index) => (
                                 <div key={index} className="flex items-start mb-2">
                                     <MapPin size={16} className="mr-2 mt-1" />
                                     <div>
@@ -167,14 +216,19 @@ function ProfileHeader() {
                                 </div>
                             ))}
                             <Link to="/addAddress">
-                            <button
-                                onClick={handleAddAddress}
-                                className="flex items-center text-blue-500 bg-transparent border-none cursor-pointer text-base p-0 hover:opacity-80"
-                            >
-                                <Plus size={16} className="mr-2" />
-                                Add Address
-                            </button>
+                                <button
+                                    onClick={handleAddAddress}
+                                    className="flex items-center text-blue-500 bg-transparent border-none cursor-pointer text-base p-0 hover:opacity-80"
+                                >
+                                    <Plus size={16} className="mr-2" />
+                                    Add Address
+                                </button>
                             </Link>
+                            <button
+                                onClick={viewAllAddress}
+                                className="flex items-center text-blue-500 bg-transparent border-none cursor-pointer text-base p-0 hover:opacity-80">
+                                View all address
+                            </button>
                         </div>
                     </div>
                 )}

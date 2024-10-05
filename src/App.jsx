@@ -6,9 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login.jsx";
 import ReservationComponent from "./components/ReservationComponent.jsx";
 import Reservation from "./pages/Reservation.jsx";
-
-
-
 import Register from './pages/Register.jsx';
 import ProductDetails from './pages/ProductDetails.jsx';
 import Cart from './pages/Cart.jsx';
@@ -21,33 +18,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import SendOrderForm from './pages/SendOrderForm.jsx';
-
-import DeliveryComponent from './components/DeliveryComponent.jsx';
 import AddAddress from './components/AddAddress.jsx';
 import { loadUser } from './redux/actions/authAction.js';
 import AdminOrder from './components/AdminOrder.jsx';
 
-
-
-
-import DeliveryAdmin from "./pages/DeliveryAdmin.jsx";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function App() {
-  // const dispatch = useDispatch();
-
+  // const dispatch = useDispatch(
   // useEffect(() => {
   //     const token = localStorage.getItem('token');
   //     console.log(token);

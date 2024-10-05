@@ -10,7 +10,7 @@ const DebitCardPayment = () => {
     const [cardType, setCardType] = useState('silver')
     const [isCardTypeOpen, setIsCardTypeOpen] = useState(false)
     const [isFlipped, setIsFlipped] = useState(false)
-    const [dni,setDni] = useState("")
+
 
     const formatCardNumber = (value) => {
         const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
@@ -48,6 +48,8 @@ const DebitCardPayment = () => {
             setCvv(value)
         }
     }
+
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -184,15 +186,7 @@ const DebitCardPayment = () => {
                                 whileFocus={{ scale: 1.02 }}
                             />
 
-                            <motion.input
-                                type="text"
-                                value={cardHolder}
-                                onChange={(e) => setCardHolder(e.target.value.toUpperCase())}
-                                className="w-full bg-white bg-opacity-20 text-white placeholder-gray-300 py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                                placeholder="DNI"
-                                required
-                                whileFocus={{ scale: 1.02 }}
-                            />
+
                             <div className="flex space-x-4">
                                 <motion.input
                                     type="text"

@@ -15,6 +15,7 @@ const MainLayout = () => {
   
   
   return (
+
     <div className="flex flex-col min-h-screen">
       {/* <Header />
       <AdminHeader/> */}
@@ -25,6 +26,9 @@ const MainLayout = () => {
       ) : (
         <Header /> // Mostrar el header normal
       )}
+
+
+
 
       <main className="flex-grow bg-black">
         <Outlet />

@@ -3,13 +3,9 @@ import axios from 'axios';
 
 const EditProducts = () => {
     const [products, setProducts] = useState([]);
-    const [selectedProductId, setSelectedProductId] = useState(null); // Initially no product is selected
-
-    const handleDelete = (id) => {
-        // Here you can add an API call to delete the product if needed
-        setProducts(prevProducts => prevProducts.filter(product => product.id !== id));
-        setSelectedProductId(null); // Deselect product after deletion
-    };
+    const [selectedProductId, setSelectedProductId] = useState(null);
+    const [productToDelete, setProductToDelete] = useState(null); // Store product to be deleted
+    const [isModalOpen, setIsModalOpen] = useState(false); // Control modal visibility
 
     // Fetch products from the API
     useEffect(() => {
@@ -24,9 +20,33 @@ const EditProducts = () => {
         fetchProducts();
     }, []);
 
-    // Function to handle product selection
+    // Function to handle product selection for editing
     const handleEditClick = (id) => {
-        setSelectedProductId(id); // Set the selected product ID for editing
+        setSelectedProductId(id);
+    };
+
+    // Function to open the modal and set the product to delete
+    const handleDeleteClick = (id) => {
+        setProductToDelete(id);
+        setIsModalOpen(true); // Open the modal
+    };
+
+    // Function to confirm deletion
+    const confirmDelete = async () => {
+        try {
+            await axios.delete(`http://localhost:8080/api/products/delete/${productToDelete}`);
+            setProducts(prevProducts => prevProducts.filter(product => product.id !== productToDelete));
+            setIsModalOpen(false); // Close the modal
+            setSelectedProductId(null); // Deselect product after deletion
+        } catch (error) {
+            console.error('Error deleting product:', error);
+        }
+    };
+
+    // Function to close the modal without deleting
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setProductToDelete(null);
     };
 
     return (
@@ -38,14 +58,13 @@ const EditProducts = () => {
                         <img 
                             src={product.img} 
                             alt={product.nameProduct} 
-                            className="w-1/3 h-full object-cover rounded-md mr-4" // Set image to take up 1/3 of the card
+                            className="w-1/3 h-full object-cover rounded-md mr-4"
                         />
                         <div className="flex-grow">
                             <h2 className="text-xl font-semibold">{product.nameProduct}</h2>
                             <p className="text-gray-700">Price: <span className="font-bold">${product.priceProduct}</span></p>
                             <p className="text-gray-700">Category: <span className="font-bold">{product.category}</span></p>
                             <p className="text-gray-700">Details: <span className="font-bold">{product.details}</span></p>
-                            {/* Add buttons for editing and deleting */}
                             <div className="flex space-x-2 mt-2">
                                 <button 
                                     onClick={() => handleEditClick(product.id)} 
@@ -54,7 +73,7 @@ const EditProducts = () => {
                                     Edit
                                 </button>
                                 <button 
-                                    onClick={() => handleDelete(product.id)} 
+                                    onClick={() => handleDeleteClick(product.id)} 
                                     className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
                                 >
                                     Delete
@@ -64,8 +83,30 @@ const EditProducts = () => {
                     </div>
                 ))}
             </div>
-            {/* Render the edit form if a product is selected */}
-            {selectedProductId && <div className="mt-4"> {/* Your edit form goes here */} </div>}
+
+            {/* Render the modal for deletion confirmation */}
+            {isModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                    <div className="bg-white p-6 rounded-lg shadow-lg">
+                        <h2 className="text-xl font-semibold mb-4">Confirm Deletion</h2>
+                        <p>Are you sure you want to delete this product?</p>
+                        <div className="mt-4 flex space-x-4">
+                            <button
+                                onClick={confirmDelete}
+                                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+                            >
+                                Confirm
+                            </button>
+                            <button
+                                onClick={closeModal}
+                                className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 transition"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

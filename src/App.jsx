@@ -18,13 +18,15 @@ import DeliveryAdmin from './pages/DeliveryAdmin.jsx';
 import AdminPostProduct from './pages/AdminPostProduct.jsx';
 
 import MenuView from './pages/MenuView.jsx';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import SendOrderForm from './pages/SendOrderForm.jsx';
 
 import DeliveryComponent from './components/DeliveryComponent.jsx';
 import AddAddress from './components/AddAddress.jsx';
+import { loadUser } from './redux/actions/authAction.js';
+import AdminOrder from './components/AdminOrder.jsx';
 
 
 
@@ -39,42 +41,60 @@ function App() {
   // useEffect(() => {
   //     const token = localStorage.getItem('token');
   //     console.log(token);
-      
+
   //     if (token) {
   //         // Si hay un token en localStorage, actualiza el estado de autenticación
   //         dispatch(loginAction({ token, isLoggedIn: true }));
   //     }
   // }, [dispatch]);
-  
-  
+
+  const auth = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.auth.user)
+  console.log(auth);
+  console.log(user);
+
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(loadUser()); // Cargar la información del usuario autenticado al montar la app
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Routes>
-        {/* Main Layout wrapping the routes */}
+        {/* Main Layout wrapping the routes (estas rutas ve la perosna que esta logueada) */}
         <Route path="/" element={<MainLayout />}>
           {/* Home Route */}
           <Route index element={<Home />} className="main" />
-          <Route path="/admin" element={<Admin />} className="admin" />
-
           <Route path="/deliveryadmin" element={<DeliveryAdmin />} className="deliveryadmin" />
-          <Route path="/adminform" element={<AdminPostProduct />} className="adminform" />
-
-
-
-          <Route path='/sendOrder' element={<SendOrderForm/>} className="sendOrderForm"></Route>
-
-
-
+          {/* <Route path="/adminform" element={<AdminPostProduct />} className="adminform" /> */}
+          <Route path='/sendOrder' element={<SendOrderForm />} className="sendOrderForm"></Route>
           <Route path="/menu" element={<MenuView />} className="" />
-          <Route path='/addAddress' element={<AddAddress/>}/>
+          <Route path='/addAddress' element={<AddAddress />} />
+
+          {/* Rutas protegidas para usuarios que contienen "admin" en su email */}
+          {auth && user?.email?.includes('admin') && (
+            <>
+              <Route path="/admin" element={<Admin />} className="admin" />
+              <Route path='/adminOrder' element={<AdminOrder />} />
+              {/* <Route path="/deliveryadmin" element={<DeliveryAdmin />} className="deliveryadmin" /> */}
+              <Route path="/adminform" element={<AdminPostProduct />} className="adminform" />
+
+
+
+            </>
+          )}
+
         </Route>
-        <Route path='/login' element={<Login/>} />
 
-        <Route path='/reservation' element={<Reservation/>} />
+        {/* Main Layout wrapping the routes (estas rutas ve la persona que no esta logueada) */}
 
-        <Route path='/register' element={<Register/>} />
-        <Route path='/productDetails' element={<ProductDetails/>} />
-        <Route path='/cart' element={<Cart/>}/>
+        <Route path='/login' element={<Login />} />
+        <Route path='/reservation' element={<Reservation />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/productDetails' element={<ProductDetails />} />
+        <Route path='/cart' element={<Cart />} />
 
 
       </Routes>

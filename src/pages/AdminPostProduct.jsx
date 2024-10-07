@@ -68,8 +68,8 @@ const AdminPostProduct = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-4 mt-[150px]">
-      <div className="mb-4 w-full flex flex-col justify-center items-center">
+    <div className="bground min-h-screen flex flex-col items-center justify-center p-4 ">
+      <div className="mb-4 w-full flex flex-col justify-center items-center mt-[150px]">
         <div className="flex gap-20">
           <button
             onClick={() => setActiveComponent("form")}
@@ -193,7 +193,7 @@ const AdminPostProduct = () => {
             />
           </div>
 
-          <ButtonWaveEffect />
+          <ButtonWaveEffect text="Send Product" />
         </form>
       )}
 

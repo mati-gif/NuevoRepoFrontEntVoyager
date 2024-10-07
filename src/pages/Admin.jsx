@@ -5,9 +5,9 @@ import EditProducts from '../components/EditProducts';
 
 const Admin = () => {
   return (
-    <div>
+    <div className='bground border border-black'>
       <AdminOrder />
-      <EditProducts/>
+      {/* <EditProducts/> */}
     </div>
   );
 }

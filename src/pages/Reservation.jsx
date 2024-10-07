@@ -16,6 +16,12 @@ function Reservation() {
   const [selectedSectorFirstFloor, setSelectedSectorFirstFloor] = useState('')
   const [selectedSectorOutDoor, setSelectedSectorOutDoor] = useState('')
 
+  const [showPb, setShowPb] = useState('')
+  const [showFirstFloor, setShowFirstFloor] = useState('hidden')
+  const [showOutDoor, setShowOutDoor] = useState('hidden')
+
+
+
 
   return (
     <div className='bgViewReservation flex flex-col min-h-screen'>
@@ -29,6 +35,9 @@ function Reservation() {
                 setSelectedSectorFirstFloor('')
                 setSelectedSectorGroundFloor('border-[3px] border-amber-500')
                 setSector('pb')
+                setShowPb('')
+                setShowFirstFloor('hidden')
+                setShowOutDoor('hidden')
               }}
             >
               <MapPin className="text-[#dd9000] mb-2" />
@@ -40,6 +49,9 @@ function Reservation() {
                 setSelectedSectorGroundFloor('')
                 setSelectedSectorFirstFloor('border-[3px] border-amber-500')
                 setSector('firstFloor')
+                setShowPb('hidden')
+                setShowFirstFloor('')
+                setShowOutDoor('hidden')
               }}
             >
               <Utensils className="text-[#dd9000] mb-2" />
@@ -51,6 +63,9 @@ function Reservation() {
                 setSelectedSectorGroundFloor('')
                 setSelectedSectorOutDoor('border-[3px] border-amber-500')
                 setSector('outDoor')
+                setShowPb('hidden')
+                setShowFirstFloor('hidden')
+                setShowOutDoor('')
               }}
             >
               <Sun className="text-[#dd9000] mb-2" />
@@ -61,11 +76,18 @@ function Reservation() {
       </div>
       {/* <ReservationComponent sector={sector} /> */}
       <div className='mb-[50px]'>
-
         <ButtonWaveEffect />
-        <ComponenteMesaPrueba />
-        <TablePB />
-        <TableOutDoor />
+        <div className={`${showPb}`}>
+          <TablePB />
+        </div>
+        <div className={`${showFirstFloor}`}>
+          <ComponenteMesaPrueba />
+        </div>
+        <div className={`${showOutDoor}`}>
+          <TableOutDoor />
+        </div>
+
+
 
       </div>
       {/* <button

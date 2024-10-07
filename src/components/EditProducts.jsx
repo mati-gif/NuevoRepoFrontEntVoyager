@@ -182,13 +182,13 @@ const EditProducts = () => {
                                     onClick={() => handleEditClick(product.id)}
                                     className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
                                 >
-                                    Editar
+                                    Edit
                                 </button>
                                 <button
                                     onClick={() => handleDeleteClick(product.id)}
                                     className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
                                 >
-                                    Eliminar
+                                    Delete
                                 </button>
                             </div>
                         </div>

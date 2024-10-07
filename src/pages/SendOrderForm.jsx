@@ -1,90 +1,51 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import Swal from "sweetalert2";
+import { saveCartProducts } from "../redux/actions/cartActions";
 import { loadUser } from "../redux/actions/authAction";
-import { useNavigate } from "react-router-dom";  // Para redirigir
+import axios from "axios"; // Importar axios
+import { useNavigate } from "react-router-dom";
+
 
 const SendOrderForm = () => {
   const dispatch = useDispatch();
   const productsQuantity = useSelector((store) => store.cart.productos);
   const user = useSelector((store) => store.auth.user);
-  const [orderType, setOrderType] = useState(""); // Tipo de orden (Delivery o Takeout)
-  const [address, setAddress] = useState(""); // Dirección seleccionada
-  const [addresses, setAddresses] = useState([]); // Lista de direcciones
-  const navigate = useNavigate();  // Navegación para redirigir tras éxito
+  const [quantitys, setQuantitis] = useState([]);
+  const [productId, setProductsId] = useState([]);
+  const [orderType, setOrderType] = useState(""); 
+  const [address, setAddress] = useState(""); 
+  const [addresses, setAddresses] = useState([]);
+  const navigate = useNavigate() // Estado para las direcciones del usuario
+
+
+  localStorage.setItem("address", address);
+  localStorage.setItem("orderType", orderType)
 
   useEffect(() => {
-    // Cargar usuario y direcciones
     if (user.firstName === "") {
       dispatch(loadUser());
     } else if (user.address) {
-      setAddresses(user.address);
+      setAddresses(user.address); // Asigna las direcciones del usuario al estado
     }
   }, [dispatch, user]);
 
+  console.log(addresses);
+
   const producstSelected = JSON.parse(localStorage.getItem("product"));
-  const ids = producstSelected.map((product) => product.idProduct);
-  const quantity = producstSelected.map((product) => product.quantity);
 
-  // Calcular el total de la compra
-  const totalPrice = producstSelected.reduce(
-    (acc, product) => acc + product.priceProduct * product.quantity,
-    0
-  );
 
-  // Manejar el envío del formulario
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    Swal.fire({
-      title: 'Confirm Your Order',
-      html: `
-        <h4>Your Order</h4>
-        ${producstSelected.map(item => `
-          <p>${item.nameProduct} - Quantity: ${item.quantity} - Unit Price: $${item.priceProduct.toFixed(2)}</p>
-        `).join('')}
-        <p><strong>Total:</strong> $${totalPrice.toFixed(2)}</p>
-      `,
-      showCancelButton: true,
-      confirmButtonText: 'Confirm Order',
-      cancelButtonText: 'Cancel',
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        // Crear el cuerpo de la petición con los datos de la orden
-        const dataPost = {
-          productIds: ids,
-          quantities: quantity,
-          addressId: orderType === "DELIVERY" ? address : null,  // Dirección solo si es DELIVERY
-          orderType: orderType,  // Tipo de orden
-        };
-
-        try {
-          const token = localStorage.getItem('token');
-          // Enviar la solicitud al backend
-          const response = await axios.post("http://localhost:8080/api/orders/create", dataPost, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-  
-          if (response.data) {
-            Swal.fire('Success', 'Order created successfully!', 'success');
-            // Redirigir a la página de pago
-            navigate(`/paymentGatewayPage`, {
-              state: { orderId: response.data.orderId, totalAmount: totalPrice }
-            });
-          }
-        } catch (error) {
-          console.error("Error submitting order:", error);
-          Swal.fire('Error', 'Failed to create order. Please try again.', 'error');
-        }
-      }
-    });
+    navigate("/payments")
   };
 
   const handleOrderTypeChange = (e) => {
     setOrderType(e.target.value);
   };
+
+  const totalPrice = producstSelected.reduce(
+    (acc, product) => acc + product.priceProduct * product.quantity,
+    0
+  );
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-900 items-center justify-center p-4 mt-[100px]">
@@ -93,7 +54,13 @@ const SendOrderForm = () => {
           Review Your Order
         </h1>
 
-        <form id="orderForm" onSubmit={handleSubmit} className="bg-gray-800 rounded-lg shadow-2xl p-8 w-full flex flex-col gap-6">
+        {/* Productos seleccionados */}
+        <form
+          id="orderForm"
+          onSubmit={handleSubmit}
+          className="bg-gray-800 rounded-lg shadow-2xl p-8 w-full flex flex-col gap-6"
+        >
+          {/* Tipo de orden */}
           <div className="mb-4">
             <label className="block text-xl font-semibold text-yellow-400 mb-2">
               Order Type:
@@ -122,6 +89,7 @@ const SendOrderForm = () => {
             </div>
           </div>
 
+          {/* Dirección (si selecciona Delivery) */}
           {orderType === "DELIVERY" && (
             <div className="mb-6">
               <label className="block text-lg font-semibold text-yellow-400 mb-2">
@@ -129,13 +97,14 @@ const SendOrderForm = () => {
               </label>
               <select
                 value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                onChange={(e) => setAddress(e.target.value)} // Almacena el ID de la dirección
                 className="mt-1 block w-full p-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none transition-all duration-200"
                 required
               >
                 <option value="">Select Address</option>
+                {/* Map sobre las direcciones del usuario */}
                 {addresses.map((addr, index) => (
-                  <option key={index} value={addr.id}>
+                  <option key={index} value={addr.id}> {/* Asignamos el ID */}
                     {addr.nameStreet} {addr.streetNumber}
                   </option>
                 ))}
@@ -149,22 +118,29 @@ const SendOrderForm = () => {
                 key={product.idProduct}
                 className="flex flex-col sm:flex-row justify-between items-center bg-gray-800 p-4 mb-4 rounded-lg shadow-lg border border-gray-700 w-full"
               >
+                {/* Nombre del producto */}
                 <p className="text-yellow-300 text-lg font-bold mb-2 sm:mb-0 w-[40%]">
                   {product.nameProduct}
                 </p>
+
+                {/* Cantidad */}
                 <p className="text-gray-400 text-center text-sm sm:text-base w-[20%]">
                   X {product.quantity}
                 </p>
+
+                {/* Precio total */}
                 <p className="text-white font-medium text-sm sm:text-base text-center w-[40%]">
                   ${product.priceProduct * product.quantity}
                 </p>
               </div>
             ))}
 
+          {/* Precio total de todos los productos */}
           <div className="mt-6 bg-gray-700 p-4 rounded-lg text-white text-lg font-semibold text-right">
             <p>Total Order Price: ${totalPrice.toFixed(2)}</p>
           </div>
 
+          {/* Botón para enviar la orden */}
           <button
             type="submit"
             className="mt-6 p-3 bg-yellow-500 text-white text-lg font-bold rounded-lg hover:bg-yellow-600 transition-all duration-200 w-full"

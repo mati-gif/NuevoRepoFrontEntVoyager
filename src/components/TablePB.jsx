@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "./Button";
 import ButtonWaveEffect from "./ButtonWaveEffect";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const TablePB = ({ token }) => {
   const [selectedDate, setSelectedDate] = useState("");
@@ -81,6 +83,9 @@ const TablePB = ({ token }) => {
 
   const timeSlots = ["20:00", "21:30", "23:00"];
 
+
+  const navigate = useNavigate();
+
   const handleReservation = (e) => {
     e.preventDefault();
 
@@ -126,11 +131,31 @@ const TablePB = ({ token }) => {
       .then((response) => {
         console.log("Reservation created:", response.data);
         // Add logic to handle success, e.g., showing a success message or resetting fields
+
+
+        Swal.fire({
+          icon: 'success',
+          title: '',
+          text: 'your reserved has been created succesfully',
+          // timer: 2000, // El temporizador dura 3 segundos (3000 milisegundos)
+          showConfirmButton: true, // Oculta el botón de confirmación
+          willClose: () => {
+              navigate("/"); // Navegar después de que la alerta desaparezca
+          }
+      });
+
+
+
+
       })
       .catch((error) => {
         console.error("Error creating the reservation:", error);
       });
   };
+
+
+
+
   
   return (
     <div className="flex flex-col justify-center items-center gap-[30px]">

@@ -5,11 +5,14 @@ import axios from "axios";
 import "./AddAddress.css";
 import { GiBank } from "react-icons/gi";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const DebitCardPayment = () => {
     const [cardNumber, setCardNumber] = useState("");
     const [cardHolder, setCardHolder] = useState("");
     const [expiryDate, setExpiryDate] = useState("");
+    // const [isModalOpeb, setExpiryDate] = useState("");
+
     const [cvv, setCvv] = useState("");
     const [cardType, setCardType] = useState("silver");
     const [isCardTypeOpen, setIsCardTypeOpen] = useState(false);
@@ -142,6 +145,23 @@ const DebitCardPayment = () => {
         { value: "gold", label: "Gold" },
         { value: "platinum", label: "Platinum" },
     ];
+
+    const navigate = useNavigate();
+    const handleClick = () =>{
+
+ 
+            Swal.fire({
+                icon: 'success',
+                title: '',
+                text: 'Your order and payment have been successfully completed.In a few minutes you will recieve an email receipt',
+                // timer: 2000, // El temporizador dura 3 segundos (3000 milisegundos)
+                showConfirmButton: true, // Oculta el botón de confirmación
+                willClose: () => {
+                    navigate("/"); // Navegar después de que la alerta desaparezca
+                }
+            });
+
+    }
 
     return (
         <div className="bground min-h-screen  flex items-center justify-center p-4">
@@ -305,7 +325,7 @@ const DebitCardPayment = () => {
                                 />
                             </div>
                             <motion.button
-                                onClick={handleSubmit}
+                                onClick={handleClick}
                                 type="submit"
                                 className="w-full flex justify-center items-center py-3 px-4 bg-yellow-500 hover:bg-yellow-500 text-white font-semibold rounded-lg focus:outline-none "
                                 whileHover={{ scale: 1.05 }}

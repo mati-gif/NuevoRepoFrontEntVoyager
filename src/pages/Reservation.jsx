@@ -16,6 +16,7 @@ function Reservation() {
   const [showOutDoor, setShowOutDoor] = useState('hidden');
 
 
+
   return (
     <div className='bgViewReservation flex flex-col min-h-screen'>
       <div className='my-[30px]'>

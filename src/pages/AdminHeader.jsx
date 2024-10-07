@@ -37,8 +37,8 @@ function AdminHeader() {
     }
 
     return (
-        <header className="z-10 absolute w-full p-[30px] mt-[2px] ">
-            <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 bg-[#0F1D15] border-[#E6BB4D] border-2 rounded-lg">
+        <header className="z-10 absolute w-full p-[30px] mt-[2px]  ">
+            <div className=" mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 bg-[#0F1D15] border-[#E6BB4D] border-2 rounded-lg">
                 <div className="flex h-16 items-center justify-between">
                     {/* Logo */}
                     <div className="flex-shrink-0">
@@ -48,8 +48,8 @@ function AdminHeader() {
                     </div>
 
                     {/* Navegación centrada */}
-                    <nav aria-label="Global" className="hidden md:flex md:justify-center flex-1">
-                        <ul className="flex items-center gap-10 text-lg">
+                    <nav aria-label="Global" className="  hidden md:flex md:justify-center flex-1">
+                        <ul className="flex items-center gap-20 text-lg">
 
                             <li
                                 className={`transition transform ${location.pathname === '/admin' ? 'scale-150' : 'hover:scale-125'
@@ -60,10 +60,10 @@ function AdminHeader() {
                                     className={`text-[#E6BB4D] text-lg font-semibold transition ${location.pathname === '/admin' ? 'text-[#FFD700]' : 'hover:text-[#FFD700]'
                                         }`}
                                 >
-                                    Admin
+                                    ManageOrders
                                 </Link>
                             </li>
-
+{/* 
                             <li
                                 className={`transition transform ${location.pathname === '/deliveryadmin' ? 'scale-150' : 'hover:scale-125'
                                     }`}
@@ -75,7 +75,7 @@ function AdminHeader() {
                                 >
                                     DeliveryAdmin
                                 </Link>
-                            </li>
+                            </li> */}
 
                             <li
                                 className={`transition transform ${location.pathname === '/adminform' ? 'scale-150' : 'hover:scale-125'
@@ -86,7 +86,7 @@ function AdminHeader() {
                                     className={`text-[#E6BB4D] text-lg font-semibold transition ${location.pathname === '/adminform' ? 'text-[#FFD700]' : 'hover:text-[#FFD700]'
                                         }`}
                                 >
-                                    adminForm
+                                    ManageProducts
                                 </Link>
                             </li>
                         </ul>

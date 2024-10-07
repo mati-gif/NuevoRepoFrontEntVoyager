@@ -165,8 +165,10 @@ const EditProducts = () => {
 
 
     return (
-        <div className="container mx-auto p-4">
-            <h1 className="text-3xl font-bold mb-4 text-white">Editar Productos</h1>
+
+        <div className="bground container mx-auto p-4">
+            <h1 className="text-3xl font-bold mb-4 text-white">Edit Products</h1>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {products.map(product => (
                     <div key={product.id} className="flex h-60 p-4 border rounded-lg shadow-md bg-white">
@@ -185,13 +187,13 @@ const EditProducts = () => {
                                     onClick={() => handleEditClick(product.id)}
                                     className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
                                 >
-                                    Editar
+                                    Edit
                                 </button>
                                 <button
                                     onClick={() => handleDeleteClick(product.id)}
                                     className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
                                 >
-                                    Eliminar
+                                    Delete
                                 </button>
                             </div>
                         </div>

@@ -25,12 +25,13 @@ const FoodCards = (props) => {
                         </h3>
                     </div>
                 </div>
-                <div className="card-back flex flex-col items-center gap-[10px] justify-center bg-white rounded-[50px] p-4">
+                <div className="card-back flex flex-col relative items-center gap-[10px] justify-center bg-white rounded-[50px] p-4">
                     <img src={props.typeIcon} alt="Category Icon" className="w-[50px] text-[#0F1D15]" />
                     <h3 className="text-[30px] text-[#0F1D15] font-bold">{props.name}</h3>
                     <p className="text-lg text text-center text-[#0F1D15]">{props.description}</p>
                     {/* Usamos el método formatPrice */}
                     <p className="text-red-500 text-xl font-bold">{formatPrice(props.price)}</p>
+
                     <div className="flex w-full justify-center gap-4 ">
 
                         <Button
@@ -62,6 +63,10 @@ const FoodCards = (props) => {
 
 
                     </div>
+
+            
+                
+
                 </div>
             </div>
         </div>

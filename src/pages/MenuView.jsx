@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { saveCartProducts } from "../redux/actions/cartActions";
 import { loadUser } from "../redux/actions/authAction";
 import ModalRegister from "../components/ModalRegister";
+import "./MenuView.css"
 
 
 
@@ -115,7 +116,11 @@ function MenuView() {
     console.log("Sending cart items:", cartItems);
     dispatch(saveCartProducts(cartItems));
     navigate("/sendOrder");
-    setIsModalOpen(false); // Cierra el modal después de enviar el carrito
+
+
+
+    setIsModalOpen(false); // Close modal after sending
+
   };
 
   const handleQuantityChange = (index, newQuantity) => {
@@ -129,10 +134,16 @@ function MenuView() {
   const handleRemoveAll = () => {
     setCartItems([]); // Vacía el carrito
   };
-
+  localStorage.setItem("product", JSON.stringify(cartItems));
   console.log(cartItems);
+  
 
 
+ 
+
+
+
+  
 
   return (
     <div className="bground flex flex-col min-h-screen">

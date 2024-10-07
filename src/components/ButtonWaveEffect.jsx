@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./ButtonWaveEffect.css"
 
-function ButtonWaveEffect() {
+function ButtonWaveEffect(prop) {
     const [isHovered, setIsHovered] = useState(false)
   return (
     <div className="flex items-center justify-center mt-[30px]">
@@ -10,7 +10,7 @@ function ButtonWaveEffect() {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <span className="relative z-10 text-[30px]">Confirmar</span>
+        <span className="relative z-10 text-[30px]">{prop.text}</span>
         <div
           className={`absolute bottom-0 left-0 w-full bg-yellow-500 transition-all duration-300 ease-in-out ${
             isHovered ? 'h-full' : 'h-0'

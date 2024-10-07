@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CreditCard, Lock, ChevronDown } from 'lucide-react'
+import axios from 'axios'
 
 const DebitCardPayment = () => {
     const [cardNumber, setCardNumber] = useState('')
@@ -10,6 +11,25 @@ const DebitCardPayment = () => {
     const [cardType, setCardType] = useState('silver')
     const [isCardTypeOpen, setIsCardTypeOpen] = useState(false)
     const [isFlipped, setIsFlipped] = useState(false)
+
+    const producstSelected = JSON.parse(localStorage.getItem("product"));
+    console.log(producstSelected);
+    
+    const ids = producstSelected.map((product) => product.idProduct);
+    const quantity = producstSelected.map((product) => product.quantity);
+    console.log(ids);
+    console.log(quantity);
+
+    const orderType = localStorage.getItem("orderType")
+    console.log(orderType);
+    
+    const address = localStorage.getItem("address")
+    console.log(address);
+    
+
+    
+    
+  
 
 
     const formatCardNumber = (value) => {
@@ -50,11 +70,36 @@ const DebitCardPayment = () => {
     }
 
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+    
+        // Crear el objeto dataPost
+        const dataPost = {
+            productIds: ids,
+            quantities: quantity,
+            addressId: orderType === "DELIVERY" ? address : null, // Solo asigna addressId si es DELIVERY
+            orderType: orderType, // Asigna el orderType seleccionado
+        };
+    
+        console.log("Order submitted:", dataPost); // Muestra el objeto en la consola
+    
+        // Realizar la petición POST con axios
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.post("http://localhost:8080/api/orders/create", dataPost, {
+                headers: {
+                    Authorization: `Bearer ${token}`, // Uso correcto de las comillas invertidas
+                },
+            });
+            console.log("Response from server:", response.data); // Muestra la respuesta del servidor
+        } catch (error) {
+            console.error("Error submitting order:", error);
+        }
+    
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        alert(`Payment submitted with ${cardType.toUpperCase()} card!`)
-    }
+    
+    };
+    
 
     const cardColors = {
         gold: 'bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500',
@@ -212,6 +257,7 @@ const DebitCardPayment = () => {
                                 />
                             </div>
                             <motion.button
+                                onClick={handleSubmit}
                                 type="submit"
                                 className="w-full flex justify-center items-center py-3 px-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-900"
                                 whileHover={{ scale: 1.05 }}

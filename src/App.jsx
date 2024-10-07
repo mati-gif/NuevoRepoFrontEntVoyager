@@ -24,8 +24,7 @@ import AdminOrder from './components/AdminOrder.jsx';
 
 
 import DeliveryComponent from "./components/DeliveryComponent.jsx";
-import EditProducts from "./components/EditProducts.jsx";
-
+import FormPay from "./pages/FormPay.jsx";
 
 function App() {
   // const dispatch = useDispatch(
@@ -87,6 +86,7 @@ function App() {
         </Route>
 
         {/* Main Layout wrapping the routes (estas rutas ve la persona que no esta logueada) */}
+        <Route path="/payments" element={<FormPay />} />
 
         <Route path="/login" element={<Login />} />
         <Route path="/reservation" element={<Reservation />} />

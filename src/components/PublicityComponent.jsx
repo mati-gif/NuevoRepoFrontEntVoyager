@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from 'react'
 import "../styles/publicityComponent.css"
 import { div } from 'framer-motion/client'
 import { Tooltip } from 'react-tooltip'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import Swal from 'sweetalert2'
 
 
 function PublicityComponent() {
@@ -48,6 +51,47 @@ function PublicityComponent() {
             setSelectedTables([...selectedTables, tableId]);
         }
     };
+
+    //------------------------------------------------------------------------------------------
+    const navigate = useNavigate();
+    const status = useSelector(state => state.auth.status)
+    console.log(status);
+    
+
+    // const handleButtonClick = () =>{
+
+    //     if(status === "success"){
+    //         navigate("/reservation")
+    //     } else{
+    //         Swal.fire({
+    //             icon: 'warning',
+    //             title: '',
+    //             text: 'To make a reservation first must be register o sig in',
+    //         })
+
+    //         navigate("/register")
+    //     }
+    // }
+
+
+
+    const handleButtonClick = () => {
+        if (status === "success") {
+            navigate("/reservation");
+        } else {
+            Swal.fire({
+                icon: 'warning',
+                title: '',
+                text: 'To make a reservation you must first register or sign in',
+                // timer: 2000, // El temporizador dura 3 segundos (3000 milisegundos)
+                showConfirmButton: true, // Oculta el botón de confirmación
+                willClose: () => {
+                    navigate("/register"); // Navegar después de que la alerta desaparezca
+                }
+            });
+        }
+    };
+    
     return (
 
         <div className="rock-business-container mt-[-50px]" ref={containerRef} style={{ opacity }}>
@@ -57,7 +101,9 @@ function PublicityComponent() {
                 <p className='w-[400px] '>
                 Exclusive spaces for business meetings and private events, equipped with a 4K UHD screen, WiFi, audio equipment and an exclusive menu for every occasion.
                 </p>
-                <button className="reserve-button-container-publicity">
+                <button 
+                onClick={handleButtonClick}
+                className="reserve-button-container-publicity">
                     <span>Make a reservation</span>
                     <div className="liquid-container-publicity"></div>
                 </button>
@@ -67,7 +113,9 @@ function PublicityComponent() {
                     <div className="overlay-container-publicity">
                         <h2>Events</h2>
                         <h1 className='h1-container-publicity'>Rock & Business</h1>
-                        <button className="reserve-button-container-publicity">
+                        <button 
+                        onClick={handleButtonClick}
+                        className="reserve-button-container-publicity">
                             <span>Make a reservation</span>
                             <div className="liquid-container-publicity"></div>
                         </button>

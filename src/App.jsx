@@ -65,6 +65,10 @@ function App() {
           ></Route>
           <Route path="/menu" element={<MenuView />} className="" />
           <Route path="/addAddress" element={<AddAddress />} />
+          <Route path="/reservations" element={<Reservation />} />
+          {/* <Route path="/editProducts" element={<EditProducts/>} /> */}
+
+
 
           {/* Rutas protegidas para usuarios que contienen "admin" en su email */}
           {auth && user?.email?.includes("admin") && (
@@ -88,9 +92,6 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/productDetails" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
-
-        <Route path="/reservation" element={<Reservation />} />
-
         <Route path="/register" element={<Register />} />
         <Route path="/productDetails" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const EditProducts = () => {
     const [products, setProducts] = useState([]);
@@ -9,6 +10,8 @@ const EditProducts = () => {
     const [isModalOpen, setIsModalOpen] = useState(false); // Controla la visibilidad del modal
     const [isEditProductOpen, setIsEditProductOpen] = useState(false);
     const [idProductSelected, setIdProductSelected] = useState("");
+
+    const navigate = useNavigate()
 
     // Estado para los datos del formulario
     const [formData, setFormData] = useState({
@@ -121,29 +124,29 @@ const EditProducts = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(formData);
-    
+
         try {
             const response = await axios.put('http://localhost:8080/api/products/update', formData);
             console.log('Producto actualizado:', response.data);
 
 
-            
+
             // Actualiza el estado de products con el producto actualizado
-            setProducts(prevProducts => 
-                prevProducts.map(product => 
+            setProducts(prevProducts =>
+                prevProducts.map(product =>
                     product.id === formData.id ? response.data : product
                 )
             );
-            
+
             Swal.fire({
                 icon: 'success',
                 title: 'The product has been update  succesfully',
                 text: 'The product has been update  succesfully',
             });
-       
+
         } catch (error) {
             console.error('Error al actualizar el producto:', error);
-            
+
         } finally {
             // Restablecer formData y cerrar el modal de edición
             setFormData({
@@ -158,7 +161,9 @@ const EditProducts = () => {
             setIdProductSelected(""); // Restablece el ID del producto seleccionado
         }
     };
-    
+
+
+
     return (
 
         <div className="bground container mx-auto p-4">
@@ -286,12 +291,25 @@ const EditProducts = () => {
                                 />
                             </div>
 
-                            <button
-                                type="submit"
-                                className="bg-blue-500 text-white px-4 py-2 rounded"
-                            >
-                                Save Product
-                            </button>
+
+                            <div className='flex  justify-evenly'>
+                                <button
+                                    type="submit"
+                                    className="bg-blue-500 text-white px-4 py-2 rounded"
+                                >
+                                    Save Product
+                                </button>
+
+
+                                {/* <button
+                                    type="submit"
+                                    className="bg-red-500 text-white px-4 py-2 rounded"
+                                   
+                                >
+                                    Cancel
+                                </button> */}
+                            </div>
+
                         </form>
                     </div>
                 </div>

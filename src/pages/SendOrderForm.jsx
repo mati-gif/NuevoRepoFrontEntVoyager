@@ -143,6 +143,7 @@ localStorage.setItem("price", totalPrice);
             <p>Total Order Price: ${totalPrice.toFixed(2)}</p>
           </div>
 
+
           {/* Botón para enviar la orden */}
           <button
             type="submit"
@@ -150,6 +151,7 @@ localStorage.setItem("price", totalPrice);
           >
             Submit Order
           </button>
+
         </form>
       </div>
     </div>

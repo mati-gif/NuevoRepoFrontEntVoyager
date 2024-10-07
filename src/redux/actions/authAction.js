@@ -65,16 +65,53 @@ export const loadUser = createAsyncThunk(
                 }
             );
             console.log(response.data);
-            
+
             return response.data;
 
         } catch (error) {
+            console.log(error)
             return rejectWithValue(
                 error.response ? error.response.data : "Unknown error"
             );
         }
     }
 );
+
+
+
+export const createAddress = createAsyncThunk(
+    'auth/createAddress',
+    async (formData, { rejectWithValue }) => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.post('http://localhost:8080/api/address/create', formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            console.log(response.data);
+            Swal.fire({
+                icon: 'success',
+                title: 'The address create sussesfully',
+                text: 'The address has been create sussesfully',
+            });
+
+            return response.data;
+        } catch (error) {
+            console.log("error del back", error);
+
+            let errorMessage = error.response.data
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Error en la Transacción',
+                text: errorMessage,
+            });
+            return rejectWithValue(errorMessage);
+        }
+    }
+);
+
 
 
 

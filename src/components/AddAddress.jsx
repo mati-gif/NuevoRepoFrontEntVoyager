@@ -1,20 +1,41 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import axios from 'axios'
+import Swal from 'sweetalert2'
+import { isRejectedWithValue } from '@reduxjs/toolkit'
+import { useDispatch, useSelector } from 'react-redux'
+import { createAddress, loadUser } from '../redux/actions/authAction'
+import "./AddAddress.css"
+
+
 
 function AddAddress() {
+    const dispatch = useDispatch(); // Obtener dispatch
+    const user = useSelector((store) => store.auth.user)
+    // const isLoggedIn = useSelector((store)=> store.authReducer)
+    const status = useSelector((store) => store.auth.status)
+    console.log(user);
+
+
+
+
+    useEffect(() => {
+        // const token = localStorage.getItem("token");
+
+        if (status != "success") {
+            dispatch(loadUser());  // Cargar el usuario si hay un token presente
+        }
+    }, [dispatch]);
+
     const [formData, setFormData] = useState({
-        nombre: '',
-        tel: '',
-        telAlternativo: '',
-        codigoPostal: '',
-        nombreCalle: '',
-        numeroCalle: '',
-        entreCalles: '',
-        tipoVivienda: '',
-        numeroPiso: '',
-        numeroDepto: '',
-        detallesAdicionales: ''
+        zipCode: '',
+        nameStreet: '',
+        streetNumber: 0,
+        betweenStreets: '',
+        typeHome: '',
+        floorNumber: null,
+        aparmentNumber: null,
+        // extraDetails: ''
     })
 
     const [showApartmentFields, setShowApartmentFields] = useState(false)
@@ -39,36 +60,58 @@ function AddAddress() {
         console.log('Form submitted:', formData);
 
         try {
-            // Realiza una petición POST para crear la nueva dirección
-            const response = await axios.post('http://localhost:8080/api/address/create', {
-                firstName: formData.nombre, // Asegúrate de que estos nombres coincidan con lo que espera tu API
-                phoneNumbers: [formData.tel, formData.telAlternativo],
-                address: [{
-                    nameStreet: formData.nombreCalle,
-                    streetNumber: formData.numeroCalle,
-                    zipCode: formData.codigoPostal,
-                    betweenStreets: formData.entreCalles,
-                    typeHome: formData.tipoVivienda,
-                    floorNumber: formData.numeroPiso || null,
-                    apartmentNumber: formData.numeroDepto || null,
-                    extraDetails: formData.detallesAdicionales || ''
-                }]
+
+
+
+            const resultAction = await dispatch(createAddress(formData)).unwrap(); // Despachar la acción
+
+            console.log(resultAction);
+            
+            Swal.fire({
+                icon: 'success',
+                title: 'Address created successfully',
+                text: 'The address has been created successfully.',
             });
 
-            console.log('Address created successfully:', response.data);
-            // Aquí podrías hacer algo después de la creación exitosa, como redirigir o mostrar una confirmación
+
+            setFormData({
+                zipCode: '',
+                nameStreet: '',
+                streetNumber: '',
+                betweenStreets: '',
+                typeHome: '',
+                floorNumber: '',
+                aparmentNumber: '',
+                extraDetails: ''
+            });
         } catch (error) {
-            console.error('Error creating address:', error);
+            // const errorMessage = error.response && error.response.data
+            //     ? error.response.data.message || error.response.data
+            //     : 'Ocurrió un error al procesar la transacción';
+
+            console.log("error del back", error);
+
+            // let errorMessage = error.response.data
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Error creating address',
+                text: "Error creating address",
+            });
+
         }
     };
+
+
+
 
     const handleTipoViviendaChange = (e) => {
         const value = e.target.value
         setFormData(prevData => ({
             ...prevData,
-            tipoVivienda: value
+            typeHome: value
         }))
-        setShowApartmentFields(value === 'DEPARTAMENTO')
+        setShowApartmentFields(value === 'APARTMENT')
     }
 
     const inputVariants = {
@@ -89,21 +132,22 @@ function AddAddress() {
 
     }
     return (
-        <div className="min-h-screen flex items-center justify-end mt-[5%] p-4  bground  flex-col">
+        
+        <div className="bground min-h-screen flex items-center justify-center p-4 flex-col">
             <motion.div
-                className="bg-gray-800 rounded-lg shadow-2xl p-8 max-w-2xl w-full "
+                className="bg-gray-800 rounded-lg shadow-2xl p-8 mt-[5%] max-w-2xl w-full "
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                <form onSubmit={handleSubmit} className="space-y-4 ">
+                <form className="space-y-4">
                     <h1 className='text-white text-[24px] text-center'>Enter the new address </h1>
 
                     <motion.input
                         type="text"
                         name="zipCode"
                         placeholder="Zip code"
-                        value={formData.codigoPostal}
+                        value={formData.zipCode}
                         onChange={handleInputChange}
                         className="w-full p-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none transition-all duration-200"
                         variants={inputVariants}
@@ -113,16 +157,16 @@ function AddAddress() {
                             type="text"
                             name="nameStreet"
                             placeholder="Name of street"
-                            value={formData.nombreCalle}
+                            value={formData.nameStreet}
                             onChange={handleInputChange}
                             className="w-1/2 p-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none transition-all duration-200"
                             variants={inputVariants}
                         />
                         <motion.input
                             type="text"
-                            name="numberStreet"
+                            name="streetNumber"
                             placeholder="Number of street"
-                            value={formData.numeroCalle}
+                            value={(formData.streetNumber)}
                             onChange={handleInputChange}
                             className="w-1/2 p-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none transition-all duration-200"
                             variants={inputVariants}
@@ -130,23 +174,23 @@ function AddAddress() {
                     </div>
                     <motion.input
                         type="text"
-                        name="betweenStreet"
+                        name="betweenStreets"
                         placeholder="Between Street"
-                        value={formData.entreCalles}
+                        value={formData.betweenStreets}
                         onChange={handleInputChange}
                         className="w-full p-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none transition-all duration-200"
                         variants={inputVariants}
                     />
                     <motion.select
-                        name="tipoVivienda"
-                        value={formData.tipoVivienda}
+                        name="typeHome"
+                        value={formData.typeHome}
                         onChange={handleTipoViviendaChange}
                         className="w-full p-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none transition-all duration-200"
                         variants={inputVariants}
                     >
                         <option value="">SELECT HOUSE-DEPARTAMENT</option>
-                        <option value="CASA">HOUSE</option>
-                        <option value="DEPARTAMENTO">DEPARTAMENT</option>
+                        <option value="HOUSE">HOUSE</option>
+                        <option value="APARTMENT">DEPARTAMENT</option>
                     </motion.select>
                     <AnimatePresence>
                         {showApartmentFields && (
@@ -158,18 +202,18 @@ function AddAddress() {
                             >
                                 <motion.input
                                     type="text"
-                                    name="numeroPiso"
+                                    name="floorNumber"
                                     placeholder="Numero depiso (String)"
-                                    value={formData.numeroPiso}
+                                    value={formData.floorNumber}
                                     onChange={handleInputChange}
                                     className="w-full p-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none transition-all duration-200"
                                     variants={inputVariants}
                                 />
                                 <motion.input
                                     type="number"
-                                    name="numeroDepto"
+                                    name="aparmentNumber"
                                     placeholder="Numero de departamento (int)"
-                                    value={formData.numeroDepto}
+                                    value={formData.aparmentNumber}
                                     onChange={handleInputChange}
                                     className="w-full p-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none transition-all duration-200"
                                     variants={inputVariants}
@@ -177,21 +221,22 @@ function AddAddress() {
                             </motion.div>
                         )}
                     </AnimatePresence>
-                    <motion.textarea
+                    {/* <motion.textarea
                         name="extraDetails"
                         placeholder="Extra Details"
-                        value={formData.detallesAdicionales}
+                        value={formData.extraDetails}
                         onChange={handleInputChange}
                         className="w-full p-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none transition-all duration-200 resize-none"
                         rows="3"
                         variants={inputVariants}
-                    />
+                    /> */}
                     <motion.button
                         type="submit"
                         className="relative w-full p-3 bg-gray-700 text-yellow-500 rounded-lg font-bold text-lg overflow-hidden group"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        
+                        onClick={handleSubmit}
+
                     >
                         <span className="relative z-10">CONFIRM</span>
                         <span className="absolute left-0 top-0 h-full w-0 bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>

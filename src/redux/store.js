@@ -7,8 +7,8 @@ import { cartReducer } from "./reducers/cartReducer";
 
 const store = configureStore({
     reducer: {
-        authReducer,
-        cartReducer
+        auth:authReducer,
+        cart:cartReducer
 
     }
 })

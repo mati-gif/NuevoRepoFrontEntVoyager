@@ -2,7 +2,7 @@
 import { createReducer } from "@reduxjs/toolkit"
 
 import { address } from "framer-motion/client"
-import { loadUser, logoutAction } from "../actions/authAction"
+import { createAddress, loadUser, logoutAction } from "../actions/authAction"
 
 
 
@@ -116,6 +116,17 @@ export const authReducer = createReducer(initialState, (builder) => {
                 ...state,
                 status:"failed",
                 error:action.payload
+            }
+        })
+
+        .addCase(createAddress.fulfilled,(state,action)=>{
+            console.log("Usuario cargado:", action.payload);
+            return{
+                ...state,
+                address:action.payload.address,
+                status:"success"
+                
+
             }
         })
         .addCase(logoutAction, (state, action) => {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Ticket from "../components/Ticket"; // Asegúrate de que la ruta sea correcta
+import "./AdminOrder.css"
 
 const AdminOrder = () => {
   const [customers, setCustomers] = useState([
@@ -298,13 +299,13 @@ const AdminOrder = () => {
   }, [customers]);
 
   return (
-    <div className="text-white p-6 mt-[100px] flex flex-col items-center gap-6 w-full bg-[#111827]">
+    <div className="bground text-white p-6 mt-[100px] flex flex-col items-center gap-6 w-full ">
       <h1 className="text-4xl font-bold mb-6">Orders Overview</h1>
 
       {/* Cooking Orders Section */}
       <section className="w-full">
         <h2 className="text-3xl text-center font-semibold mb-4">
-          In Pocess
+          In Process
         </h2>
         <div className="border border-gray-700 p-4 rounded-lg flex gap-4 justify-center bg-yellow-500">
           {cookingOrders.length > 0 ? (
@@ -323,7 +324,7 @@ const AdminOrder = () => {
               />
             ))
           ) : (
-            <p className="text-center w-full text-white">
+            <p className="text-center w-full text-black font-bold">
               No cooking orders available
             </p>
           )}
@@ -338,7 +339,7 @@ const AdminOrder = () => {
         <div className="flex flex-col gap-6">
           {/* Dine-In Orders */}
           <div className="border border-gray-700 p-4 rounded-lg  bg-yellow-500">
-            <h3 className="text-2xl text-center font-bold mb-2">Dine-In</h3>
+            <h3 className="text-2xl text-center text-black font-extrabold mb-2">Dine-In</h3>
             <div className="flex flex-wrap gap-4 justify-center">
               {dineInOrders.length > 0 ? (
                 dineInOrders.map((order) => (
@@ -356,7 +357,7 @@ const AdminOrder = () => {
                   />
                 ))
               ) : (
-                <p className="text-center w-full text-white">
+                <p className="text-center w-full text-black font-bold">
                   No dine-in orders ready
                 </p>
               )}
@@ -365,7 +366,7 @@ const AdminOrder = () => {
 
           {/* Takeout Orders */}
           <div className="border border-gray-700 p-4 rounded-lg bg-yellow-500">
-            <h3 className="text-2xl font-bold mb-2 text-center">Takeout</h3>
+            <h3 className="text-2xl mb-2 text-center text-black font-extrabold">Takeout</h3>
             <div className="flex flex-wrap gap-4 justify-center">
               {takeoutOrders.length > 0 ? (
                 takeoutOrders.map((order) => (
@@ -383,7 +384,7 @@ const AdminOrder = () => {
                   />
                 ))
               ) : (
-                <p className="text-center w-full text-white">
+                <p className="text-center w-full text-black font-bold">
                   No takeout orders ready
                 </p>
               )}
@@ -392,7 +393,7 @@ const AdminOrder = () => {
 
           {/* Delivery Orders */}
           <div className="border border-gray-700 p-4 rounded-lg bg-yellow-500">
-            <h3 className="text-2xl font-bold mb-2 text-center">Delivery</h3>
+            <h3 className="text-2xl text-black font-extrabold mb-2 text-center">Delivery</h3>
             <div className=" flex flex-wrap gap-4 justify-center">
               {deliveryOrders.length > 0 ? (
                 deliveryOrders.map((order) => (
@@ -410,7 +411,7 @@ const AdminOrder = () => {
                   />
                 ))
               ) : (
-                <p className="text-center w-full text-white">
+                <p className="text-center w-full text-black font-bold">
                   No delivery orders ready
                 </p>
               )}
@@ -420,7 +421,7 @@ const AdminOrder = () => {
       </section>
 
       <div className="mb-4 w-[80%]">
-        <h3 className="text-lg font-semibold text-white">Delivery</h3>
+        <h3 className="text-[35px] font-semibold text-white">Delivery</h3>
         <table className="w-full bg-white border border-gray-300 shadow-lg rounded-t-[500px]">
           {" "}
           {/* Añadir rounded-t-lg aquí */}
@@ -471,8 +472,9 @@ const AdminOrder = () => {
       </div>
 
       {/* Total Revenue */}
-      <div className="mt-6 text-xl font-bold text-gray-400">
-        Total Revenue: ${totalRevenue.toFixed(2)}
+      <div className="bg-yellow-500 rounded-[10px] px-[70px] mt-6 text-[30px] font-bold text-black">
+        <h1>Total Revenue</h1>
+        <h1 className="text-center text-[40px] font-extrabold text-[#2fbd2f]">${totalRevenue.toFixed(2)}</h1> 
       </div>
     </div>
   );

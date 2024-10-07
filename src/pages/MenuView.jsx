@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
 import FoodCards from "../components/FoodCards";
-import drink from "../assets/soft-drink.png"; // Icon for drinks
-import burger from "../assets/burger.png"; // Icon for hamburgers
-import fries from "../assets/potato-fries.png"; // Icon for sides
-import dessertsIcon from "../assets/cake_icon.png";
+import image from "../assets/soft-drink.png"; // Icon for drinks
+import image1 from "../assets/burger.png"; // Icon for hamburgers
+import image2 from "../assets/potato-fries.png"; // Icon for sides
+import image3 from "../assets/cake_icon.png";
 import axios from "axios";
 import CartModal from "../components/CartModal"; // Import your modal component
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { saveCartProducts } from "../redux/actions/cartActions";
+import { loadUser } from "../redux/actions/authAction";
+import ModalRegister from "../components/ModalRegister";
+import "./MenuView.css"
 
-const iconMap = {
-  burger: burger,
-  drink: drink,
-  frying: fries,
-  dessert: dessertsIcon,
-};
+
 
 function MenuView() {
   const dispatch = useDispatch();
@@ -23,8 +21,32 @@ function MenuView() {
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isOpenRegisterModal, setisOpenRegisterModal] = useState(false); // Estado para el modal de registro
+
+  console.log(isOpenRegisterModal);
+
+  // Cargar los productos guardados en el carrito desde localStorage cuando se monta el componente
+  useEffect(() => {
+    const storedProducts = JSON.parse(localStorage.getItem("product")) || [];
+    if (storedProducts.length !== 0) {
+      setCartItems(storedProducts);
+    }
+  }, []);
 
   useEffect(() => {
+    // Verifica si el usuario está logueado
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+      dispatch(loadUser()); // El usuario está logueado
+    } else {
+      setIsLoggedIn(false); // El usuario no está logueado
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    // Recuperar productos de la API
     const fetchProducts = async () => {
       try {
         const response = await axios.get("http://localhost:8080/api/products/");
@@ -35,6 +57,11 @@ function MenuView() {
     };
     fetchProducts();
   }, []);
+
+  // Sincronizar el carrito con el localStorage cada vez que cambia el estado de cartItems
+  useEffect(() => {
+    localStorage.setItem("product", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const burgers = products.filter((product) => product.category === "BURGER");
   const frying = products.filter((product) => product.category === "FRYING");
@@ -54,13 +81,19 @@ function MenuView() {
   const [showDivDesserts, setShowDivDesserts] = useState("");
 
   const addToCart = (product) => {
+    if (!isLoggedIn) { // Cambia isUserLoggedIn a isLoggedIn
+      setIsLoggedIn(false);
+      setisOpenRegisterModal(true); // Abre el modal si el usuario no está logueado
+      return; // Salimos de la función para no añadir el producto al carrito
+    }
+
     const existingItem = cartItems.find(
       (item) => item.nameProduct === product.nameProduct
     );
 
     if (existingItem) {
-      existingItem.quantity += 1; // Increment quantity if product is already in cart
-      setCartItems([...cartItems]); // Update state to recognize change
+      existingItem.quantity += 1; // Incrementar la cantidad si el producto ya está en el carrito
+      setCartItems([...cartItems]); // Actualizar el estado para reconocer el cambio
     } else {
       setCartItems((prevItems) => [
         ...prevItems,
@@ -70,9 +103,9 @@ function MenuView() {
           idProduct: product.id,
           backgroundImage: product.img,
         },
-      ]); // Add new product
+      ]); // Agregar nuevo producto
     }
-    setIsModalOpen(true); // Open modal when product is added
+    setIsModalOpen(true); // Abrir el modal cuando se añade el producto
   };
 
   const removeFromCart = (index) => {
@@ -82,14 +115,18 @@ function MenuView() {
   const handleSendCart = () => {
     console.log("Sending cart items:", cartItems);
     dispatch(saveCartProducts(cartItems));
-    navigate("/sendOrder")
+    navigate("/sendOrder");
+
+
+
     setIsModalOpen(false); // Close modal after sending
+
   };
 
   const handleQuantityChange = (index, newQuantity) => {
     setCartItems((prevItems) => {
       const updatedItems = [...prevItems];
-      updatedItems[index].quantity = newQuantity; // Update product quantity
+      updatedItems[index].quantity = newQuantity; // Actualiza la cantidad del producto
       return updatedItems;
     });
   };
@@ -97,6 +134,16 @@ function MenuView() {
   const handleRemoveAll = () => {
     setCartItems([]); // Vacía el carrito
   };
+  localStorage.setItem("product", JSON.stringify(cartItems));
+  console.log(cartItems);
+  
+
+
+ 
+
+
+
+  
 
   return (
     <div className="bground flex flex-col min-h-screen">
@@ -139,7 +186,7 @@ function MenuView() {
               <div
                 className={`shadowButton ${selectedBurger} p-2 w-16 rounded-lg`}
               >
-                <img src={burger} alt="Burger" />
+                <img src={image1} alt="Burger" />
               </div>
             </button>
 
@@ -159,7 +206,7 @@ function MenuView() {
               <div
                 className={`shadowButton ${selectedFries} p-2 w-16 rounded-lg`}
               >
-                <img src={fries} alt="Fries" />
+                <img src={image2} alt="Fries" />
               </div>
             </button>
 
@@ -179,7 +226,7 @@ function MenuView() {
               <div
                 className={`shadowButton ${selectedDrink} p-2 w-16 rounded-lg`}
               >
-                <img src={drink} alt="Drink" />
+                <img src={image} alt="Drink" />
               </div>
             </button>
 
@@ -199,7 +246,7 @@ function MenuView() {
               <div
                 className={`shadowButton ${selectedDesserts} p-2 w-16 rounded-lg`}
               >
-                <img src={dessertsIcon} alt="Desserts" />
+                <img src={image3} alt="Desserts" />
               </div>
             </button>
           </div>
@@ -217,7 +264,7 @@ function MenuView() {
                   description={hamburguer.details}
                   price={hamburguer.priceProduct}
                   backgroundImage={hamburguer.img}
-                  typeIcon={iconMap[hamburguer.category]}
+                  typeIcon={image1}
                   onClick={() => addToCart(hamburguer)} // Add to cart
                 />
               ))}
@@ -230,15 +277,15 @@ function MenuView() {
               FRIES
             </h1>
             <div className="gaga flex flex-wrap gap-10 w-full justify-center">
-              {frying.map((side) => (
+              {frying.map((fry) => (
                 <FoodCards
-                  key={side.nameProduct}
-                  name={side.nameProduct}
-                  description={side.details}
-                  price={side.priceProduct}
-                  backgroundImage={side.img}
-                  typeIcon={iconMap[side.category]}
-                  onClick={() => addToCart(side)} // Add to cart
+                  key={fry.nameProduct}
+                  name={fry.nameProduct}
+                  description={fry.details}
+                  price={fry.priceProduct}
+                  backgroundImage={fry.img}
+                  typeIcon={image2}
+                  onClick={() => addToCart(fry)} // Add to cart
                 />
               ))}
             </div>
@@ -250,15 +297,15 @@ function MenuView() {
               DRINKS
             </h1>
             <div className="gaga flex flex-wrap gap-10 w-full justify-center">
-              {drinks.map((beverage) => (
+              {drinks.map((drink) => (
                 <FoodCards
-                  key={beverage.nameProduct}
-                  name={beverage.nameProduct}
-                  description={beverage.details}
-                  price={beverage.priceProduct}
-                  backgroundImage={beverage.img}
-                  typeIcon={iconMap[beverage.category]}
-                  onClick={() => addToCart(beverage)} // Add to cart
+                  key={drink.nameProduct}
+                  name={drink.nameProduct}
+                  description={drink.details}
+                  price={drink.priceProduct}
+                  backgroundImage={drink.img}
+                  typeIcon={image}
+                  onClick={() => addToCart(drink)} // Add to cart
                 />
               ))}
             </div>
@@ -277,7 +324,7 @@ function MenuView() {
                   description={dessert.details}
                   price={dessert.priceProduct}
                   backgroundImage={dessert.img}
-                  typeIcon={iconMap[dessert.category]}
+                  typeIcon={image3}
                   onClick={() => addToCart(dessert)} // Add to cart
                 />
               ))}
@@ -285,16 +332,20 @@ function MenuView() {
           </div>
         </div>
       </div>
+
+      {/* Modal for Cart */}
       {isModalOpen && (
         <CartModal
           cartItems={cartItems}
-          onClose={() => setIsModalOpen(false)} // Close modal
-          onSendCart={handleSendCart} // Logic to send the cart
-          onRemoveFromCart={removeFromCart} // Remove from cart
-          onQuantityChange={handleQuantityChange} // Handle quantity changes
-          onRemoveAll={handleRemoveAll} // Handle removing all items
+          onRemoveFromCart={removeFromCart}
+          onQuantityChange={handleQuantityChange}
+          onSendCart={handleSendCart}
+          onClose={() => setIsModalOpen(false)}
+          onRemoveAll={handleRemoveAll}
         />
       )}
+
+      {isOpenRegisterModal && (<ModalRegister />)}
     </div>
   );
 }

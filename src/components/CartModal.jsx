@@ -3,7 +3,7 @@ import React from "react";
 const CartModal = ({ cartItems, onClose, onSendCart, onRemoveFromCart, onQuantityChange, onRemoveAll }) => {
   return (
     <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex items-start justify-end z-50">
-      <div className="bg-white w-full h-screen sm:w-full md:w-3/4 lg:w-1/3 xl:w-1/4 p-4 rounded-l-lg shadow-lg overflow-y-auto">
+      <div className="bg-white  h-screen sm:w-full md:w-3/4 lg:w-1/3 xl:w-[30%] p-4 rounded-l-lg shadow-lg overflow-y-auto">
         <h2 className="text-xl font-bold mb-4 text-center p-4 bg-gray-200 rounded-t-lg">Your Cart</h2>
         {cartItems.length === 0 ? (
           <p className="text-center text-gray-500">Your cart is empty.</p>
@@ -16,9 +16,9 @@ const CartModal = ({ cartItems, onClose, onSendCart, onRemoveFromCart, onQuantit
                     <img
                       src={item.backgroundImage}
                       alt={item.nameProduct}
-                      className="w-24 h-24 mr-4 object-cover rounded-lg shadow-md"
+                      className="w-24 h-24 mr-4 object-cover rounded-lg shadow-md "
                     />
-                    <div>
+                    <div className="flex flex-col justify-center items-center">
                       <p className="font-semibold">{item.nameProduct}</p>
                       <div className="flex items-center mt-1">
                         <span className="text-gray-600">Quantity: </span>
@@ -33,9 +33,9 @@ const CartModal = ({ cartItems, onClose, onSendCart, onRemoveFromCart, onQuantit
                   </div>
                   <button
                     onClick={() => onRemoveFromCart(index)}
-                    className="bg-red-500 text-white rounded-lg px-2 py-1 text-xs hover:bg-red-600 transition duration-200"
+                    className="bg-red-500 text-white  rounded-lg px-2 py-1 text-lg hover:bg-red-600 transition duration-200"
                   >
-                    Remove
+                    <i className="fa-solid fa-trash"></i>
                   </button>
                 </li>
               ))}
@@ -43,13 +43,13 @@ const CartModal = ({ cartItems, onClose, onSendCart, onRemoveFromCart, onQuantit
             <div className="mt-4 flex justify-between items-center p-4">
               <button
                 onClick={onRemoveAll}
-                className="bg-gray-400 text-white px-3 py-1 rounded-lg hover:bg-gray-500 transition duration-200"
+                className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-400  hover:text-white transition duration-200"
               >
                 Clear Cart
               </button>
               <button
                 onClick={onSendCart}
-                className="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600 transition duration-200"
+                className="bg-yellow-500 text-black px-3 py-1 rounded-lg hover:bg-yellow-600 transition duration-200"
               >
                 Send Cart
               </button>
@@ -58,9 +58,9 @@ const CartModal = ({ cartItems, onClose, onSendCart, onRemoveFromCart, onQuantit
         )}
         <button
           onClick={onClose}
-          className="w-full bg-gray-600 text-white py-2 rounded-b-lg hover:bg-gray-700 transition duration-200"
+          className="w-full bg-gray-600 text-white py-2 rounded-b-lg hover:bg-gray-700  hover:text-white transition duration-200"
         >
-          Close
+          Add more products
         </button>
       </div>
     </div>

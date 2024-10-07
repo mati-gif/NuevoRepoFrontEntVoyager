@@ -203,16 +203,16 @@ function AddAddress() {
                                 <motion.input
                                     type="text"
                                     name="floorNumber"
-                                    placeholder="Numero depiso (String)"
+                                    placeholder="Number floor "
                                     value={formData.floorNumber}
                                     onChange={handleInputChange}
                                     className="w-full p-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none transition-all duration-200"
                                     variants={inputVariants}
                                 />
                                 <motion.input
-                                    type="number"
+                                    type="text"
                                     name="aparmentNumber"
-                                    placeholder="Numero de departamento (int)"
+                                    placeholder="Flat"
                                     value={formData.aparmentNumber}
                                     onChange={handleInputChange}
                                     className="w-full p-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none transition-all duration-200"

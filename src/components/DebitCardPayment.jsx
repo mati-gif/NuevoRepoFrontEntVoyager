@@ -164,7 +164,7 @@ const DebitCardPayment = () => {
     }
 
     return (
-        <div className="bground min-h-screen  flex items-center justify-center p-4">
+        <div className="bground min-h-screen  flex items-center justify-center p-4 mt-[50px]">
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -327,7 +327,7 @@ const DebitCardPayment = () => {
                             <motion.button
                                 onClick={handleClick}
                                 type="submit"
-                                className="w-full flex justify-center items-center py-3 px-4 bg-yellow-500 hover:bg-yellow-500 text-white font-semibold rounded-lg focus:outline-none "
+                                className="w-full flex justify-center items-center py-3 px-4 bg-yellow-500 hover:bg-yellow-500 text-black font-semibold rounded-lg focus:outline-none "
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >

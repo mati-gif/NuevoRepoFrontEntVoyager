@@ -9,6 +9,7 @@ import { ul } from 'framer-motion/m'
 import NewCommentBox from '../components/NewCommentBox'
 import { useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
 
 
 function ProductDetails() {
@@ -126,6 +127,14 @@ function ProductDetails() {
     setArrayOrdenado(ordenarArray());
   }, [reviews]);
 
+  const navigate = useNavigate();
+  const handleClick = () =>{
+
+
+        navigate("/"); // Navegar después de que la alerta desaparezca
+
+  
+  }
   return (
     <div className="container-div overflow-hidden h-[632px] bg-gray-900 flex items-center justify-center p-4">
       <ProductDetailComponent
@@ -204,31 +213,31 @@ function ProductDetails() {
           </div>
           <div className="flex justify-center gap-3 mt-2">
             <button
-              onClick={handleSubmit}
+              onClick={handleClick}
               style={{
                 padding: "8px 16px",
                 backgroundColor: "#ef4444",
-                color: "white",
+                color: "black",
                 borderRadius: "4px",
                 marginRight: "8px",
                 border: "none",
                 cursor: "pointer",
               }}
             >
-              Cancelar
+              Cancel
             </button>
             <button
               onClick={handleSubmit}
               style={{
                 padding: "8px 16px",
-                backgroundColor: "#10b981",
-                color: "white",
+                backgroundColor: "#EAB308",
+                color: "black",
                 borderRadius: "4px",
                 border: "none",
                 cursor: "pointer",
               }}
             >
-              Enviar
+              Submit
             </button>
           </div>
         </div>

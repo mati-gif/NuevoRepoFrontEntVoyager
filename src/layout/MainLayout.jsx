@@ -27,9 +27,6 @@ const MainLayout = () => {
         <Header /> // Mostrar el header normal
       )}
 
-
-
-
       <main className="flex-grow bg-black">
         <Outlet />
       </main>

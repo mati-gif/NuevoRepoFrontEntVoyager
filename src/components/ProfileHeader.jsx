@@ -146,7 +146,7 @@ function ProfileHeader() {
 
     }
     return (
-        <header className="flex justify-between items-center p-4  text-white">
+        <header className="flex justify-evenly items-center p-4   text-white">
             {/* <h1 className="text-2xl font-bold">My Website</h1> */}
             <div className="relative ">
                 <button

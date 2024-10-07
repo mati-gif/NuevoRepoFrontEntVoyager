@@ -7,7 +7,7 @@ const Admin = () => {
   return (
     <div className='bground border border-black'>
       <AdminOrder />
-      <EditProducts/>
+      {/* <EditProducts/> */}
     </div>
   );
 }

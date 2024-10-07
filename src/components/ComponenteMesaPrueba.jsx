@@ -7,19 +7,48 @@ import axios from 'axios';
 const ComponenteMesaPrueba = () => {
 
 
-    // Estado para almacenar qué mesas están seleccionadas
-    const [selectedTables, setSelectedTables] = useState([]);
 
-    // Función para manejar la selección/deselección de mesas
-    const handleTableClick = (tableId) => {
-        if (selectedTables.includes(tableId)) {
-            // Si la mesa ya está seleccionada, deseleccionarla
-            setSelectedTables(selectedTables.filter(id => id !== tableId));
-        } else {
-            // Si no está seleccionada, agregarla
-            setSelectedTables([...selectedTables, tableId]);
+
+
+    //---------------------------------------------------------------------PETICION PARA TRAER TODAS LAS MESAS---------------------------
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+        console.log(token)
+        if (token) {
+            axios.get("http://localhost:8080/api/tables/", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+
+            })
+                .then(reponse => {
+                    console.log(reponse)
+                    setAllTables(reponse.data)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+            console.log(token)
+
         }
-    };
+
+    }, [])
+    //---------------------------------------------------------------------PETICION PARA TRAER TODAS LAS MESAS---------------------------
+
+    //-------------------------------------------------------------FILTRA LAS MESAS Y LAS RESERVAS DE LA PETICION POR EL SECTOR "GROUND_FLOOR"-------------------------  
+  useEffect(() => {
+    if (allTables.length > 0) {
+      const filteredTables = allTables.filter((firstFloorTable) => firstFloorTable.sector === "FIRST_FLOOR");
+      setFirstFloorTables(filteredTables);
+      console.log(filteredTables);  // Muestra las tablas filtradas
+    }
+  }, [allTables]);  // Ejecuta el filtro cuando cambie allTables
+  //-------------------------------------------------------------FILTRA LAS MESAS DE LA PETICION POR EL SECTOR "GROUND_FLOOR"-------------------------
+
+
+  console.log(firstFloorTables)
+
+
 
     const [allTables, setAllTables] = useState([])
     const [firstFloorTables, setFirstFloorTables] = useState([])
@@ -69,6 +98,8 @@ const ComponenteMesaPrueba = () => {
         <div>
             <div className='flex flex-row justify-center'>
                 <div className='bgTableFirstFloor border border-red-600 relative h-[95vh] w-[820px]'>
+
+
                     { 
                     /* <button>
                         <div className='bg-[#00000077] border-2 border-green-500 absolute top-[40%] left-[41%] w-[23%] h-[20%] rounded-[100px] hover:bg-white'>
@@ -131,7 +162,6 @@ const ComponenteMesaPrueba = () => {
                             </div>
                         </div>
                     </button> */}
-
 
 
                     {firstFloorTables.map((table, index) => {

@@ -9,6 +9,7 @@ import MapComponent from '../components/MapComponent'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadUser } from '../redux/actions/authAction'
 import DebitCardPayment from '../components/DebitCardPayment'
+import Prueba from '../components/Prueba'
 
 
 
@@ -39,6 +40,7 @@ const home = () => {
         <TimeInfoComponent/> 
         {/* <DebitCardPayment/> */}
         <PublicityComponent/>
+        <Prueba/>
         <MapComponent/>
       </div>
     </div>

@@ -1,3 +1,4 @@
+
 import "./TablePB.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -264,5 +265,6 @@ const TablePB = ({ token }) => {
     </div>
   );
 };
+
 
 export default TablePB;

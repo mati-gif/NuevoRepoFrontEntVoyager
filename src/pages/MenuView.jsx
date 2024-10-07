@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { saveCartProducts } from "../redux/actions/cartActions";
 import { loadUser } from "../redux/actions/authAction";
 import ModalRegister from "../components/ModalRegister";
+import "./MenuView.css"
 
 
 

@@ -15,9 +15,11 @@ function Reservation() {
   const [showFirstFloor, setShowFirstFloor] = useState('hidden');
   const [showOutDoor, setShowOutDoor] = useState('hidden');
 
+
   return (
     <div className='bgViewReservation flex flex-col min-h-screen'>
       <div className='my-[30px]'>
+
         <h1 className="text-[40px] block text-center font-bold text-[white] mb-[50px]">Seating Area</h1>
         <div className='w-full flex flex-col items-center'>
           <div className="w-[90%] flex justify-center"> {/* Contenedor centrado */}
@@ -54,6 +56,7 @@ function Reservation() {
           </div>
         </div>
       </div>
+
 
       <div className='mb-[50px]'>
         

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Ticket from "../components/Ticket"; // Asegúrate de que la ruta sea correcta
+import "./AdminOrder.css"
 
 const AdminOrder = () => {
   const [customers, setCustomers] = useState([
@@ -298,13 +299,13 @@ const AdminOrder = () => {
   }, [customers]);
 
   return (
-    <div className="text-white p-6 mt-[100px] flex flex-col items-center gap-6 w-full bg-[#111827]">
+    <div className="bground text-white p-6 mt-[100px] flex flex-col items-center gap-6 w-full ">
       <h1 className="text-4xl font-bold mb-6">Orders Overview</h1>
 
       {/* Cooking Orders Section */}
       <section className="w-full">
         <h2 className="text-3xl text-center font-semibold mb-4">
-          In Pocess
+          In Process
         </h2>
         <div className="border border-gray-700 p-4 rounded-lg flex gap-4 justify-center bg-yellow-500">
           {cookingOrders.length > 0 ? (
@@ -471,8 +472,9 @@ const AdminOrder = () => {
       </div>
 
       {/* Total Revenue */}
-      <div className="mt-6 text-xl font-bold text-gray-400">
-        Total Revenue: ${totalRevenue.toFixed(2)}
+      <div className="bg-yellow-500 px-[70px] mt-6 text-[30px] font-bold text-black">
+        <h1>Total Revenue</h1>
+        <h1 className="text-center text-[40px] text-[#2fbd2f]">${totalRevenue.toFixed(2)}</h1> 
       </div>
     </div>
   );

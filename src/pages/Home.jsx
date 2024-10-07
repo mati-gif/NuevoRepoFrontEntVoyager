@@ -35,9 +35,9 @@ const home = () => {
       <div className='flex flex-col gap-[50px] mb-[50px]'>
         <Carrousel />
         <Menu />
-        <PopUpProductWindow/>
+        {/* <PopUpProductWindow/> */}
         <TimeInfoComponent/> 
-        <DebitCardPayment/>
+        {/* <DebitCardPayment/> */}
         <PublicityComponent/>
         <MapComponent/>
       </div>

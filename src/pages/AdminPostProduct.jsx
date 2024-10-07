@@ -14,7 +14,6 @@ const AdminPostProduct = () => {
     name: "",
     description: "",
     price: "",
-    ingredients: "",
     category: "",
     img: "",
   });
@@ -31,13 +30,7 @@ const AdminPostProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Procesa los ingredientes
-    const ingredientsArray = formData.ingredients
-      .split(", ")
-      .map(
-        (ingredient) =>
-          ingredient.charAt(0).toUpperCase() + ingredient.slice(1).toLowerCase()
-      );
+ 
 
     const updatedFormData = {
       nameProduct: formData.name,
@@ -142,20 +135,6 @@ const AdminPostProduct = () => {
             />
           </div>
 
-          <div className="mb-4">
-            <label htmlFor="ingredients" className="block text-sm font-medium text-white">
-              Ingredients (separate with commas and space ", "):
-            </label>
-            <input
-              type="text"
-              id="ingredients"
-              name="ingredients"
-              className="mt-1 block w-full p-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none transition-all duration-200"
-              value={formData.ingredients}
-              onChange={handleChange}
-              required
-            />
-          </div>
 
           <div className="mb-4">
             <label htmlFor="category" className="block text-sm font-medium text-white">

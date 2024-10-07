@@ -337,34 +337,6 @@ const AdminOrder = () => {
           Ready for Delivery
         </h2>
         <div className="flex flex-col gap-6">
-          {/* Dine-In Orders */}
-          <div className="border border-gray-700 p-4 rounded-lg  bg-yellow-500">
-            <h3 className="text-2xl text-center text-black font-extrabold mb-2">Dine-In</h3>
-            <div className="flex flex-wrap gap-4 justify-center">
-              {dineInOrders.length > 0 ? (
-                dineInOrders.map((order) => (
-                  <Ticket
-                    key={order.orderId}
-                    firstName={order.firstName}
-                    lastName={order.lastName}
-                    dateTime={order.dateTime}
-                    status={order.status}
-                    products={order.products}
-                    total={order.total}
-                    onClick={() => handleReadyToDelivered(order)}
-                    onClick2={() => handleCancelOrder(order)}
-                    buttonText1={"Delivered"}
-                  />
-                ))
-              ) : (
-                <p className="text-center w-full text-black font-bold">
-                  No dine-in orders ready
-                </p>
-              )}
-            </div>
-          </div>
-
-          {/* Takeout Orders */}
           <div className="border border-gray-700 p-4 rounded-lg bg-yellow-500">
             <h3 className="text-2xl mb-2 text-center text-black font-extrabold">Takeout</h3>
             <div className="flex flex-wrap gap-4 justify-center">

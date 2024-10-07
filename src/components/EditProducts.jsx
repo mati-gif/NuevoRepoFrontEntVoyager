@@ -231,7 +231,7 @@ const EditProducts = () => {
                     <div className="bg-white rounded-lg shadow-lg p-6 w-11/12 md:w-1/3">
                         <form onSubmit={handleSubmit}>
                             <div className="mb-4">
-                                <label className="block text-gray-700">Nombre del Producto:</label>
+                                <label className="block text-gray-700">Product Name</label>
                                 <input
                                     type="text"
                                     name="nameProduct"
@@ -243,7 +243,7 @@ const EditProducts = () => {
                             </div>
 
                             <div className="mb-4">
-                                <label className="block text-gray-700">Precio:</label>
+                                <label className="block text-gray-700">Price:</label>
                                 <input
                                     type="number"
                                     name="priceProduct"
@@ -256,7 +256,7 @@ const EditProducts = () => {
                             </div>
 
                             <div className="mb-4">
-                                <label className="block text-gray-700">Categoría:</label>
+                                <label className="block text-gray-700">Category:</label>
                                 <input
                                     type="text"
                                     name="category"
@@ -268,7 +268,7 @@ const EditProducts = () => {
                             </div>
 
                             <div className="mb-4">
-                                <label className="block text-gray-700">Detalles:</label>
+                                <label className="block text-gray-700">Details:</label>
                                 <input
                                     type="text"
                                     name="details"
@@ -280,7 +280,7 @@ const EditProducts = () => {
                             </div>
 
                             <div className="mb-4">
-                                <label className="block text-gray-700">URL de Imagen:</label>
+                                <label className="block text-gray-700">Image URL:</label>
                                 <input
                                     type="text"
                                     name="img"
@@ -290,6 +290,7 @@ const EditProducts = () => {
                                     className="border rounded w-full px-3 py-2"
                                 />
                             </div>
+
 
                             <div className='flex  justify-evenly'>
                                 <button
@@ -308,6 +309,7 @@ const EditProducts = () => {
                                     Cancel
                                 </button> */}
                             </div>
+
                         </form>
                     </div>
                 </div>

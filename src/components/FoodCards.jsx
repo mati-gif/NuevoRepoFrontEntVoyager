@@ -35,7 +35,7 @@ const FoodCards = (props) => {
                     <div className="flex w-full justify-center gap-4 ">
 
                         <Button
-                            text="Add to Cart"
+                            text={props.text}
                             backgroundColor="bg-[#E6BB4D]"
                             borderColor="border-[#0F1D15]"
                             arrowColor="text-[#0F1D15]"

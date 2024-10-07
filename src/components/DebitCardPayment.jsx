@@ -69,13 +69,15 @@ const DebitCardPayment = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+
         // Crear el objeto dataPost
         const dataPost = {
             productIds: ids,
             quantities: quantity,
-            addressId: orderType === "DELIVERY" ? address : null, // Solo asigna addressId si es DELIVERY
+            addressId: orderType === "DELIVERY" ? Number(address) : null, // Solo asigna addressId si es DELIVERY
             orderType: orderType, // Asigna el orderType seleccionado
         };
+
 
         console.log("Order submitted:", dataPost); // Muestra el objeto en la consola
 

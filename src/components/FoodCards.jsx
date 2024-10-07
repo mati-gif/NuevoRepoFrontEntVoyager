@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/foodCards.css";
 import Button from "./Button";
+import { Link } from "react-router-dom";
 
 // Método para formatear los precios en USD
 const formatPrice = (price) => {
@@ -30,14 +31,42 @@ const FoodCards = (props) => {
                     <p className="text-lg text text-center text-[#0F1D15]">{props.description}</p>
                     {/* Usamos el método formatPrice */}
                     <p className="text-red-500 text-xl font-bold">{formatPrice(props.price)}</p>
-                    <Button
-                        text="Add to Cart"
-                        backgroundColor="bg-[#E6BB4D]"
-                        borderColor="border-[#0F1D15]"
-                        arrowColor="text-[#0F1D15]"
-                        onClick={props.onClick}
-                    />
+
+                    <div className="flex w-full justify-center gap-4 ">
+
+                        <Button
+                            text="Add to Cart"
+                            backgroundColor="bg-[#E6BB4D]"
+                            borderColor="border-[#0F1D15]"
+                            arrowColor="text-[#0F1D15]"
+                            onClick={props.onClick}
+
+                        />
+                        {/* <button className="  bg-[#E6BB4D] rounded-lg border-[#0F1D15] p-2 font-bold text-[#0F1D15] shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 ease-out hover:bg-[#d4a639]">
+                                Add to Cart
+                            </button> */}
+
+                        <Link to="/productDetails"> <div className=" bg-black text-yellow-500 px-[15px] py-[3px] rounded-lg  underline absolute top-2 right-6 text-xs text-center "><i class="fa-regular fa-star"></i><p>Revew</p></div></Link>
+
+
+
+                        {/* <Button
+                            text="Add to Cart"
+                            backgroundColor="bg-[#E6BB4D]"
+                            borderColor="border-[#0F1D15]"
+                            arrowColor="text-[#0F1D15]"
+                            onClick={props.onClick}
+                        /> */}
+                        {/* <button className="bg-[#E6BB4D] rounded-lg border-[#0F1D15] p-2 font-bold text-[#0F1D15] shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 ease-out hover:bg-[#d4a639]">
+                                make a review
+                            </button> */}
+
+
+                    </div>
+
+            
                 
+
                 </div>
             </div>
         </div>

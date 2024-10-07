@@ -2,13 +2,6 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Star } from 'lucide-react'
 
-// interface CommentBoxProps {
-//     userImage: ""
-//     userName: ""
-//     rating: number
-//     comment: string
-//     date: string
-// }
 
 export default function CommentBox({ userImage, userName, rating, comment, date }) {
     const containerVariants = {
@@ -40,7 +33,7 @@ export default function CommentBox({ userImage, userName, rating, comment, date 
 
     return (
         <motion.div
-            className="bg-gray-800 rounded-lg shadow-lg p-6 max-w-md mx-auto"
+            className="bg-gray-800 rounded-lg shadow-lg p-6 w-[100%]"
             variants={containerVariants}
             initial="hidden"
             animate="visible"

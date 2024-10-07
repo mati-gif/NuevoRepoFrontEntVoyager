@@ -22,28 +22,31 @@ function MenuView() {
   const [cartItems, setCartItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isOpenRegisterModal, setisOpenRegisterModal] = useState(false) // State to track login status
+  const [isOpenRegisterModal, setisOpenRegisterModal] = useState(false); // Estado para el modal de registro
 
   console.log(isOpenRegisterModal);
-  
 
+  // Cargar los productos guardados en el carrito desde localStorage cuando se monta el componente
   useEffect(() => {
-    // Check if the user is logged in
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsLoggedIn(true);
-      dispatch(loadUser()) // User is logged in
-    } else {
-      setIsLoggedIn(false); // User is not logged in
-      // Optionally, redirect to login page or show a message
-      // navigate("/login");
+    const storedProducts = JSON.parse(localStorage.getItem("product")) || [];
+    if (storedProducts.length !== 0) {
+      setCartItems(storedProducts);
     }
   }, []);
 
- 
-  
+  useEffect(() => {
+    // Verifica si el usuario está logueado
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+      dispatch(loadUser()); // El usuario está logueado
+    } else {
+      setIsLoggedIn(false); // El usuario no está logueado
+    }
+  }, [dispatch]);
 
   useEffect(() => {
+    // Recuperar productos de la API
     const fetchProducts = async () => {
       try {
         const response = await axios.get("http://localhost:8080/api/products/");
@@ -54,6 +57,11 @@ function MenuView() {
     };
     fetchProducts();
   }, []);
+
+  // Sincronizar el carrito con el localStorage cada vez que cambia el estado de cartItems
+  useEffect(() => {
+    localStorage.setItem("product", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const burgers = products.filter((product) => product.category === "BURGER");
   const frying = products.filter((product) => product.category === "FRYING");
@@ -74,15 +82,15 @@ function MenuView() {
 
   const addToCart = (product) => {
     if (!isLoggedIn) { // Cambia isUserLoggedIn a isLoggedIn
-      setIsLoggedIn(false)
-      setisOpenRegisterModal(true) // Abre el modal si el usuario no está logueado
+      setIsLoggedIn(false);
+      setisOpenRegisterModal(true); // Abre el modal si el usuario no está logueado
       return; // Salimos de la función para no añadir el producto al carrito
     }
-  
+
     const existingItem = cartItems.find(
       (item) => item.nameProduct === product.nameProduct
     );
-  
+
     if (existingItem) {
       existingItem.quantity += 1; // Incrementar la cantidad si el producto ya está en el carrito
       setCartItems([...cartItems]); // Actualizar el estado para reconocer el cambio
@@ -108,13 +116,17 @@ function MenuView() {
     console.log("Sending cart items:", cartItems);
     dispatch(saveCartProducts(cartItems));
     navigate("/sendOrder");
+
+
+
     setIsModalOpen(false); // Close modal after sending
+
   };
 
   const handleQuantityChange = (index, newQuantity) => {
     setCartItems((prevItems) => {
       const updatedItems = [...prevItems];
-      updatedItems[index].quantity = newQuantity; // Update product quantity
+      updatedItems[index].quantity = newQuantity; // Actualiza la cantidad del producto
       return updatedItems;
     });
   };
@@ -126,7 +138,13 @@ function MenuView() {
   console.log(cartItems);
   
 
+
+ 
+
+
+
   
+
   return (
     <div className="bground flex flex-col min-h-screen">
       <div className="mb-[70px] mt-[150px]">
@@ -327,7 +345,7 @@ function MenuView() {
         />
       )}
 
-      {isOpenRegisterModal && (<ModalRegister/>)}
+      {isOpenRegisterModal && (<ModalRegister />)}
     </div>
   );
 }

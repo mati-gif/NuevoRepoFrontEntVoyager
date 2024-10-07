@@ -193,7 +193,7 @@ const AdminPostProduct = () => {
             />
           </div>
 
-          <ButtonWaveEffect />
+          <ButtonWaveEffect text="Send Product" />
         </form>
       )}
 

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveCartProducts } from "../redux/actions/cartActions";
 import { loadUser } from "../redux/actions/authAction";
 import axios from "axios"; // Importar axios
+import { Link } from "react-router-dom";
 
 const SendOrderForm = () => {
   const dispatch = useDispatch();
@@ -161,6 +162,7 @@ const SendOrderForm = () => {
             <p>Total Order Price: ${totalPrice.toFixed(2)}</p>
           </div>
 
+
           {/* Botón para enviar la orden */}
           <button
             type="submit"
@@ -168,6 +170,7 @@ const SendOrderForm = () => {
           >
             Submit Order
           </button>
+
         </form>
       </div>
     </div>

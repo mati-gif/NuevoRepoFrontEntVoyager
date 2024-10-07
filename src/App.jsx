@@ -24,7 +24,7 @@ import AdminOrder from './components/AdminOrder.jsx';
 
 
 import DeliveryComponent from "./components/DeliveryComponent.jsx";
-import PaymentGatewayPage from "./pages/PaymentGatewayPage.jsx";
+
 
 function App() {
   // const dispatch = useDispatch(
@@ -63,7 +63,7 @@ function App() {
             element={<SendOrderForm />}
             className="sendOrderForm"
           ></Route>
-          <Route path="/paymentGatewayPage" element={<PaymentGatewayPage />} />
+          {/* <Route path="/paymentGatewayPage" element={<PaymentGatewayPage />} /> */}
           <Route path="/menu" element={<MenuView />} className="" />
           <Route path="/addAddress" element={<AddAddress />} />
 

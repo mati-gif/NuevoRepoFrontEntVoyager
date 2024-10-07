@@ -11,17 +11,16 @@ const FirstFloor = () => {
   const [reservations, setReservations] = useState([]);
   const [firstFloorTables, setFirstFloorTables] = useState([]);
   const [selectedTableId, setSelectedTableId] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [dateError, setDateError] = useState("");
+  const [timeError, setTimeError] = useState("");
 
   // Fetch all tables
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       axios
-        .get("http://localhost:8080/api/tables/", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .get("http://localhost:8080/api/tables/")
         .then((response) => {
           setAllTables(response.data);
         })
@@ -87,33 +86,55 @@ const FirstFloor = () => {
 
   const timeSlots = ["20:00", "21:30", "23:00"];
 
-  const handleReservation = () => {
-    if (selectedTableId && selectedDate && selectedTime) {
-      const initialReservTime = `${selectedDate}T${selectedTime}`;
-      const reservationData = {
-        tableId: selectedTableId,
-        initialReservTime: initialReservTime,
-      };
+  const handleReservation = (e) => {
+    e.preventDefault();
 
-      axios
-        .post(
-          "http://localhost:8080/api/clientTables/create",
-          reservationData,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
-        .then((response) => {
-          console.log("Reservation created:", response.data);
-        })
-        .catch((error) => {
-          console.error("Error creating reservation:", error);
-        });
+    let hasError = false;
+
+    if (!selectedTableId) {
+      setErrorMessage("Please select a table.");
+      hasError = true;
     } else {
-      alert("Please select a table, date, and time.");
+      setErrorMessage("");
     }
+
+    if (!selectedDate) {
+      setDateError("Please select a date.");
+      hasError = true;
+    } else {
+      setDateError("");
+    }
+
+    if (!selectedTime) {
+      setTimeError("Please select a time.");
+      hasError = true;
+    } else {
+      setTimeError("");
+    }
+
+    if (hasError) return;
+
+    const initialReservTime = `${selectedDate}T${selectedTime}`;
+    const reservationData = {
+      tableId: selectedTableId,
+      initialReservTime: initialReservTime,
+    };
+
+    console.log(initialReservTime);
+
+    axios
+      .post("http://localhost:8080/api/clientTables/create", reservationData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((response) => {
+        console.log("Reservation created:", response.data);
+        // Add logic to handle success, e.g., showing a success message or resetting fields
+      })
+      .catch((error) => {
+        console.error("Error creating the reservation:", error);
+      });
   };
 
   return (
@@ -132,14 +153,15 @@ const FirstFloor = () => {
                 type="date"
                 value={selectedDate}
                 onChange={(e) => setSelectedDate(e.target.value)}
-                min={new Date().toISOString().split("T")[0]} // From today
-                max={ 
+                min={new Date().toISOString().split("T")[0]} // Desde hoy
+                max={
                   new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
                     .toISOString()
                     .split("T")[0]
-                } // Up to 7 days ahead
+                } // Hasta 7 días adelante
               />
             </div>
+            {dateError && <p className="text-red-500 font-bold text-sm text-center">{dateError}</p>}
             <div className="flex gap-4 items-center">
               <label className="whitespace-nowrap">Reservation Time:</label>
               <select
@@ -155,7 +177,11 @@ const FirstFloor = () => {
                 ))}
               </select>
             </div>
+            {timeError && <p className="text-red-500 font-bold text-sm text-center">{timeError}</p>}
           </div>
+          {errorMessage && (
+            <p className="text-red-500 text-sm font-bold text-center">{errorMessage}</p>
+          )}
           <button
             onClick={handleReservation}
             className="bg-yellow-500 hover:bg-yellow-600 p-5 font-bold text-blue-950 rounded-xl"

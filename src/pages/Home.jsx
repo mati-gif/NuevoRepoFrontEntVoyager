@@ -40,7 +40,6 @@ const home = () => {
         <TimeInfoComponent/> 
         {/* <DebitCardPayment/> */}
         <PublicityComponent/>
-        <Prueba/>
         <MapComponent/>
       </div>
     </div>

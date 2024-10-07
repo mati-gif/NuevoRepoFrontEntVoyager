@@ -1,5 +1,3 @@
-
-
 import "./TablePB.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -14,6 +12,9 @@ const TablePB = ({ token }) => {
   const [reservations, setReservations] = useState([]);
   const [groundFloorTables, setGroundFloorTables] = useState([]);
   const [selectedTableId, setSelectedTableId] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [dateError, setDateError] = useState("");
+  const [timeError, setTimeError] = useState("");
 
   useEffect(() => {
     axios
@@ -80,45 +81,64 @@ const TablePB = ({ token }) => {
 
   const timeSlots = ["20:00", "21:30", "23:00"];
 
-  const handleReservation = () => {
-    if (selectedTableId && selectedDate && selectedTime) {
-      const initialReservTime = `${selectedDate}T${selectedTime}`; // Convertir a ISO 8601
-      const reservationData = {
-        tableId: selectedTableId,
-        initialReservTime: initialReservTime,
-      };
-      console.log(initialReservTime);
+  const handleReservation = (e) => {
+    e.preventDefault();
 
-      axios
-        .post(
-          "http://localhost:8080/api/clientTables/create",
-          reservationData,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
-        .then((response) => {
-          console.log("Reserva creada:", response.data);
-          // Puedes agregar lógica para actualizar el estado o mostrar un mensaje de éxito aquí.
-        })
-        .catch((error) => {
-          console.error("Error al crear la reserva:", error);
-        });
+    let hasError = false;
+
+    if (!selectedTableId) {
+      setErrorMessage("Please select a table.");
+      hasError = true;
     } else {
-      alert("Por favor, selecciona una mesa y una fecha y hora.");
+      setErrorMessage("");
     }
-  };
 
+    if (!selectedDate) {
+      setDateError("Please select a date.");
+      hasError = true;
+    } else {
+      setDateError("");
+    }
+
+    if (!selectedTime) {
+      setTimeError("Please select a time.");
+      hasError = true;
+    } else {
+      setTimeError("");
+    }
+
+    if (hasError) return;
+
+    const initialReservTime = `${selectedDate}T${selectedTime}`;
+    const reservationData = {
+      tableId: selectedTableId,
+      initialReservTime: initialReservTime,
+    };
+
+    console.log(initialReservTime);
+
+    axios
+      .post("http://localhost:8080/api/clientTables/create", reservationData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((response) => {
+        console.log("Reservation created:", response.data);
+        // Add logic to handle success, e.g., showing a success message or resetting fields
+      })
+      .catch((error) => {
+        console.error("Error creating the reservation:", error);
+      });
+  };
+  
   return (
     <div className="flex flex-col justify-center items-center gap-[30px]">
       <div className="flex flex-row-reverse gap-[30px] mt-[20px]">
         <form className="w-[50%] flex flex-col gap-[45px] items-center pt-[50px] relative">
           <h2 className="text-3xl font-bold text-yellow-500">
-          Table Reservation
+            Table Reservation
           </h2>
-    
 
           <div className="flex flex-col gap-4 text-white font-bold">
             <div className="flex gap-4 items-center">
@@ -136,6 +156,7 @@ const TablePB = ({ token }) => {
                 } // Hasta 7 días adelante
               />
             </div>
+            {dateError && <p className="text-red-500 font-bold text-sm text-center">{dateError}</p>}
             <div className="flex gap-4 items-center">
               <label className="whitespace-nowrap">Reservation Time:</label>
               <select
@@ -151,11 +172,25 @@ const TablePB = ({ token }) => {
                 ))}
               </select>
             </div>
+            {timeError && <p className="text-red-500 font-bold text-sm text-center">{timeError}</p>}
           </div>
-          <button onClick={handleReservation} className="bg-yellow-500 hover:bg-yellow-600 p-5 font-bold text-blue-950 rounded-xl">
-                Reserve
+          {errorMessage && (
+            <p className="text-red-500 text-sm font-bold text-center">{errorMessage}</p>
+          )}
+          <button
+            onClick={handleReservation}
+            className="bg-yellow-500 hover:bg-yellow-600 p-5 font-bold text-blue-950 rounded-xl"
+          >
+            Reserve
           </button>
-          <p className="w-[550px] text-yellow-500 text-xs">(*)Reservations can be made with a maximum of two hours in advance and are available from the current day up to 7 days ahead. We offer three dinner shifts, starting at 20:00 (8 PM) and running until 02:00 (2 AM). If you need to cancel your reservation, please do so with two hours' notice. Thank you for choosing us for your dining experience.</p>
+          <p className="w-[550px] text-yellow-500 text-xs">
+            (*)Reservations can be made with a maximum of two hours in advance
+            and are available from the current day up to 7 days ahead. We offer
+            three dinner shifts, starting at 20:00 (8 PM) and running until
+            02:00 (2 AM). If you need to cancel your reservation, please do so
+            with two hours' notice. Thank you for choosing us for your dining
+            experience.
+          </p>
         </form>
         <div className="bgTablePB border-2 border-yellow-500 relative h-[75vh] w-[600px] rounded-xl">
           <div className="bg-yellow-500 p-1 rounded-lg absolute right-0 text-[10px]">
@@ -267,6 +302,4 @@ const TablePB = ({ token }) => {
   );
 };
 
-
 export default TablePB;
-

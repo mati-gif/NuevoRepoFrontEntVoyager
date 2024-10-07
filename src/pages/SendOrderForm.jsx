@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveCartProducts } from "../redux/actions/cartActions";
 import { loadUser } from "../redux/actions/authAction";
 import axios from "axios"; // Importar axios
+import { useNavigate } from "react-router-dom";
+
 
 const SendOrderForm = () => {
   const dispatch = useDispatch();
@@ -12,7 +14,12 @@ const SendOrderForm = () => {
   const [productId, setProductsId] = useState([]);
   const [orderType, setOrderType] = useState(""); 
   const [address, setAddress] = useState(""); 
-  const [addresses, setAddresses] = useState([]); // Estado para las direcciones del usuario
+  const [addresses, setAddresses] = useState([]);
+  const navigate = useNavigate() // Estado para las direcciones del usuario
+
+
+  localStorage.setItem("address", address);
+  localStorage.setItem("orderType", orderType)
 
   useEffect(() => {
     if (user.firstName === "") {
@@ -26,37 +33,9 @@ const SendOrderForm = () => {
 
   const producstSelected = JSON.parse(localStorage.getItem("product"));
 
-  const ids = producstSelected.map((product) => product.idProduct);
-  const quantity = producstSelected.map((product) => product.quantity);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // Crear el objeto dataPost
-    const dataPost = {
-      productIds: ids,
-      quantities: quantity,
-      addressId: orderType === "DELIVERY" ? address : null, // Solo asigna addressId si es DELIVERY
-      orderType: orderType, // Asigna el orderType seleccionado
-    };
-
-    console.log("Order submitted:", dataPost); // Muestra el objeto en la consola
-
-    // Realizar la petición POST con axios
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post("http://localhost:8080/api/orders/create", dataPost, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    })
-      console.log("Response from server:", response.data); // Muestra la respuesta del servidor
-    } catch (error) {
-      console.error("Error submitting order:", error);
-    }
-
-    // Despachar acción para guardar productos (opcional)
-    dispatch(saveCartProducts(dataPost));
+    navigate("/payments")
   };
 
   const handleOrderTypeChange = (e) => {

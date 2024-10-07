@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveCartProducts } from "../redux/actions/cartActions";
 import { loadUser } from "../redux/actions/authAction";
 import axios from "axios"; // Importar axios
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const SendOrderForm = () => {
@@ -46,6 +46,11 @@ const SendOrderForm = () => {
     (acc, product) => acc + product.priceProduct * product.quantity,
     0
   );
+
+  
+
+
+
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-900 items-center justify-center p-4 mt-[100px]">
@@ -142,13 +147,14 @@ const SendOrderForm = () => {
 
 
           {/* Botón para enviar la orden */}
+          <Link to="/debitCard">
           <button
             type="submit"
-            className="mt-6 p-3 bg-yellow-500 text-white text-lg font-bold rounded-lg hover:bg-yellow-600 transition-all duration-200 w-full"
+            className="mt-6 p-3 bg-yellow-500 text-black text-lg font-bold rounded-lg hover:bg-yellow-600 transition-all duration-200 w-full"
           >
             Submit Order
           </button>
-
+          </Link>
         </form>
       </div>
     </div>

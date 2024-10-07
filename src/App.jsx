@@ -25,6 +25,7 @@ import AdminOrder from './components/AdminOrder.jsx';
 
 import DeliveryComponent from "./components/DeliveryComponent.jsx";
 import FormPay from "./pages/FormPay.jsx";
+import DebitCardPayment from "./components/DebitCardPayment.jsx";
 
 function App() {
   // const dispatch = useDispatch(
@@ -67,6 +68,10 @@ function App() {
           <Route path="/addAddress" element={<AddAddress />} />
           <Route path="/reservations" element={<Reservation />} />
           {/* <Route path="/editProducts" element={<EditProducts/>} /> */}
+          <Route path="/reservation" element={<Reservation />} />
+          <Route path="/productDetails" element={<ProductDetails />} />
+          {/* <Route path="/debitCard" element={<DebitCardPayment/>} /> */}
+          <Route path="/payments" element={<FormPay />} />
 
 
 
@@ -86,15 +91,12 @@ function App() {
         </Route>
 
         {/* Main Layout wrapping the routes (estas rutas ve la persona que no esta logueada) */}
-        <Route path="/payments" element={<FormPay />} />
 
         <Route path="/login" element={<Login />} />
-        <Route path="/reservation" element={<Reservation />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/productDetails" element={<ProductDetails />} />
+        {/* <Route path="/productDetails" element={<ProductDetails />} /> */}
         <Route path="/cart" element={<Cart />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/productDetails" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
     </BrowserRouter>

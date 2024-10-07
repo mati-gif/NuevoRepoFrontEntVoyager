@@ -16,19 +16,19 @@ const Ticket = ({ firstName, lastName, dateTime, status, products, total, onClic
       <p className="mt-2 font-bold text-lg text-black">${total.toFixed(2)}</p>
       
       {/* Aquí agregamos los botones al final del ticket */}
-      <div className="flex w-full space-x-2 mt-4">
-        <Button 
-          onClick={onClick} 
-          text={buttonText1} 
-          backgroundColor="bg-green-500 hover:bg-green-700" // Cambiado a verde
-          borderColor="border-green-500" // Cambiado a verde
-          arrowColor="text-white"
-        />
+      <div className="flex  w-full space-x-2 mt-4">
         <Button 
           onClick={onClick2} 
           text="Cancel" 
           backgroundColor="bg-red-500 hover:bg-red-700" // Cambiado a rojo
           borderColor="border-red-500" // Cambiado a rojo
+          arrowColor="text-white"
+        />
+        <Button 
+          onClick={onClick} 
+          text={buttonText1} 
+          backgroundColor="bg-green-500 hover:bg-green-700" // Cambiado a verde
+          borderColor="border-green-500" // Cambiado a verde
           arrowColor="text-white"
         />
       </div>

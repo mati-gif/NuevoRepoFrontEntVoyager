@@ -338,7 +338,7 @@ const AdminOrder = () => {
         </h2>
         <div className="flex flex-col gap-6">
           {/* Dine-In Orders */}
-          <div className="border border-gray-700 p-4 rounded-lg  bg-yellow-500">
+          {/* <div className="border border-gray-700 p-4 rounded-lg  bg-yellow-500">
             <h3 className="text-2xl text-center text-black font-extrabold mb-2">Dine-In</h3>
             <div className="flex flex-wrap gap-4 justify-center">
               {dineInOrders.length > 0 ? (
@@ -362,7 +362,7 @@ const AdminOrder = () => {
                 </p>
               )}
             </div>
-          </div>
+          </div> */}
 
           {/* Takeout Orders */}
           <div className="border border-gray-700 p-4 rounded-lg bg-yellow-500">
@@ -473,7 +473,7 @@ const AdminOrder = () => {
 
       {/* Total Revenue */}
       <div className="bg-yellow-500 rounded-[10px] px-[70px] mt-6 text-[30px] font-bold text-black">
-        <h1>Total Revenue</h1>
+        <h1>Total Revenue of day</h1>
         <h1 className="text-center text-[40px] font-extrabold text-[#2fbd2f]">${totalRevenue.toFixed(2)}</h1> 
       </div>
     </div>

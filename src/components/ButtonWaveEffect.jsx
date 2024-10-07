@@ -3,8 +3,11 @@ import "./ButtonWaveEffect.css"
 
 function ButtonWaveEffect(prop) {
     const [isHovered, setIsHovered] = useState(false)
+
+
+
   return (
-    <div className="flex items-center justify-center mt-[30px]">
+    <div onClick={prop.onClick} className="flex items-center justify-center mt-[30px]">
       <button
         className="buttonWave relative overflow-hidden text-2xl font-bold py-4 px-8 rounded-lg bg-gray-800 text-yellow-500 transition-all duration-300 ease-in-out"
         onMouseEnter={() => setIsHovered(true)}

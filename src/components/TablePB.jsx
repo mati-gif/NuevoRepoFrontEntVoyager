@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const TablePB = ({ token }) => {
-  const [selectedDate, setSelectedDate] = useState("");
+  const today = new Date().toISOString().split("T")[0];
+  const [selectedDate, setSelectedDate] = useState(today);
   const [selectedTime, setSelectedTime] = useState("");
   const [tableStatus, setTableStatus] = useState({});
   const [allTables, setAllTables] = useState([]);
@@ -173,7 +174,7 @@ const TablePB = ({ token }) => {
                 type="date"
                 value={selectedDate}
                 onChange={(e) => setSelectedDate(e.target.value)}
-                min={new Date().toISOString().split("T")[0]} // Desde hoy
+                min={today} // Desde hoy
                 max={
                   new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
                     .toISOString()
@@ -208,7 +209,7 @@ const TablePB = ({ token }) => {
           >
             Reserve
           </button>
-          <p className="w-[550px] text-yellow-500 text-xs">
+          <p className="w-[550px] text-yellow-500 text-[14px]">
             (*)Reservations can be made with a maximum of two hours in advance
             and are available from the current day up to 7 days ahead. We offer
             three dinner shifts, starting at 20:00 (8 PM) and running until
@@ -218,13 +219,13 @@ const TablePB = ({ token }) => {
           </p>
         </form>
         <div className="bgTablePB border-2 border-yellow-500 relative h-[75vh] w-[600px] rounded-xl">
-          <div className="bg-yellow-500 p-1 rounded-lg absolute right-0 text-[10px]">
+          <div className="bg-yellow-500 p-2  rounded-lg absolute right-0 text-[11.5px]">
             <p className="flex items-center gap-0.5">
               <i className="fa-solid fa-chair"></i> Capacity
             </p>
             <div className="flex items-center gap-0.5 mt-0.5">
               <div className="w-[8px] h-[8px] rounded-full border border-black bg-[#FFFFFF80]"></div>
-              <p>Disponible</p>
+              <p>Available</p>
             </div>
             <div className="flex items-center gap-0.5 mt-0.5">
               <div className="w-[8px] h-[8px] rounded-full border border-black bg-[#00800080]"></div>

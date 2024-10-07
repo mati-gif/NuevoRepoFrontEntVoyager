@@ -47,6 +47,9 @@ const SendOrderForm = () => {
     0
   );
 
+localStorage.setItem("price", totalPrice);
+  
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-900 items-center justify-center p-4 mt-[100px]">
       <div className="w-full max-w-4xl">

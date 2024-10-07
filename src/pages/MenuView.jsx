@@ -266,6 +266,7 @@ function MenuView() {
                   backgroundImage={hamburguer.img}
                   typeIcon={image1}
                   onClick={() => addToCart(hamburguer)} // Add to cart
+                  text = "Add to cart"
                 />
               ))}
             </div>
@@ -286,6 +287,7 @@ function MenuView() {
                   backgroundImage={fry.img}
                   typeIcon={image2}
                   onClick={() => addToCart(fry)} // Add to cart
+                  text = "Add to cart"
                 />
               ))}
             </div>
@@ -306,6 +308,7 @@ function MenuView() {
                   backgroundImage={drink.img}
                   typeIcon={image}
                   onClick={() => addToCart(drink)} // Add to cart
+                  text = "Add to cart"
                 />
               ))}
             </div>
@@ -325,6 +328,7 @@ function MenuView() {
                   price={dessert.priceProduct}
                   backgroundImage={dessert.img}
                   typeIcon={image3}
+                  text = "Add to cart"
                   onClick={() => addToCart(dessert)} // Add to cart
                 />
               ))}

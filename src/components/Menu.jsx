@@ -56,20 +56,6 @@ const Menu = () => {
       category: "burger"
     },
     {
-      name: "Voyager",
-      description: "Gourmet burger with avocado, bacon, and special sauce.",
-      price: 9.99,
-      ingredients: ["beef", "avocado", "bacon", "special sauce", "burger bun"],
-      category: "burger"
-    },
-    {
-      name: "Cheeseburger",
-      description: "Delicious burger with double cheese and fresh onion.",
-      price: 10.49,
-      ingredients: ["beef", "double cheese", "fresh onion", "burger bun"],
-      category: "burger"
-    },
-    {
       name: "Cheddar Bacon Fries",
       description: "Crispy French fries topped with melted cheddar cheese and crispy bacon.",
       price: 5.99,
@@ -97,7 +83,7 @@ const Menu = () => {
   let drinks = products.filter(product => product.category === "drink");
 
   return (
-    <div className='flex flex-col gap-[20px] mx-[20px] justify-center items-center'>
+    <div className='flex flex-col gap-[20px] my-[50px] mx-[20px] justify-center items-center'>
       {/* <h2 className='text-white font-bold text-[50px]'>Menu</h2> */}
       <div className='flex flex-col gap-[20px] items-center w-full'>
       <h3 className='text-white font-semibold text-[40px]'>The burgers most requested by our customers </h3>
@@ -112,6 +98,7 @@ const Menu = () => {
               // backgroundPosition="50% 100%"
               backgroundImage={imageMap[hamburguer.name]} 
               typeIcon={iconMap[hamburguer.category]} // Passing the category icon
+              text = "Go to menu"
             />
           ))}
         </div>

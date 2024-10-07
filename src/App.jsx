@@ -71,7 +71,6 @@ function App() {
             <>
               <Route path="/admin" element={<Admin />} className="admin" />
               <Route path="/adminOrder" element={<AdminOrder />} />
-              {/* <Route path="/deliveryadmin" element={<DeliveryAdmin />} className="deliveryadmin" /> */}
               <Route
                 path="/adminform"
                 element={<AdminPostProduct />}
@@ -81,7 +80,7 @@ function App() {
           )}
         </Route>
 
-        {/* Main Layout wrapping the routes (estas rutas ve la persona que no esta logueada) */}
+     
         <Route path="/payments" element={<FormPay />} />
 
         <Route path="/login" element={<Login />} />

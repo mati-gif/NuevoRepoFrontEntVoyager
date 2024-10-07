@@ -103,15 +103,15 @@ function TimeInfoComponent() {
                     <h2 className="h2-container-time-info">OUR SCHEDULES</h2>
                     <div className="schedule-container-time-info">
                         <div className="location-container-time-info">
-                            <h4>Rosario</h4>
-                            <p>19:00</p>
-                            <p>01:00</p>
+                            <h4>Miami</h4>
+                            <p>20:00</p>
+                            <p>02:00</p>
                         </div>
                         <div className="divider-container-time-info"></div>
                         <div className="location-container-time-info">
-                            <h4>Buenos Aires</h4>
-                            <p>17:00</p>
-                            <p>01:00</p>
+                            <h4>New York City</h4>
+                            <p>20:00</p>
+                            <p>02:00</p>
                         </div>
                     </div>
                     <button className="text-[25px] text-yellow-400 border-2 border-yellow-500 p-[10px] hover:bg-[#0000002c] hover:text-yellow-400">

@@ -73,19 +73,20 @@ const DebitCardPayment = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
     
+        const token = localStorage.getItem('token');
         // Crear el objeto dataPost
         const dataPost = {
             productIds: ids,
             quantities: quantity,
-            addressId: orderType === "DELIVERY" ? address : null, // Solo asigna addressId si es DELIVERY
+            addressId: orderType === "DELIVERY" ? Number(address) : null, // Solo asigna addressId si es DELIVERY
             orderType: orderType, // Asigna el orderType seleccionado
         };
+        console.log(dataPost);
+        
     
-        console.log("Order submitted:", dataPost); // Muestra el objeto en la consola
     
         // Realizar la petición POST con axios
         try {
-            const token = localStorage.getItem('token');
             const response = await axios.post("http://localhost:8080/api/orders/create", dataPost, {
                 headers: {
                     Authorization: `Bearer ${token}`, // Uso correcto de las comillas invertidas
@@ -94,7 +95,7 @@ const DebitCardPayment = () => {
             console.log("Response from server:", response.data); // Muestra la respuesta del servidor
         } catch (error) {
             console.error("Error submitting order:", error);
-        }
+        }   
     
 
     

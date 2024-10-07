@@ -140,6 +140,7 @@ const SendOrderForm = () => {
             <p>Total Order Price: ${totalPrice.toFixed(2)}</p>
           </div>
 
+
           {/* Botón para enviar la orden */}
           <button
             type="submit"
@@ -147,6 +148,7 @@ const SendOrderForm = () => {
           >
             Submit Order
           </button>
+
         </form>
       </div>
     </div>

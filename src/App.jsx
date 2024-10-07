@@ -25,6 +25,8 @@ import AdminOrder from './components/AdminOrder.jsx';
 
 import DeliveryComponent from "./components/DeliveryComponent.jsx";
 
+import FormPay from "./pages/FormPay.jsx";
+
 
 function App() {
   // const dispatch = useDispatch(
@@ -63,9 +65,12 @@ function App() {
             element={<SendOrderForm />}
             className="sendOrderForm"
           ></Route>
-          {/* <Route path="/paymentGatewayPage" element={<PaymentGatewayPage />} /> */}
           <Route path="/menu" element={<MenuView />} className="" />
           <Route path="/addAddress" element={<AddAddress />} />
+          <Route path="/reservations" element={<Reservation />} />
+          {/* <Route path="/editProducts" element={<EditProducts/>} /> */}
+
+
 
           {/* Rutas protegidas para usuarios que contienen "admin" en su email */}
           {auth && user?.email?.includes("admin") && (
@@ -83,15 +88,13 @@ function App() {
         </Route>
 
         {/* Main Layout wrapping the routes (estas rutas ve la persona que no esta logueada) */}
+        <Route path="/payments" element={<FormPay />} />
 
         <Route path="/login" element={<Login />} />
         <Route path="/reservation" element={<Reservation />} />
         <Route path="/register" element={<Register />} />
         <Route path="/productDetails" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
-
-        <Route path="/reservation" element={<Reservation />} />
-
         <Route path="/register" element={<Register />} />
         <Route path="/productDetails" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />

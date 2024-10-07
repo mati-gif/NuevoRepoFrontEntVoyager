@@ -101,7 +101,7 @@ const Header = () => {
               </div>
 
               {/* Navegación centrada */}
-              <nav aria-label="Global" className="hidden md:flex md:justify-center flex-1 w-[50%]">
+              <nav aria-label="Global" className="hidden  md:flex md:justify-center flex-1 w-[50%]">
                 <ul className="flex items-center gap-10 text-lg">
 
                   <li
@@ -133,19 +133,14 @@ const Header = () => {
                     }`}
                   >
                     <Link
-                      to="/deliveryadmin"
+                      to="/reservations"
                       className={`text-[#E6BB4D] text-lg font-semibold transition ${location.pathname === '/deliveryadmin' ? 'text-[#FFD700]' : 'hover:text-[#FFD700]'
-                        }`} >Orders</Link>
+                        }`} >Reservations</Link>
                   </li>
 
                   {/* <li className="transition transform hover:scale-125">
                     <Link className="text-[#E6BB4D] text-lg font-semibold transition hover:text-[#FFD700]" to="/dfasdas">dfasdas</Link>
                   </li> */}
-               
-            
-
-                
-
                 </ul>
               </nav>
               <div className='flex justify-center items-center w-[25%]'>

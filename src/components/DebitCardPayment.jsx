@@ -1,122 +1,160 @@
-import React, { useState, useEffect } from 'react'; 
-import { motion, AnimatePresence } from 'framer-motion';
-import { CreditCard, Lock, ChevronDown } from 'lucide-react';
-import { useNavigate, useLocation } from 'react-router-dom'; // Para redirigir y obtener datos
-import axios from 'axios';
-import Swal from 'sweetalert2';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { CreditCard, Lock, ChevronDown } from "lucide-react";
+import axios from "axios";
+import "./AddAddress.css";
+import { GiBank } from "react-icons/gi";
+import Swal from "sweetalert2";
 
 const DebitCardPayment = () => {
-    const location = useLocation();  // Obtener el estado de navegación
-    const { orderId, totalAmount } = location.state || {};  // Recibir orderId y totalAmount
-    const [cardNumber, setCardNumber] = useState('');
-    const [cardHolder, setCardHolder] = useState('');
-    const [expiryDate, setExpiryDate] = useState('');
-    const [cvv, setCvv] = useState('');
-    const [cardType, setCardType] = useState('silver');
+    const [cardNumber, setCardNumber] = useState("");
+    const [cardHolder, setCardHolder] = useState("");
+    const [expiryDate, setExpiryDate] = useState("");
+    const [cvv, setCvv] = useState("");
+    const [cardType, setCardType] = useState("silver");
     const [isCardTypeOpen, setIsCardTypeOpen] = useState(false);
     const [isFlipped, setIsFlipped] = useState(false);
-    const navigate = useNavigate();  // Para redirigir
 
-    if (!orderId || !totalAmount) {
-        // Redirigir al usuario si no tiene el estado necesario
-        useEffect(() => {
-            Swal.fire('Error', 'No order data found. Redirecting...', 'error');
-            navigate('/menu');  // Redirigir a una página adecuada
-        }, [navigate]);
+    const producstSelected = JSON.parse(localStorage.getItem("product"));
+    console.log(producstSelected);
 
-        return null;  // Retornar null para evitar renderizar el componente sin datos
-    }
+    const ids = producstSelected.map((product) => product.idProduct);
+    const quantity = producstSelected.map((product) => product.quantity);
+    console.log(ids);
+    console.log(quantity);
 
-    // Formatear el número de tarjeta
+    const orderType = localStorage.getItem("orderType");
+    console.log(orderType);
+
+    const address = localStorage.getItem("address");
+    console.log(address);
+
     const formatCardNumber = (value) => {
-        const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+        const v = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
         const matches = v.match(/\d{4,16}/g);
-        const match = (matches && matches[0]) || '';
+        const match = (matches && matches[0]) || "";
         const parts = [];
+
         for (let i = 0, len = match.length; i < len; i += 4) {
             parts.push(match.substring(i, i + 4));
         }
-        return parts.length ? parts.join(' ') : value;
+
+        if (parts.length) {
+            return parts.join(" ");
+        } else {
+            return value;
+        }
     };
 
     const handleCardNumberChange = (e) => {
-        setCardNumber(formatCardNumber(e.target.value));
+        const formattedValue = formatCardNumber(e.target.value);
+        setCardNumber(formattedValue);
     };
 
     const handleExpiryDateChange = (e) => {
-        const value = e.target.value.replace(/\D/g, '');
+        const value = e.target.value.replace(/\D/g, "");
         if (value.length <= 4) {
-            const formattedValue = value.replace(/(\d{2})(\d{2})/, '$1/$2');
+            const formattedValue = value.replace(/(\d{2})(\d{2})/, "$1/$2");
             setExpiryDate(formattedValue);
         }
     };
 
     const handleCvvChange = (e) => {
-        const value = e.target.value.replace(/\D/g, '');
+        const value = e.target.value.replace(/\D/g, "");
         if (value.length <= 3) {
             setCvv(value);
         }
     };
 
-    // Manejo del envío del formulario
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        if (window.confirm(`Do you want to proceed with the payment of $${totalAmount}?`)) {
-            try {
-                const token = localStorage.getItem('token');
-                const paymentData = {
-                    orderId,
-                    amount: totalAmount,
-                    cardDetails: {
-                      cardNumber: cardNumber,
-                      cardHolder: cardHolder,
-                      expiryDate: expiryDate,
-                      cvv: cvv
-                    }
-                    
-                  };
-                  console.log(paymentData);
-    
-                // Enviar los detalles del pago al backend de homebanking
-                const response = await axios.post("http://localhost:8080/api/orders/initiate-payment", paymentData, {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
-    
-                if (response.data.success) {
-                    Swal.fire("Success", "Payment processed successfully!", "success");
-                    navigate("/order-summary");  // Redirigir al resumen de la orden
-                } else {
-                    Swal.fire("Error", "Payment failed. " + response.data.message, "error");
+
+        // Crear el objeto dataPost
+        const dataPost = {
+            productIds: ids,
+            quantities: quantity,
+            addressId: orderType === "DELIVERY" ? address : null, // Solo asigna addressId si es DELIVERY
+            orderType: orderType, // Asigna el orderType seleccionado
+        };
+
+        console.log("Order submitted:", dataPost); // Muestra el objeto en la consola
+
+        // Realizar la petición POST con axios
+        try {
+            const token = localStorage.getItem("token");
+            const response = await axios.post(
+                "http://localhost:8080/api/orders/create",
+                dataPost,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Uso correcto de las comillas invertidas
+                    },
                 }
-            } catch (error) {
-                Swal.fire("Error", "Payment failed. Please try again.", "error");
-            }
+            );
+            console.log("Response from server:", response.data); // Muestra la respuesta del servidor
+        } catch (error) {
+            console.error("Error submitting order:", error);
         }
     };
-    
+
+    //----------------------------------------------------------------HOME BANKING------------------------------------------
+    const [number, setNumber] = useState("");
+    const [restaurantAccountNumber, setRestaurantAccountNumber] = useState("");
+    const [totalAmount, setTotalAmount] = useState(0);
+
+    const handleOnclickPayment = () => {
+        const body = {
+            cardNumberClient: number,
+            accountNumberRestaurant: restaurantAccountNumber,
+            totalAmount: totalAmount,
+        };
+        console.log(body);
+        // 3435-6736-2470-2857  TARJETA QUE ESTA EN EL BACK: SI QUIERES PROBAR EN EL MONTO PONE 1 PESO PORQUE A LA CUENTA SE LE VA DESCUENTA EL MONTO (VER RESPUESTA DE LA PETICION EN CONSOLA)
+        // VIN003                ----------------- NUMERO DECUENTA A LA QUE SE TRANFIEREN LOS CONFODS
+        axios
+            .post(
+                "https://homebanking-luisibanez-deply-back.onrender.com/api/external/payment",
+                body
+            )
+            .then((response) => {
+                console.log(response.data);
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'We are processing your payment',
+                    text: 'in a few minutes you will recieve a receipt to your email',
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+    //----------------------------------------------------------------HOME BANKING------------------------------------------
+
     const cardColors = {
-        gold: 'bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500',
-        silver: 'bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500',
-        platinum: 'bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300'
+        gold: "bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500",
+        silver: "bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500",
+        platinum: "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300",
     };
 
     const cardTypeOptions = [
-        { value: 'silver', label: 'Silver' },
-        { value: 'gold', label: 'Gold' },
-        { value: 'platinum', label: 'Platinum' }
+        { value: "silver", label: "Silver" },
+        { value: "gold", label: "Gold" },
+        { value: "platinum", label: "Platinum" },
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-indigo-900 to-purple-900 flex items-center justify-center p-4">
+        <div className="bground min-h-screen  flex items-center justify-center p-4">
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="border-4 border-blue-600 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-3xl shadow-2xl p-8 max-w-4xl w-full"
+                className="  bg-gray-800   rounded-3xl shadow-2xl p-8 max-w-4xl w-full"
             >
-                <h2 className="text-4xl font-extrabold mb-6 text-center text-white">Debit Card Payment</h2>
-                <div className="flex flex-col md:flex-row gap-8">
+                <h2 className="text-4xl font-extrabold mb-6 text-center text-yellow-500">
+                    Debit Card Payment
+                </h2>
+                <div className="flex flex-col  md:flex-row gap-8">
                     <div className="md:w-1/2">
                         <div className="perspective-1000 w-full h-56">
                             <motion.div
@@ -124,39 +162,52 @@ const DebitCardPayment = () => {
                                 initial={false}
                                 animate={{ rotateY: isFlipped ? 180 : 0 }}
                                 transition={{ duration: 0.6 }}
-                                style={{ transformStyle: 'preserve-3d' }}
+                                style={{ transformStyle: "preserve-3d" }}
                             >
-                                {/* Tarjeta de crédito (frente) */}
-                                <div className={`absolute w-full h-full ${cardColors[cardType]} rounded-2xl shadow-lg p-6 text-white overflow-hidden`} style={{ backfaceVisibility: 'hidden' }}>
+                                <div
+                                    className={`absolute w-full h-full ${cardColors[cardType]} rounded-2xl shadow-lg p-6 text-white overflow-hidden backface-hidden`}
+                                    style={{ backfaceVisibility: "hidden" }}
+                                >
                                     <div className="absolute inset-0 bg-black bg-opacity-20"></div>
                                     <div className="relative z-10">
                                         <div className="flex justify-between items-start">
                                             <CreditCard size={32} />
-                                            <img src="/placeholder.svg" alt="Bank Logo" className="h-8" />
+                                            <GiBank size={32} />
                                         </div>
                                         <div className="mt-8">
-                                            <div className="text-2xl mb-2 font-mono">{cardNumber || '•••• •••• •••• ••••'}</div>
+                                            <div className="text-2xl mb-2 font-mono">
+                                                {cardNumber || "•••• •••• •••• ••••"}
+                                            </div>
                                             <div className="flex justify-between">
                                                 <div>
                                                     <div className="text-xs opacity-75">Card Holder</div>
-                                                    <div className="font-semibold">{cardHolder || 'YOUR NAME'}</div>
+                                                    <div className="font-semibold">
+                                                        {cardHolder || "YOUR NAME"}
+                                                    </div>
                                                 </div>
                                                 <div>
                                                     <div className="text-xs opacity-75">Expires</div>
-                                                    <div className="font-semibold">{expiryDate || 'MM/YY'}</div>
+                                                    <div className="font-semibold">
+                                                        {expiryDate || "MM/YY"}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                {/* Tarjeta de crédito (parte trasera) */}
-                                <div className={`absolute w-full h-full ${cardColors[cardType]} rounded-2xl shadow-lg p-6 text-white overflow-hidden`} style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
+                                <div
+                                    className={`absolute w-full h-full ${cardColors[cardType]} rounded-2xl shadow-lg p-6 text-white overflow-hidden backface-hidden`}
+                                    style={{
+                                        backfaceVisibility: "hidden",
+                                        transform: "rotateY(180deg)",
+                                    }}
+                                >
                                     <div className="absolute inset-0 bg-black bg-opacity-20"></div>
                                     <div className="relative z-10">
                                         <div className="w-full h-12 bg-black mt-4"></div>
                                         <div className="mt-8 px-6">
                                             <div className="bg-white text-black text-right p-2 font-mono">
-                                                {cvv || '•••'}
+                                                {cvv || "•••"}
                                             </div>
                                         </div>
                                     </div>
@@ -164,17 +215,21 @@ const DebitCardPayment = () => {
                             </motion.div>
                         </div>
                     </div>
-
                     <div className="md:w-1/2">
                         <form onSubmit={handleSubmit} className="space-y-6">
-                            {/* Tipo de tarjeta */}
                             <div className="relative">
                                 <motion.button
                                     type="button"
-                                    className="w-full text-left bg-white bg-opacity-20 text-white py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                    className="w-full text-left bg-white bg-opacity-20 text-white py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
                                     onClick={() => setIsCardTypeOpen(!isCardTypeOpen)}
                                 >
-                                    <span>{cardTypeOptions.find(option => option.value === cardType)?.label}</span>
+                                    <span>
+                                        {
+                                            cardTypeOptions.find(
+                                                (option) => option.value === cardType
+                                            )?.label
+                                        }
+                                    </span>
                                     <ChevronDown className="absolute right-4 top-1/2 transform -translate-y-1/2" />
                                 </motion.button>
                                 <AnimatePresence>
@@ -194,6 +249,9 @@ const DebitCardPayment = () => {
                                                         setCardType(option.value);
                                                         setIsCardTypeOpen(false);
                                                     }}
+                                                    whileHover={{
+                                                        backgroundColor: "rgba(167, 139, 250, 0.1)",
+                                                    }}
                                                 >
                                                     {option.label}
                                                 </motion.button>
@@ -202,58 +260,54 @@ const DebitCardPayment = () => {
                                     )}
                                 </AnimatePresence>
                             </div>
-
-                            {/* Número de tarjeta */}
                             <motion.input
                                 type="text"
                                 value={cardNumber}
                                 onChange={handleCardNumberChange}
-                                className="w-full bg-white bg-opacity-20 text-white placeholder-gray-300 py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                className="w-full bg-white bg-opacity-20 text-white placeholder-gray-300 py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
                                 placeholder="Card Number"
                                 maxLength="19"
                                 required
+                                whileFocus={{ scale: 1.02 }}
                             />
-
-                            {/* Nombre del titular */}
                             <motion.input
                                 type="text"
                                 value={cardHolder}
                                 onChange={(e) => setCardHolder(e.target.value.toUpperCase())}
-                                className="w-full bg-white bg-opacity-20 text-white placeholder-gray-300 py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                className="w-full bg-white bg-opacity-20 text-white placeholder-gray-300 py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
                                 placeholder="Card Holder Name"
                                 required
+                                whileFocus={{ scale: 1.02 }}
                             />
 
                             <div className="flex space-x-4">
-                                {/* Fecha de expiración */}
                                 <motion.input
                                     type="text"
                                     value={expiryDate}
                                     onChange={handleExpiryDateChange}
-                                    className="w-16 flex-1 bg-white bg-opacity-20 text-white placeholder-gray-300 py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                    className="w-16 flex-1 bg-white bg-opacity-20 text-white placeholder-gray-300 py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
                                     placeholder="MM/YY"
                                     maxLength="5"
                                     required
+                                    whileFocus={{ scale: 1.02 }}
                                 />
-
-                                {/* CVV */}
                                 <motion.input
                                     type="text"
                                     value={cvv}
                                     onChange={handleCvvChange}
                                     onFocus={() => setIsFlipped(true)}
                                     onBlur={() => setIsFlipped(false)}
-                                    className="w-16 flex-1 bg-white bg-opacity-20 text-white placeholder-gray-300 py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                    className="w-16 flex-1 bg-white bg-opacity-20 text-white placeholder-gray-300 py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
                                     placeholder="CVV"
                                     maxLength="3"
                                     required
+                                    whileFocus={{ scale: 1.02 }}
                                 />
                             </div>
-
-                            {/* Botón de pago */}
                             <motion.button
+                                onClick={handleSubmit}
                                 type="submit"
-                                className="w-full flex justify-center items-center py-3 px-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                className="w-full flex justify-center items-center py-3 px-4 bg-yellow-500 hover:bg-yellow-500 text-white font-semibold rounded-lg focus:outline-none "
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >

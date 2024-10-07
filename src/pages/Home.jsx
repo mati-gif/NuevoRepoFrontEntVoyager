@@ -86,7 +86,6 @@ console.log(body)
         <TimeInfoComponent/> 
         {/* <DebitCardPayment/> */}
         <PublicityComponent/>
-        <Prueba/>
         <MapComponent/>
       </div>
     </div>

@@ -24,6 +24,7 @@ import AdminOrder from './components/AdminOrder.jsx';
 
 
 import DeliveryComponent from "./components/DeliveryComponent.jsx";
+import EditProducts from "./components/EditProducts.jsx";
 
 
 function App() {
@@ -65,7 +66,8 @@ function App() {
           ></Route>
           <Route path="/menu" element={<MenuView />} className="" />
           <Route path="/addAddress" element={<AddAddress />} />
-        <Route path="/reservations" element={<Reservation />} />
+          <Route path="/reservations" element={<Reservation />} />
+          {/* <Route path="/editProducts" element={<EditProducts/>} /> */}
 
 
 

@@ -138,7 +138,7 @@ function TablePB() {
     console.log(initialReservTime);
 
     axios
-      .post("http://localhost:8080/api/clientTables/create", reservationData, {
+      .post("https://challengefinalbackvoyager.onrender.com/api/clientTables/create", reservationData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

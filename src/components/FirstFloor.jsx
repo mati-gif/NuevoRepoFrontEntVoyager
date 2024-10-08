@@ -20,7 +20,7 @@ const FirstFloor = () => {
     const token = localStorage.getItem("token");
     if (token) {
       axios
-        .get("http://localhost:8080/api/tables/")
+        .get("https://challengefinalbackvoyager.onrender.com/api/tables/")
         .then((response) => {
           setAllTables(response.data);
         })
@@ -33,7 +33,7 @@ const FirstFloor = () => {
   // Fetch all reservations
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/clientTables/allReservations")
+      .get("https://challengefinalbackvoyager.onrender.com/api/clientTables/allReservations")
       .then((response) => {
         setReservations(response.data);
       })
@@ -123,7 +123,7 @@ const FirstFloor = () => {
     console.log(initialReservTime);
 
     axios
-      .post("http://localhost:8080/api/clientTables/create", reservationData, {
+      .post("https://challengefinalbackvoyager.onrender.com/api/clientTables/create", reservationData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

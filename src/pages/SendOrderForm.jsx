@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveCartProducts } from "../redux/actions/cartActions";
 import { loadUser } from "../redux/actions/authAction";
 import axios from "axios"; // Importar axios
+import { Link, useNavigate } from "react-router-dom";
+
 
 const SendOrderForm = () => {
   const dispatch = useDispatch();
@@ -12,7 +14,12 @@ const SendOrderForm = () => {
   const [productId, setProductsId] = useState([]);
   const [orderType, setOrderType] = useState(""); 
   const [address, setAddress] = useState(""); 
-  const [addresses, setAddresses] = useState([]); // Estado para las direcciones del usuario
+  const [addresses, setAddresses] = useState([]);
+  const navigate = useNavigate() // Estado para las direcciones del usuario
+
+
+  localStorage.setItem("address", address);
+  localStorage.setItem("orderType", orderType)
 
   useEffect(() => {
     if (user.firstName === "") {
@@ -26,8 +33,6 @@ const SendOrderForm = () => {
 
   const producstSelected = JSON.parse(localStorage.getItem("product"));
 
-  const ids = producstSelected.map((product) => product.idProduct);
-  const quantity = producstSelected.map((product) => product.quantity);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,6 +72,11 @@ const SendOrderForm = () => {
     (acc, product) => acc + product.priceProduct * product.quantity,
     0
   );
+
+  
+
+
+
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-900 items-center justify-center p-4 mt-[100px]">
@@ -161,13 +171,16 @@ const SendOrderForm = () => {
             <p>Total Order Price: ${totalPrice.toFixed(2)}</p>
           </div>
 
+
           {/* Botón para enviar la orden */}
+          <Link to="/payments">
           <button
             type="submit"
-            className="mt-6 p-3 bg-yellow-500 text-white text-lg font-bold rounded-lg hover:bg-yellow-600 transition-all duration-200 w-full"
+            className="mt-6 p-3 bg-yellow-500 text-black text-lg font-bold rounded-lg hover:bg-yellow-600 transition-all duration-200 w-full"
           >
             Submit Order
           </button>
+          </Link>
         </form>
       </div>
     </div>

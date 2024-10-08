@@ -5,6 +5,7 @@ import Swal from 'sweetalert2'
 import { isRejectedWithValue } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux'
 import { createAddress, loadUser } from '../redux/actions/authAction'
+import "./AddAddress.css"
 
 
 
@@ -104,24 +105,6 @@ function AddAddress() {
 
 
 
-
-
-    // Acción asincrónica para crear una transacción
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     const handleTipoViviendaChange = (e) => {
         const value = e.target.value
         setFormData(prevData => ({
@@ -149,17 +132,15 @@ function AddAddress() {
 
     }
     return (
-        <div style={{
-            backgroundImage: "url('../assets/black-background.jpg')",
-            backgroundSize: 'cover',
-        }} className="border-4 border-red-500 min-h-screen flex items-center justify-center mt-[5%]  p-4    flex-col">
+        
+        <div className="bground min-h-screen flex items-center justify-center p-4 flex-col">
             <motion.div
-                className="bg-gray-800 rounded-lg shadow-2xl p-8 max-w-2xl w-full "
+                className="bg-gray-800 rounded-lg shadow-2xl p-8 mt-[5%] max-w-2xl w-full "
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                <form className="space-y-4 border-4 border-green-500  ">
+                <form className="space-y-4">
                     <h1 className='text-white text-[24px] text-center'>Enter the new address </h1>
 
                     <motion.input
@@ -222,16 +203,16 @@ function AddAddress() {
                                 <motion.input
                                     type="text"
                                     name="floorNumber"
-                                    placeholder="Numero depiso (String)"
+                                    placeholder="Number floor "
                                     value={formData.floorNumber}
                                     onChange={handleInputChange}
                                     className="w-full p-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none transition-all duration-200"
                                     variants={inputVariants}
                                 />
                                 <motion.input
-                                    type="number"
+                                    type="text"
                                     name="aparmentNumber"
-                                    placeholder="Numero de departamento (int)"
+                                    placeholder="Flat"
                                     value={formData.aparmentNumber}
                                     onChange={handleInputChange}
                                     className="w-full p-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none transition-all duration-200"

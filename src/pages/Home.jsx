@@ -9,6 +9,7 @@ import MapComponent from '../components/MapComponent'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadUser } from '../redux/actions/authAction'
 import DebitCardPayment from '../components/DebitCardPayment'
+import Prueba from '../components/Prueba'
 
 
 
@@ -35,9 +36,9 @@ const home = () => {
       <div className='flex flex-col gap-[50px] mb-[50px]'>
         <Carrousel />
         <Menu />
-        <PopUpProductWindow/>
+        {/* <PopUpProductWindow/> */}
         <TimeInfoComponent/> 
-        <DebitCardPayment/>
+        {/* <DebitCardPayment/> */}
         <PublicityComponent/>
         <MapComponent/>
       </div>

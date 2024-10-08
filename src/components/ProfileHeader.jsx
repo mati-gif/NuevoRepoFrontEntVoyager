@@ -69,6 +69,7 @@ function ProfileHeader() {
     const handleAddAddress = () => {
         // const street = prompt('Enter new address:')
         // const postalCode = prompt('Enter postal code:')
+        setIsOpen(false)
 
         if (street && postalCode) {
             setUserInfo(prevInfo => ({
@@ -105,6 +106,7 @@ function ProfileHeader() {
 
 
     const viewAllAddress = () => {
+        setIsOpen(false)
         const htmlContent = address.map((address, index) => (
             `<div key=${index} class="flex items-start mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 mt-1" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -146,7 +148,7 @@ function ProfileHeader() {
 
     }
     return (
-        <header className="flex justify-between items-center p-4  text-white">
+        <header className="flex justify-evenly items-center p-4   text-white">
             {/* <h1 className="text-2xl font-bold">My Website</h1> */}
             <div className="relative ">
                 <button

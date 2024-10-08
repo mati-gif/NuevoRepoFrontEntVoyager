@@ -11,7 +11,8 @@ function NewCommentBox({name,ratingg,revieww}) {
             borderRadius: '8px',
             padding: '16px',
             maxWidth: '100%',
-            color: 'white'
+            color: 'white',
+            marginTop:"50px"
         }}>
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
                 <div style={{

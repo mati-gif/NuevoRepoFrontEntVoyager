@@ -136,16 +136,16 @@ function ProductDetails() {
   
   }
   return (
-    <div className="container-div overflow-hidden h-[632px] bg-gray-900 flex items-center justify-center p-4">
+    <div className="container-div   overflow-hidden h-[632px] bg-gray-900 flex items-center justify-center p-4 mt-14" >
       <ProductDetailComponent
         imageUrl="/src/assets/menuImages/oklahoma1.png"
         productName="Oklahoma"
         rating={4}
         description="Juicy burger with caramelized onions and cheddar cheese."
-        className=""
+        
       />
 
-      <div className="flex flex-col gap-5 scroll h-[500px] w-[50%] overflow-y-scroll">
+      <div className="mt-[20px] flex flex-col gap-5 scroll h-[500px] w-[50%] overflow-y-scroll">
         <div>
           <div
             style={{

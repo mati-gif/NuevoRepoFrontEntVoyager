@@ -86,7 +86,7 @@ const DebitCardPayment = () => {
         try {
             const token = localStorage.getItem("token");
             const response = await axios.post(
-                "http://localhost:8080/api/orders/create",
+                "https://challengefinalbackvoyager.onrender.com/api/orders/create",
                 dataPost,
                 {
                     headers: {

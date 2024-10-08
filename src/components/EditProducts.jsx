@@ -813,7 +813,7 @@ const EditProducts = () => {
         console.log(formData);
 
         try {
-            const response = await axios.put('http://localhost:8080/api/products/update', formData);
+            const response = await axios.put('https://challengefinalbackvoyager.onrender.com/api/products/update', formData);
             console.log('Producto actualizado:', response.data);
 
 

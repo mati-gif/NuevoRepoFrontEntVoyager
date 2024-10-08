@@ -147,7 +147,7 @@ const SendOrderForm = () => {
 
 
           {/* Botón para enviar la orden */}
-          <Link to="/debitCard">
+          <Link to="/payments">
           <button
             type="submit"
             className="mt-6 p-3 bg-yellow-500 text-black text-lg font-bold rounded-lg hover:bg-yellow-600 transition-all duration-200 w-full"

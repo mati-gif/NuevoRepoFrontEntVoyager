@@ -136,7 +136,12 @@ function ProductDetails() {
   
   }
   return (
-    <div className="container-div   overflow-hidden h-[632px] bg-gray-900 flex items-center justify-center p-4 mt-14" >
+    <div className="container-div   overflow-hidden h-[662px] bg-gray-900 " >
+      
+      <div className='mt-[100px] flex items-center justify-center p-4'>
+
+
+      <div className='p-[15px] mt-[23px]'>
       <ProductDetailComponent
         imageUrl="/src/assets/menuImages/oklahoma1.png"
         productName="Oklahoma"
@@ -144,6 +149,7 @@ function ProductDetails() {
         description="Juicy burger with caramelized onions and cheddar cheese."
         
       />
+      </div>
 
       <div className="mt-[20px] flex flex-col gap-5 scroll h-[500px] w-[50%] overflow-y-scroll">
         <div>
@@ -254,6 +260,7 @@ function ProductDetails() {
             />
           );
         })}
+      </div>
       </div>
     </div>
   );

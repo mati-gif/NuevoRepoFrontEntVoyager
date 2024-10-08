@@ -45,7 +45,7 @@ const SendOrderForm = () => {
     // Realizar la petición POST con axios
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post("http://localhost:8080/api/orders/create", dataPost, {
+      const response = await axios.post("https://challengefinalbackvoyager.onrender.com/api/orders/create", dataPost, {
         headers: {
             Authorization: `Bearer ${token}`,
         },

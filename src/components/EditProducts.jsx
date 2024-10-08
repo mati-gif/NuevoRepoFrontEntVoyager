@@ -11,7 +11,7 @@ const EditProducts = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/products/');
+                const response = await axios.get('https://challengefinalbackvoyager.onrender.com/api/products/');
                 setProducts(response.data);
             } catch (error) {
                 console.error('Error fetching products:', error);
@@ -34,7 +34,7 @@ const EditProducts = () => {
     // Function to confirm deletion
     const confirmDelete = async () => {
         try {
-            await axios.delete(`http://localhost:8080/api/products/delete/${productToDelete}`);
+            await axios.delete(`https://challengefinalbackvoyager.onrender.com/api/products/delete/${productToDelete}`);
             setProducts(prevProducts => prevProducts.filter(product => product.id !== productToDelete));
             setIsModalOpen(false); // Close the modal
             setSelectedProductId(null); // Deselect product after deletion

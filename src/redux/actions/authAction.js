@@ -59,7 +59,7 @@ export const loadUser = createAsyncThunk(
 
             }
             const response = await axios.get(
-                "http://localhost:8080/api/auth/current",
+                "https://challengefinalbackvoyager.onrender.com/api/auth/current",
                 {
                     headers: { Authorization: `Bearer ${token}` },
                 }
@@ -84,7 +84,7 @@ export const createAddress = createAsyncThunk(
     async (formData, { rejectWithValue }) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post('http://localhost:8080/api/address/create', formData, {
+            const response = await axios.post('https://challengefinalbackvoyager.onrender.com/api/address/create', formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

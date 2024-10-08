@@ -7,7 +7,7 @@ const PaymentGateway = ({ orderId, totalAmount }) => {
 
     const handlePayment = async () => {
         try {
-            const response = await axios.post("http://localhost:8081/api/orders/create", {
+            const response = await axios.post("https://challengefinalbackvoyager.onrender.com/api/orders/create", {
                 orderId,
                 amount: totalAmount
             });

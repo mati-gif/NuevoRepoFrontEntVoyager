@@ -45,7 +45,7 @@ function MenuView() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/products/");
+        const response = await axios.get("https://challengefinalbackvoyager.onrender.com/api/products/");
         setProducts(response.data);
       } catch (error) {
         console.error("Error fetching the products", error);

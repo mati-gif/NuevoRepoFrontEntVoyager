@@ -42,7 +42,7 @@ function TablePB() {
     
  
     useEffect (() => {
-        axios.get("http://localhost:8080/api/tables/", {
+        axios.get("https://challengefinalbackvoyager.onrender.com/api/tables/", {
             header: {
                 Authorization: `Bearer ${token}`,
             }

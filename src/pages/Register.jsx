@@ -121,7 +121,7 @@ function Register() {
 
         try {
             const response = await axios.post(
-                "http://localhost:8080/api/auth/register",
+                "https://challengefinalbackvoyager.onrender.com/api/auth/register",
                 user
             );
             console.log(response.data);

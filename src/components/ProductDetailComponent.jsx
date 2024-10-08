@@ -36,7 +36,7 @@ function ProductDetailComponent({ imageUrl, productName, rating, description }) 
         }
     }
     return (
-        <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4 mt-[50px]">
+        <div className=" bg-gray-900 flex items-center  mt-[-60px]">
             <div className="bg-gray-800 rounded-lg shadow-2xl overflow-hidden max-w-6xl w-full flex flex-col md:flex-row">
                 <motion.div
                     className="w-full md:w-1/2 h-64 md:h-auto relative"

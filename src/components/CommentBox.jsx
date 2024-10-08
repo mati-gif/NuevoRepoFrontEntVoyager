@@ -33,7 +33,7 @@ export default function CommentBox({ userImage, userName, rating, comment, date 
 
     return (
         <motion.div
-            className="bg-gray-800 rounded-lg shadow-lg p-6 w-[100%] mt-[50px]"
+            className="bg-gray-800 rounded-lg shadow-lg p-6 w-[100%] "
             variants={containerVariants}
             initial="hidden"
             animate="visible"

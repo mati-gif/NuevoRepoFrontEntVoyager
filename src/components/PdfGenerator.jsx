@@ -74,47 +74,49 @@ const PdfGenerator = () => {
         //         </div>
 
 
-<div>
-<div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-            <div className="bg-yellow-400 p-4 flex items-center justify-between">
-                <div className="flex items-center">
-                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mr-4">
-                        <span className="text-4xl">
-                        <img src={logo} alt="" />
-                        </span>
-                    </div>
-                    <h1 className="text-3xl font-extrabold text-gray-800 ml-[20px] ">Voyager</h1>
-                </div>
-
-            </div>
-            <div className="p-6">
-                <h2 className="text-xl font-semibold mb-4">Receipt</h2>
-                <div className="space-y-2">
-                    {listProducts.map((item, index) => (
-                        <div key={index} className="flex justify-between ">
-                            <span>{item.quantity} {item.nameProduct}</span>
-                            <span className=''>${item.priceProduct.toFixed(2)}</span>
-                            <span>$ {item.priceProduct * item.quantity} </span>
+        <div>
+            <div >
+            <div id='pdf-content' className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+                <div className="bg-yellow-400 p-4 flex items-center justify-between">
+                    <div className="flex items-center">
+                        <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mr-4">
+                            <span className="text-4xl">
+                                <img src={logo} alt="" />
+                            </span>
                         </div>
-                    ))}
-                </div>
-                <div className="mt-6 pt-4 border-t border-gray-200">
-                    <div className="flex justify-between items-center">
-                        <span className="text-xl font-semibold">Total:</span>
-                        <span className="text-xl font-bold">${sendTotal}</span>
+                        <h1 className="text-3xl font-extrabold text-gray-800 ml-[20px] ">Voyager</h1>
                     </div>
-                </div>
-            </div>
-            <div className="bg-yellow-400 px-6 py-3 flex justify-between items-center">
-                <span className="text-sm font-semibold text-gray-800">Thank {`${firstName} ${lastName}`} for your purchase!</span>
-                <Receipt className="text-gray-800" size={20} />
-            </div>
 
-        </div>
-                    <div className='mt-[10px] bg-yellow-500 p-2 font-bold rounded-lg border-2 border-black w-full flex flex-row justify-center'>
-                    <button className='' onClick={generatePDF}>Generar PDF</button>
+                </div>
+                <div className="p-6">
+                    <h2 className="text-xl font-semibold mb-4">Receipt</h2>
+                    <div className="space-y-2">
+                        {listProducts.map((item, index) => (
+                            <div key={index} className="flex justify-between ">
+                                <span>{item.quantity} {item.nameProduct}</span> x
+                                <span className=''>${item.priceProduct.toFixed(2)}</span> =
+                                <span>$ {item.priceProduct * item.quantity} </span>
+                            </div>
+                        ))}
                     </div>
-</div>
+                    <div className="mt-6 pt-4 border-t border-gray-200">
+                        <div className="flex justify-between items-center">
+                            <span className="text-xl font-semibold">Total:</span>
+                            <span className="text-xl font-bold">${sendTotal}</span>
+                        </div>
+                    </div>
+                </div>
+                <div className="bg-yellow-400 px-6 py-3 flex justify-between items-center">
+                    <span className="text-sm font-semibold text-gray-800">Thank {`${firstName} ${lastName}`} for your purchase!</span>
+                    <Receipt className="text-gray-800" size={20} />
+                </div>
+
+            </div>
+            <div className='mt-[10px] bg-yellow-500 p-2 font-bold rounded-lg border-2 border-black w-full flex flex-row justify-center'>
+                <button className='' onClick={generatePDF}>Download PDF</button>
+            </div>
+            </div>
+        </div>
     );
 };
 

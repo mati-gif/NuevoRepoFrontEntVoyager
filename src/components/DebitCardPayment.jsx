@@ -7,6 +7,7 @@ import { GiBank } from "react-icons/gi";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import PdfGenerator from "./PdfGenerator";
+import LoadingAnimation from "./LoadingAnimation";
 
 const DebitCardPayment = () => {
     const [cardNumber, setCardNumber] = useState("");
@@ -113,6 +114,7 @@ const DebitCardPayment = () => {
     const [totalAmount, setTotalAmount] = useState(0);
 
     const handleOnclickPayment = () => {
+        setShowLoading('')
         const body = {
             cardNumberClient: cardNumber.replace(/ /g, "-"),
             accountNumberRestaurant: "VIN003", //==>  es la cuenta de destino a la que se le realiza el pago(Si ,por el momento es una cuenta de nuestro homeBanking)
@@ -152,7 +154,7 @@ const DebitCardPayment = () => {
             )
             .then((response) => {
                 console.log(response.data);
-
+                setShowLoading('hidden')
                 Swal.fire({
                     icon: 'success',
                     title: 'We are processing your payment',
@@ -206,10 +208,15 @@ const DebitCardPayment = () => {
 
 
     const [mostrarTicket, setMostrarTicket] = useState("hidden")
+    const [showLoading, setShowLoading] = useState('hidden')
 
 
     return (
         <div className=" relative bground min-h-screen  flex items-center justify-center p-4 ">
+
+            <div className={`${showLoading} absolute h-screen w-full z-10`}>
+                <LoadingAnimation/>
+            </div>
 
             <div className={` ${mostrarTicket} w-full h-screen absolute z-20 bg-[#00000080]`}></div>
             <div className={`${mostrarTicket} absolute z-30`}>

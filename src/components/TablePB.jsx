@@ -4,6 +4,7 @@ import './TablePB.css'
 import axios from 'axios';
 import { header } from 'framer-motion/client';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function TablePB() {
 

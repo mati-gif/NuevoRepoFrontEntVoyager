@@ -90,21 +90,21 @@ const DebitCardPayment = () => {
         console.log("Order submitted:", dataPost); // Muestra el objeto en la consola
 
         // Realizar la petición POST con axios
-        try {
-            const token = localStorage.getItem("token");
-            const response = await axios.post(
-                "https://challengefinalbackvoyager.onrender.com/api/orders/create",
-                dataPost,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`, // Uso correcto de las comillas invertidas
-                    },
-                }
-            );
-            console.log("Response from server:", response.data); // Muestra la respuesta del servidor
-        } catch (error) {
-            console.error("Error submitting order:", error);
-        }
+        // try {
+        //     const token = localStorage.getItem("token");
+        //     const response = await axios.post(
+        //         "https://challengefinalbackvoyager.onrender.com/api/orders/create",
+        //         dataPost,
+        //         {
+        //             headers: {
+        //                 Authorization: `Bearer ${token}`, // Uso correcto de las comillas invertidas
+        //             },
+        //         }
+        //     );
+        //     console.log("Response from server:", response.data); // Muestra la respuesta del servidor
+        // } catch (error) {
+        //     console.error("Error submitting order:", error);
+        // }
     };
 
     //----------------------------------------------------------------HOME BANKING------------------------------------------
@@ -129,12 +129,6 @@ const DebitCardPayment = () => {
             )
             .then((response) => {
                 console.log(response.data);
-
-                Swal.fire({
-                    icon: 'success',
-                    title: 'We are processing your payment',
-                    text: 'in a few minutes you will recieve a receipt to your email',
-                });
             })
             .catch((error) => {
                 console.log(error);
@@ -162,7 +156,16 @@ const DebitCardPayment = () => {
                 Swal.fire({
                     icon: 'success',
                     title: 'We are processing your payment',
-                    text: 'in a few minutes you will recieve a receipt to your email',
+                    text: 'In a few minutes you will receive a receipt to your email',
+                    confirmButtonText: 'OK', // Texto del botón
+                    confirmButtonColor: '#3085d6', // Color del botón
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Acción cuando se hace clic en el botón
+                        console.log('User clicked OK');
+                        // Puedes agregar aquí alguna funcionalidad, como redirigir o mostrar otro mensaje
+                        setMostrarTicket('')
+                    }
                 });
             })
             .catch((error) => {
@@ -202,13 +205,18 @@ const DebitCardPayment = () => {
 
 
 
+    const [mostrarTicket, setMostrarTicket] = useState("hidden")
 
 
     return (
-        <div className=" relative bground min-h-screen  flex items-center justify-center p-4 mt-[50px]">
+        <div className=" relative bground min-h-screen  flex items-center justify-center p-4 ">
 
-            <div className="absolute z-20">
+            <div className={` ${mostrarTicket} w-full h-screen absolute z-20 bg-[#00000080]`}></div>
+            <div className={`${mostrarTicket} absolute z-30`}>
                 <PdfGenerator />
+                <button onClick={(a) => {setMostrarTicket('hidden')}}>
+                <h1 className="absolute top-[1%] right-[3%] text-[25px] hover:scale-110 transition-transform duration-300 ease-in-out"><i class="fa-solid fa-circle-xmark"></i></h1>
+                </button>
             </div>
 
 
@@ -216,7 +224,7 @@ const DebitCardPayment = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="  bg-gray-800   rounded-3xl shadow-2xl p-8 max-w-4xl w-full"
+                className="  bg-gray-800   rounded-3xl mt-[50px] shadow-2xl p-8 max-w-4xl w-full"
             >
                 <h2 className="text-4xl font-extrabold mb-6 text-center text-yellow-500">
                     Debit Card Payment

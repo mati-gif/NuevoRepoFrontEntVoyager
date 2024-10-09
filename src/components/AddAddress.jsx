@@ -17,6 +17,13 @@ function AddAddress() {
     console.log(user);
 
 
+    // const sendUser = JSON.parse(localStorage.getItem("user"));
+    // localStorage.setItem("sendUser", JSON.stringify(user));
+
+
+
+
+
 
 
     useEffect(() => {

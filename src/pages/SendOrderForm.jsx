@@ -73,8 +73,10 @@ const SendOrderForm = () => {
     0
   );
 
-  
+// Para guardar en local
+localStorage.setItem("totalAPagar", JSON.stringify(totalPrice.toFixed(2)));
 
+console.log(localStorage.setItem("totalAPagar", JSON.stringify(totalPrice.toFixed(2))));
 
 
 

@@ -1,61 +1,46 @@
+import "./TablePB.css";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Button from "./Button";
+import ButtonWaveEffect from "./ButtonWaveEffect";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
-import React, { useEffect, useState } from 'react'
-import './TablePB.css'
-import axios from 'axios';
-import { header } from 'framer-motion/client';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+const TablePB = ({ token }) => {
+  const today = new Date().toISOString().split("T")[0];
+  const [selectedDate, setSelectedDate] = useState(today);
+  const [selectedTime, setSelectedTime] = useState("");
+  const [tableStatus, setTableStatus] = useState({});
+  const [allTables, setAllTables] = useState([]);
+  const [reservations, setReservations] = useState([]);
+  const [groundFloorTables, setGroundFloorTables] = useState([]);
+  const [selectedTableId, setSelectedTableId] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [dateError, setDateError] = useState("");
+  const [timeError, setTimeError] = useState("");
 
-function TablePB() {
+  useEffect(() => {
+    axios
+      .get("https://challengefinalbackvoyager.onrender.com/api/tables/")
+      .then((response) => {
+        console.log(response);
+        setAllTables(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [token]);
 
-    const [tables, setTables] = useState ([
-        {id:1,number: 1, capacity: 2, status:'AVAILABLE'},
-        {id:2, number: 2, capacity: 4, status:'AVAILABLE'}
-    ])
-
-    const updateStatus = (id, newStatus) => {
-        const updatedTables = tables.map(table => 
-          table.id === id ? { ...table, status: newStatus } : table
-        );
-        setTables(updatedTables);
-      };
-
-      console.log(tables[0]. id)
-      console.log(tables[1]. id)
-
-
-    const [textColorStatusTable1, setTextColorStatusTable1] = useState('text-[green]')
-    const [bgTable1, setBgTable1] = useState('')
-    const [statusIsSelectedTable1, setStatusIsSelectedTable1] = useState('')
-    const [isDisabledTable1, setIsDisabledTable1] = useState(false)
-
-    const [textColorStatusTable2, setTextColorStatusTable2] = useState('text-[green]')
-    const [bgTable2, setBgTable2] = useState('')
-    const [statusIsSelectedTable2, setStatusIsSelectedTable2] = useState('')
-    const [isDisabledTable2, setIsDisabledTable2] = useState(false)
-
-    const [allTables, setAllTables] = useState([])
-    const [pbTables, setPbTables] = useState([])
-
-
-    const token = useSelector((state) => state.auth.token)
-    console.log(token)
-    
- 
-    useEffect (() => {
-        axios.get("https://challengefinalbackvoyager.onrender.com/api/tables/", {
-            header: {
-                Authorization: `Bearer ${token}`,
-            }
-        })
-        .then(reponse => {
-            console.log(reponse)
-            setAllTables(reponse.data)
-        })
-        .catch(error => {
-            console.log(error)
-        })
-    }, [])
+  useEffect(() => {
+    axios
+      .get("https://challengefinalbackvoyager.onrender.com/api/clientTables/allReservations")
+      .then((response) => {
+        setReservations(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [token]);
 
   useEffect(() => {
     if (allTables.length > 0) {

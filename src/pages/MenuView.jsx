@@ -450,11 +450,18 @@ function MenuView() {
   const [showDivDesserts, setShowDivDesserts] = useState("");
 
   const addToCart = (product) => {
+
     if (!isLoggedIn) { // Cambia isUserLoggedIn a isLoggedIn
       setIsLoggedIn(false);
       setisOpenRegisterModal(true); // Abre el modal si el usuario no está logueado
+
       return; // Salimos de la función para no añadir el producto al carrito
     }
+
+    const storedProduct = JSON.parse(localStorage.getItem("product")) || [];
+
+      setCartItems(storedProduct);
+  
 
     const existingItem = cartItems.find(
       (item) => item.nameProduct === product.nameProduct

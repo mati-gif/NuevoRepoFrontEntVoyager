@@ -1,3 +1,26 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import React from "react";
 // import "../styles/foodCards.css";
 // import Button from "./Button";
@@ -35,7 +58,7 @@
 //                     <div className="flex w-full justify-center gap-4 ">
 
 //                         <Button
-//                             text="Add to Cart"
+//                             text={props.text}
 //                             backgroundColor="bg-[#E6BB4D]"
 //                             borderColor="border-[#0F1D15]"
 //                             arrowColor="text-[#0F1D15]"
@@ -96,6 +119,16 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 import React from "react";
 import "../styles/foodCards.css";
 import Button from "./Button";
@@ -123,7 +156,7 @@ const FoodCards = (props) => {
                         </h3>
                     </div>
                 </div>
-                <div className="card-back flex flex-col relative items-center gap-[10px] justify-center bg-white rounded-[50px] p-4">
+                <div className="card-back h-[800px] flex flex-col relative items-center gap-[10px] justify-center bg-white rounded-[50px] p-4">
                     <img src={props.typeIcon} alt="Category Icon" className="w-[50px] text-[#0F1D15]" />
                     <h3 className="text-[30px] text-[#0F1D15] font-bold">{props.name}</h3>
                     <p className="text-lg text text-center text-[#0F1D15]">{props.description}</p>

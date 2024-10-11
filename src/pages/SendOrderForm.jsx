@@ -35,7 +35,33 @@ const SendOrderForm = () => {
 
 
   const handleSubmit = async (e) => {
-    navigate("/payments")
+    e.preventDefault();
+
+    // Crear el objeto dataPost
+    const dataPost = {
+      productIds: ids,
+      quantities: quantity,
+      addressId: orderType === "DELIVERY" ? address : null, // Solo asigna addressId si es DELIVERY
+      orderType: orderType, // Asigna el orderType seleccionado
+    };
+
+    console.log("Order submitted:", dataPost); // Muestra el objeto en la consola
+
+    // Realizar la petición POST con axios
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post("https://challengefinalbackvoyager.onrender.com/api/orders/create", dataPost, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+      console.log("Response from server:", response.data); // Muestra la respuesta del servidor
+    } catch (error) {
+      console.error("Error submitting order:", error);
+    }
+
+    // Despachar acción para guardar productos (opcional)
+    dispatch(saveCartProducts(dataPost));
   };
 
   const handleOrderTypeChange = (e) => {
@@ -47,8 +73,10 @@ const SendOrderForm = () => {
     0
   );
 
-  
+// Para guardar en local
+localStorage.setItem("totalAPagar", JSON.stringify(totalPrice.toFixed(2)));
 
+console.log(localStorage.setItem("totalAPagar", JSON.stringify(totalPrice.toFixed(2))));
 
 
 

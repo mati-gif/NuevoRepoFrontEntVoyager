@@ -2,7 +2,9 @@
   perspective: 1000px; /* Añade perspectiva para el efecto 3D */
   width: 400px; /* Ajusta el tamaño según tu diseño */
   height: 300px;
+
 }
+
 
 .card {
   width: 100%;

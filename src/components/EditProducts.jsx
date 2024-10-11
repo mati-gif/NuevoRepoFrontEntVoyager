@@ -714,7 +714,7 @@ const EditProducts = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/products/');
+                const response = await axios.get('https://challengefinalbackvoyager.onrender.com/api/products/');
                 setProducts(response.data);
             } catch (error) {
                 console.error('Error al obtener productos:', error);
@@ -738,7 +738,7 @@ const EditProducts = () => {
     // Función para confirmar la eliminación
     const confirmDelete = async () => {
         try {
-            await axios.delete(`http://localhost:8080/api/products/delete/${productToDelete}`);
+            await axios.delete(`https://challengefinalbackvoyager.onrender.com/api/products/delete/${productToDelete}`);
             setProducts(prevProducts => prevProducts.filter(product => product.id !== productToDelete));
             setIsModalOpen(false); // Cierra el modal
             setSelectedProductId(null); // Deselecciona el producto después de eliminar
@@ -813,7 +813,7 @@ const EditProducts = () => {
         console.log(formData);
 
         try {
-            const response = await axios.put('http://localhost:8080/api/products/update', formData);
+            const response = await axios.put('https://challengefinalbackvoyager.onrender.com/api/products/update', formData);
             console.log('Producto actualizado:', response.data);
 
 

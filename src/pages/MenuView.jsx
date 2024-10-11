@@ -418,7 +418,7 @@ function MenuView() {
     // Recuperar productos de la API
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/products/");
+        const response = await axios.get("https://challengefinalbackvoyager.onrender.com/api/products/");
         setProducts(response.data);
       } catch (error) {
         console.error("Error fetching the products", error);
@@ -450,11 +450,18 @@ function MenuView() {
   const [showDivDesserts, setShowDivDesserts] = useState("");
 
   const addToCart = (product) => {
+
     if (!isLoggedIn) { // Cambia isUserLoggedIn a isLoggedIn
       setIsLoggedIn(false);
       setisOpenRegisterModal(true); // Abre el modal si el usuario no está logueado
+
       return; // Salimos de la función para no añadir el producto al carrito
     }
+
+    const storedProduct = JSON.parse(localStorage.getItem("product")) || [];
+
+      setCartItems(storedProduct);
+  
 
     const existingItem = cartItems.find(
       (item) => item.nameProduct === product.nameProduct

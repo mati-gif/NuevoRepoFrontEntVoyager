@@ -307,42 +307,7 @@ const Header = () => {
   const [productsSelected, setProductsSelected] = useState([]);
 
 
-  // const handleClick = () => {
-
-  //   dispatch(logoutAction())
-
-  //   console.log("hice click?");
-
-  //   Swal.fire({
-  //     title: 'Logged Out',
-  //     text: 'You have been logged out successfully.',
-  //     icon: 'success',
-  //     confirmButtonText: 'OK',
-  //   })
-
-  //   navigate("/")
-
-  //   // dispatch(logoutAction())
-
-  //   // try {
-
-  //   //   Swal.fire({
-  //   //     title: 'Logged Out',
-  //   //     text: 'You have been logged out successfully.',
-  //   //     icon: 'success',
-  //   //     confirmButtonText: 'OK',
-  //   //   }).then(() => {
-  //   //     // navigate('/'); // Redirige al usuario al login después de cerrar sesión
-  //   //   });
-  //   // } catch (error) {
-  //   //   Swal.fire({
-  //   //     title: 'Logout Failed',
-  //   //     text: 'There was a problem logging out. Please try again.',
-  //   //     icon: 'error',
-  //   //     confirmButtonText: 'OK',
-  //   //   });
-  //   // }
-  // }
+ 
 
   const cartClick = () => {
     setIsModalOpen(true)
@@ -371,6 +336,9 @@ const Header = () => {
   };
 
   return (
+
+//------------- CODIGO ↓↓↓↓↓ ORIGINAL--------------------------// 
+
     <div>
       <header className="z-10 absolute w-full p-[30px] mt-[2px] ">
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 bg-[#0F1D15] border-[#E6BB4D] border-2 rounded-lg">
@@ -569,6 +537,14 @@ const Header = () => {
         />
       )}
     </div>
+
+//------------- CODIGO ↑↑↑↑ ORIGINAL--------------------------// 
+
+
+
+
+
+
   );
 };
 

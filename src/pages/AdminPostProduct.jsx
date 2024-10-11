@@ -281,7 +281,7 @@ const AdminPostProduct = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/products/create",
+        "https://challengefinalbackvoyager.onrender.com/api/products/create",
         updatedFormData
       );
       console.log("Product created:", response.data);

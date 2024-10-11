@@ -15,7 +15,7 @@ const ComponenteMesaPrueba = () => {
         const token = localStorage.getItem("token")
         console.log(token)
         if (token) {
-            axios.get("http://localhost:8080/api/tables/", {
+            axios.get("https://challengefinalbackvoyager.onrender.com/api/tables/", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
@@ -59,7 +59,7 @@ const ComponenteMesaPrueba = () => {
         const token = localStorage.getItem("token")
         console.log(token)
         if (token) {
-            axios.get("http://localhost:8080/api/tables/", {
+            axios.get("https://challengefinalbackvoyager.onrender.com/api/tables/", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }

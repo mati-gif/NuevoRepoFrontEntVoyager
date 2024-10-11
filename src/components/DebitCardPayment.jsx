@@ -6,6 +6,8 @@ import "./AddAddress.css";
 import { GiBank } from "react-icons/gi";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import PdfGenerator from "./PdfGenerator";
+import LoadingAnimation from "./LoadingAnimation";
 
 const DebitCardPayment = () => {
     const [cardNumber, setCardNumber] = useState("");
@@ -31,6 +33,12 @@ const DebitCardPayment = () => {
 
     const address = localStorage.getItem("address");
     console.log(address);
+
+    //obtener el total a pagar del localStorage
+    const sendTotal = JSON.parse(localStorage.getItem("totalAPagar"));
+
+    console.log(sendTotal);
+
 
     const formatCardNumber = (value) => {
         const v = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
@@ -83,21 +91,21 @@ const DebitCardPayment = () => {
         console.log("Order submitted:", dataPost); // Muestra el objeto en la consola
 
         // Realizar la petición POST con axios
-        try {
-            const token = localStorage.getItem("token");
-            const response = await axios.post(
-                "http://localhost:8080/api/orders/create",
-                dataPost,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`, // Uso correcto de las comillas invertidas
-                    },
-                }
-            );
-            console.log("Response from server:", response.data); // Muestra la respuesta del servidor
-        } catch (error) {
-            console.error("Error submitting order:", error);
-        }
+        // try {
+        //     const token = localStorage.getItem("token");
+        //     const response = await axios.post(
+        //         "https://challengefinalbackvoyager.onrender.com/api/orders/create",
+        //         dataPost,
+        //         {
+        //             headers: {
+        //                 Authorization: `Bearer ${token}`, // Uso correcto de las comillas invertidas
+        //             },
+        //         }
+        //     );
+        //     console.log("Response from server:", response.data); // Muestra la respuesta del servidor
+        // } catch (error) {
+        //     console.error("Error submitting order:", error);
+        // }
     };
 
     //----------------------------------------------------------------HOME BANKING------------------------------------------
@@ -106,11 +114,13 @@ const DebitCardPayment = () => {
     const [totalAmount, setTotalAmount] = useState(0);
 
     const handleOnclickPayment = () => {
+        setShowLoading('')
         const body = {
-            cardNumberClient: number,
-            accountNumberRestaurant: restaurantAccountNumber,
-            totalAmount: totalAmount,
+            cardNumberClient: cardNumber.replace(/ /g, "-"),
+            accountNumberRestaurant: "VIN003", //==>  es la cuenta de destino a la que se le realiza el pago(Si ,por el momento es una cuenta de nuestro homeBanking)
+            totalAmount: Number(sendTotal),
         };
+
         console.log(body);
         // 3435-6736-2470-2857  TARJETA QUE ESTA EN EL BACK: SI QUIERES PROBAR EN EL MONTO PONE 1 PESO PORQUE A LA CUENTA SE LE VA DESCUENTA EL MONTO (VER RESPUESTA DE LA PETICION EN CONSOLA)
         // VIN003                ----------------- NUMERO DECUENTA A LA QUE SE TRANFIEREN LOS CONFODS
@@ -121,11 +131,43 @@ const DebitCardPayment = () => {
             )
             .then((response) => {
                 console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
 
+
+
+        const body2 = {
+            cardNumber: cardNumber.replace(/ /g, "-"),
+            accountNumber: "VIN003", //==>  es la cuenta de destino a la que se le realiza el pago(Si ,por el momento es una cuenta de nuestro homeBanking)
+            maxAmount: Number(sendTotal),
+        };
+
+        console.log(body);
+        // 3435-6736-2470-2857  TARJETA QUE ESTA EN EL BACK: SI QUIERES PROBAR EN EL MONTO PONE 1 PESO PORQUE A LA CUENTA SE LE VA DESCUENTA EL MONTO (VER RESPUESTA DE LA PETICION EN CONSOLA)
+        // VIN003                ----------------- NUMERO DECUENTA A LA QUE SE TRANFIEREN LOS CONFODS
+        axios
+            .post(
+                "https://proyectohomebanking-1.onrender.com/api/external/payment",
+                body2
+            )
+            .then((response) => {
+                console.log(response.data);
+                setShowLoading('hidden')
                 Swal.fire({
                     icon: 'success',
                     title: 'We are processing your payment',
-                    text: 'in a few minutes you will recieve a receipt to your email',
+                    text: 'In a few minutes you will receive a receipt to your email',
+                    confirmButtonText: 'OK', // Texto del botón
+                    confirmButtonColor: '#3085d6', // Color del botón
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Acción cuando se hace clic en el botón
+                        console.log('User clicked OK');
+                        // Puedes agregar aquí alguna funcionalidad, como redirigir o mostrar otro mensaje
+                        setMostrarTicket('')
+                    }
                 });
             })
             .catch((error) => {
@@ -147,29 +189,49 @@ const DebitCardPayment = () => {
     ];
 
     const navigate = useNavigate();
-    const handleClick = () =>{
+    const handleClick = () => {
 
- 
-            Swal.fire({
-                icon: 'success',
-                title: '',
-                text: 'Your order and payment have been successfully completed.In a few minutes you will recieve an email receipt',
-                // timer: 2000, // El temporizador dura 3 segundos (3000 milisegundos)
-                showConfirmButton: true, // Oculta el botón de confirmación
-                willClose: () => {
-                    navigate("/"); // Navegar después de que la alerta desaparezca
-                }
-            });
+
+        Swal.fire({
+            icon: 'success',
+            title: '',
+            text: 'Your order and payment have been successfully completed.In a few minutes you will recieve an email receipt',
+            // timer: 2000, // El temporizador dura 3 segundos (3000 milisegundos)
+            showConfirmButton: true, // Oculta el botón de confirmación
+            willClose: () => {
+                navigate("/"); // Navegar después de que la alerta desaparezca
+            }
+        });
 
     }
 
+
+
+    const [mostrarTicket, setMostrarTicket] = useState("hidden")
+    const [showLoading, setShowLoading] = useState('hidden')
+
+
     return (
-        <div className="bground min-h-screen  flex items-center justify-center p-4 mt-[50px]">
+        <div className=" relative bground min-h-screen  flex items-center justify-center p-4 ">
+
+            <div className={`${showLoading} absolute h-screen w-full z-10`}>
+                <LoadingAnimation/>
+            </div>
+
+            <div className={` ${mostrarTicket} w-full h-screen absolute z-20 bg-[#00000080]`}></div>
+            <div className={`${mostrarTicket} absolute z-30`}>
+                <PdfGenerator />
+                <button onClick={(a) => {setMostrarTicket('hidden')}}>
+                <h1 className="absolute top-[1%] right-[3%] text-[25px] hover:scale-110 transition-transform duration-300 ease-in-out"><i class="fa-solid fa-circle-xmark"></i></h1>
+                </button>
+            </div>
+
+
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="  bg-gray-800   rounded-3xl shadow-2xl p-8 max-w-4xl w-full"
+                className="  bg-gray-800   rounded-3xl mt-[50px] shadow-2xl p-8 max-w-4xl w-full"
             >
                 <h2 className="text-4xl font-extrabold mb-6 text-center text-yellow-500">
                     Debit Card Payment
@@ -325,7 +387,7 @@ const DebitCardPayment = () => {
                                 />
                             </div>
                             <motion.button
-                                onClick={handleClick}
+                                onClick={handleOnclickPayment}
                                 type="submit"
                                 className="w-full flex justify-center items-center py-3 px-4 bg-yellow-500 hover:bg-yellow-500 text-black font-semibold rounded-lg focus:outline-none "
                                 whileHover={{ scale: 1.05 }}

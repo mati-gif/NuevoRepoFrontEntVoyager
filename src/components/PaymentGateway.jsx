@@ -12,25 +12,12 @@ const PaymentGateway = () => {
 
     const handlePayment = async () => {
         try {
-          const token = localStorage.getItem('token');
-          const paymentData = {
-            orderId,
-            amount: totalAmount,
-            cardDetails // Detalles de la tarjeta enviados al backend
-          };
-      
-          const response = await axios.post("http://localhost:8080/api/payments/pay-order", paymentData, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-      
-          if (response.data.success) {
-            Swal.fire("Success", "Payment processed successfully!", "success");
-            navigate("/order-summary");  // Redirigir a la página de resumen de la orden
-          } else {
-            setError(response.data.message);
-          }
+            const response = await axios.post("https://challengefinalbackvoyager.onrender.com/api/orders/create", {
+                orderId,
+                amount: totalAmount
+            });
+
+            setPaymentStatus(response.data.message);  // El backend de restaurante retorna el estado del pago
         } catch (err) {
           setError("Payment failed. Please try again.");
         }

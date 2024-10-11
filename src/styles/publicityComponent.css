@@ -9,6 +9,8 @@
     grid-template-columns: 1fr 1fr;
     min-height: 100vh;
     font-family: Arial, sans-serif;
+    width: 100vw; /* Ensure full width on mobile */
+    box-sizing: border-box; /* Make sure padding doesn't cause overflow */
 }
 
 /* Columna izquierda */
@@ -19,12 +21,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%; /* Ensure full width on mobile */
 }
 
 /* Columna derecha con imagen de fondo */
 .right-content-container-publicity {
     position: relative;
     overflow: hidden;
+    width: 100%; /* Ensure full width on mobile */
 }
 
 /* Imagen de fondo */
@@ -56,32 +60,6 @@
     transform: translateY(0);
 }
 
-/* Encabezado principal */
-.h1-container-publicity {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: white;
-}
-
-/* Subtítulo en el overlay */
-.overlay-container-publicity h2 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: #ffd700;
-}
-
-/* Encabezado en la columna izquierda */
-.left-content-container-publicity h3 {
-    color: #ffd700;
-    margin-bottom: 0.5rem;
-    font-size: 1.2rem;
-}
-
-.left-content-container-publicity p {
-    margin-bottom: 2rem;
-    line-height: 1.6;
-}
-
 /* Botón de reserva */
 .reserve-button-container-publicity {
     position: relative;
@@ -96,14 +74,12 @@
     text-transform: capitalize;
 }
 
-/* Texto del botón */
 .reserve-button-container-publicity span {
     position: relative;
     z-index: 1;
     color: #ffd700;
 }
 
-/* Efecto líquido dentro del botón */
 .reserve-button-container-publicity .liquid-container-publicity {
     position: absolute;
     top: 0;
@@ -114,16 +90,9 @@
     transition: all 0.5s ease;
 }
 
-/* Al hacer hover, el líquido se desplaza */
 .reserve-button-container-publicity:hover .liquid-container-publicity {
     left: 0;
     background-color: #1a1a1a;
-}
-
-/* Estilos del botón al hacer hover */
-.reserve-button-container-publicity:hover {
-    color: #ffd700;
-    background-color: #ffd700;
 }
 
 /* ------------------------ RESPONSIVE DESIGN ------------------------ */
@@ -131,10 +100,12 @@
     .rock-business-container {
         grid-template-columns: 1fr;
         min-height: auto;
+        width: 100vw;
     }
 
     .left-content-container-publicity {
         padding: 3rem;
+        width: 100%; /* Full width */
     }
 
     .h1-container-publicity {
@@ -149,14 +120,17 @@
 @media (max-width: 768px) {
     .rock-business-container {
         grid-template-columns: 1fr;
+        width: 100vw;
     }
 
     .left-content-container-publicity {
         padding: 2rem;
+        width: 100%; /* Full width */
     }
 
     .right-content-container-publicity {
         height: 50vh;
+        width: 100%; /* Full width */
     }
 
     .h1-container-publicity {
@@ -173,8 +147,14 @@
 }
 
 @media (max-width: 480px) {
+    .rock-business-container {
+        grid-template-columns: 1fr;
+        width: 100vw;
+    }
+
     .left-content-container-publicity {
         padding: 1rem;
+        width: 100%;
     }
 
     .h1-container-publicity {
@@ -191,5 +171,6 @@
 
     .right-content-container-publicity {
         height: 40vh;
+        width: 100%;
     }
 }

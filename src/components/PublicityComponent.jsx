@@ -56,7 +56,7 @@ function PublicityComponent() {
     const navigate = useNavigate();
     const status = useSelector(state => state.auth.status)
     console.log(status);
-
+    
 
     // const handleButtonClick = () =>{
 
@@ -91,31 +91,31 @@ function PublicityComponent() {
             });
         }
     };
-
+    
     return (
 
-        <div className="rock-business-container mt-[-50px] flex flex-col lg:flex-row" ref={containerRef} style={{ opacity }}>
-            <div className="left-content-container-publicity flex-1 p-4">
-                <h3 className="text-xl md:text-2xl">Business</h3>
-                <h1 className='h1-container-publicity text-3xl md:text-4xl font-bold'>Rock & Business</h1>
-                <p className='w-full md:w-[400px] mt-2'>
-                    Exclusive spaces for business meetings and private events, equipped with a 4K UHD screen, WiFi, audio equipment and an exclusive menu for every occasion.
+        <div className="rock-business-container mt-[-50px]" ref={containerRef} style={{ opacity }}>
+            <div className="left-content-container-publicity">
+                <h3>Business</h3>
+                <h1 className='h1-container-publicity'>Rock & Business</h1>
+                <p className='w-[400px] '>
+                Exclusive spaces for business meetings and private events, equipped with a 4K UHD screen, WiFi, audio equipment and an exclusive menu for every occasion.
                 </p>
-                <button
-                    onClick={handleButtonClick}
-                    className="reserve-button-container-publicity mt-4">
+                <button 
+                onClick={handleButtonClick}
+                className="reserve-button-container-publicity">
                     <span>Make a reservation</span>
                     <div className="liquid-container-publicity"></div>
                 </button>
             </div>
-            <div className="right-content-container-publicity flex-1 p-4 mt-4 lg:mt-0">
-                <div className="image-container-publicity relative">
+            <div className="right-content-container-publicity">
+                <div className="image-container-publicity">
                     <div className="overlay-container-publicity">
-                        <h2 className="text-xl md:text-2xl">Events</h2>
-                        <h1 className='h1-container-publicity text-3xl md:text-4xl font-bold'>Rock & Business</h1>
-                        <button
-                            onClick={handleButtonClick}
-                            className="reserve-button-container-publicity mt-4">
+                        <h2>Events</h2>
+                        <h1 className='h1-container-publicity'>Rock & Business</h1>
+                        <button 
+                        onClick={handleButtonClick}
+                        className="reserve-button-container-publicity">
                             <span>Make a reservation</span>
                             <div className="liquid-container-publicity"></div>
                         </button>
@@ -123,7 +123,6 @@ function PublicityComponent() {
                 </div>
             </div>
         </div>
-
 
 
     )

@@ -1,11 +1,19 @@
+/*-------------CODIGO ↓↓↓↓↓↓↓ ORIGINAL---------------*/
+
+/*-------------CODIGO ↑↑↑↑↑↑↑ ORIGINAL---------------*/
+
+/*-----------------------------------------------------------------------------------------------------*/
+
 .rock-business-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     min-height: 100vh;
     font-family: Arial, sans-serif;
-
+    width: 100vw; /* Ensure full width on mobile */
+    box-sizing: border-box; /* Make sure padding doesn't cause overflow */
 }
 
+/* Columna izquierda */
 .left-content-container-publicity {
     background-color: #1a1a1a;
     color: white;
@@ -13,13 +21,17 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%; /* Ensure full width on mobile */
 }
 
+/* Columna derecha con imagen de fondo */
 .right-content-container-publicity {
     position: relative;
     overflow: hidden;
+    width: 100%; /* Ensure full width on mobile */
 }
 
+/* Imagen de fondo */
 .image-container-publicity {
     position: absolute;
     top: 0;
@@ -31,6 +43,7 @@
     background-position: center;
 }
 
+/* Overlay de texto */
 .overlay-container-publicity {
     position: absolute;
     bottom: 0;
@@ -45,95 +58,119 @@
 
 .right-content-container-publicity:hover .overlay-container-publicity {
     transform: translateY(0);
-
 }
 
-.h1-container-publicity {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: white;
-}
-
-.overlay-container-publicity h2 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: #ffd700;
-}
-
-.left-content-container-publicity h3 {
-    color: #ffd700;
-    margin-bottom: 0.5rem;
-    font-size: 1.2rem;
-}
-
-.left-content-container-publicity p {
-    margin-bottom: 2rem;
-    line-height: 1.6;
-}
-
+/* Botón de reserva */
 .reserve-button-container-publicity {
     position: relative;
     padding: 1rem 2rem;
     background-color: transparent;
     color: #ffd700;
-    /* Texto siempre visible con color amarillo */
     border: 2px solid #ffd700;
     cursor: pointer;
     overflow: hidden;
     transition: color 0.3s ease;
     font-weight: bold;
     text-transform: capitalize;
-
 }
 
 .reserve-button-container-publicity span {
     position: relative;
     z-index: 1;
-    /* El texto siempre por encima del líquido */
     color: #ffd700;
-    /* Color de texto amarillo siempre visible */
 }
 
 .reserve-button-container-publicity .liquid-container-publicity {
     position: absolute;
     top: 0;
     left: -100%;
-    /* Empieza fuera del botón a la izquierda */
     width: 200%;
-    /* Asegura que cubra todo el botón */
     height: 100%;
     z-index: 0;
-    /* Se mantiene detrás del texto */
     transition: all 0.5s ease;
 }
 
 .reserve-button-container-publicity:hover .liquid-container-publicity {
     left: 0;
-    /* Mueve el líquido de izquierda a derecha */
-    /* background-color: #ffd700; */
     background-color: #1a1a1a;
-
 }
 
-.reserve-button-container-publicity:hover {
-    color: #ffd700;
-    /* Cambia el color del borde y el texto al hacer hover */
-    /* background-color: #1a1a1a; */
-    background-color: #ffd700;
+/* ------------------------ RESPONSIVE DESIGN ------------------------ */
+@media (max-width: 1024px) {
+    .rock-business-container {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        width: 100vw;
+    }
 
+    .left-content-container-publicity {
+        padding: 3rem;
+        width: 100%; /* Full width */
+    }
+
+    .h1-container-publicity {
+        font-size: 2.5rem;
+    }
+
+    .reserve-button-container-publicity {
+        padding: 0.8rem 1.5rem;
+    }
 }
-
-
 
 @media (max-width: 768px) {
     .rock-business-container {
         grid-template-columns: 1fr;
+        width: 100vw;
+    }
+
+    .left-content-container-publicity {
+        padding: 2rem;
+        width: 100%; /* Full width */
     }
 
     .right-content-container-publicity {
         height: 50vh;
+        width: 100%; /* Full width */
+    }
+
+    .h1-container-publicity {
+        font-size: 2rem;
+    }
+
+    .overlay-container-publicity h2 {
+        font-size: 1.2rem;
+    }
+
+    .reserve-button-container-publicity {
+        padding: 0.7rem 1.2rem;
     }
 }
 
-/*-----------------------------------------------------------------------------------------------------*/
+@media (max-width: 480px) {
+    .rock-business-container {
+        grid-template-columns: 1fr;
+        width: 100vw;
+    }
 
+    .left-content-container-publicity {
+        padding: 1rem;
+        width: 100%;
+    }
+
+    .h1-container-publicity {
+        font-size: 1.5rem;
+    }
+
+    .overlay-container-publicity h2 {
+        font-size: 1rem;
+    }
+
+    .reserve-button-container-publicity {
+        padding: 0.6rem 1rem;
+    }
+
+    .right-content-container-publicity {
+        height: 40vh;
+        width: 100%;
+    }
+}

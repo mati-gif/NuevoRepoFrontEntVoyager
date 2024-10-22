@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import PdfGenerator from "./PdfGenerator";
 import LoadingAnimation from "./LoadingAnimation";
+import "./DebitCardPayment.css"
 
 const DebitCardPayment = () => {
     const [cardNumber, setCardNumber] = useState("");
@@ -131,6 +132,21 @@ const DebitCardPayment = () => {
             )
             .then((response) => {
                 console.log(response.data);
+                setShowLoading('hidden')
+                Swal.fire({
+                    icon: 'success',
+                    title: 'We are processing your payment',
+                    text: 'In a few minutes you will receive a receipt to your email',
+                    confirmButtonText: 'OK', // Texto del botón
+                    confirmButtonColor: '#3085d6', // Color del botón
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Acción cuando se hace clic en el botón
+                        console.log('User clicked OK');
+                        // Puedes agregar aquí alguna funcionalidad, como redirigir o mostrar otro mensaje
+                        setMostrarTicket('')
+                    }
+                });
             })
             .catch((error) => {
                 console.log(error);
@@ -247,7 +263,7 @@ const DebitCardPayment = () => {
                                 style={{ transformStyle: "preserve-3d" }}
                             >
                                 <div
-                                    className={`absolute w-full h-full ${cardColors[cardType]} rounded-2xl shadow-lg p-6 text-white overflow-hidden backface-hidden`}
+                                    className={`paymentCard absolute ${cardColors[cardType]} flex flex-col items-center rounded-2xl shadow-lg p-6 text-white overflow-hidden backface-hidden`}
                                     style={{ backfaceVisibility: "hidden" }}
                                 >
                                     <div className="absolute inset-0 bg-black bg-opacity-20"></div>
@@ -256,8 +272,8 @@ const DebitCardPayment = () => {
                                             <CreditCard size={32} />
                                             <GiBank size={32} />
                                         </div>
-                                        <div className="mt-8">
-                                            <div className="text-2xl mb-2 font-mono">
+                                        <div className=" mt-[10px]">
+                                            <div className="text-numbers mb-2 font-mono">
                                                 {cardNumber || "•••• •••• •••• ••••"}
                                             </div>
                                             <div className="flex justify-between">
@@ -278,7 +294,7 @@ const DebitCardPayment = () => {
                                     </div>
                                 </div>
                                 <div
-                                    className={`absolute w-full h-full ${cardColors[cardType]} rounded-2xl shadow-lg p-6 text-white overflow-hidden backface-hidden`}
+                                    className={`paymentCardBack absolute ${cardColors[cardType]} rounded-2xl shadow-lg p-6 text-white overflow-hidden backface-hidden`}
                                     style={{
                                         backfaceVisibility: "hidden",
                                         transform: "rotateY(180deg)",
@@ -286,7 +302,7 @@ const DebitCardPayment = () => {
                                 >
                                     <div className="absolute inset-0 bg-black bg-opacity-20"></div>
                                     <div className="relative z-10">
-                                        <div className="w-full h-12 bg-black mt-4"></div>
+                                        <div className="w-full h-12 bg-black"></div>
                                         <div className="mt-8 px-6">
                                             <div className="bg-white text-black text-right p-2 font-mono">
                                                 {cvv || "•••"}

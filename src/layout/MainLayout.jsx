@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 import Footer from '../components/Footer';
 import AdminHeader from '../pages/AdminHeader';
 import { useSelector } from 'react-redux';
+import "../styles/header.css"
 
 const MainLayout = () => {
 
@@ -16,7 +17,7 @@ const MainLayout = () => {
   
   return (
 
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-body">
       {/* <Header />
       <AdminHeader/> */}
 

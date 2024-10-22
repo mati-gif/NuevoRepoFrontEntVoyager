@@ -1,0 +1,30 @@
+/* Estilo personalizado para el popup */
+.swal-custom-popup {
+    background-color: #0F1D15; /* Fondo oscuro */
+    color: #FFD700; /* Texto amarillo */
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Estilo personalizado para el título */
+.swal-custom-title {
+    font-size: 24px;
+    color: #FFD700; /* Texto amarillo */
+    font-weight: bold;
+}
+
+/* Estilo personalizado para el botón de confirmación */
+.swal-custom-confirm {
+    background-color: #E6BB4D; /* Color dorado */
+    color: #0F1D15; /* Texto oscuro */
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.swal-custom-confirm:hover {
+    background-color: #FFD700; /* Cambia de color en hover */
+}

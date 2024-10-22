@@ -1,0 +1,114 @@
+/* Botón de hamburguesa */
+.menu-button {
+    background-color: #0f1d1500; /* Mismo color que el header */
+    font-size: 1.875rem; /* Tamaño del ícono */
+    padding: 5px;
+    cursor: pointer;
+    color: #E6BB4D; /* Color del ícono */
+    border: none; /* Elimina el borde si lo tiene */
+    display: block; /* Mostrar el botón de hamburguesa por defecto */
+}
+
+/* Mantener el color dorado cuando el menú está abierto o cerrado */
+.menu-button:focus,
+.menu-button:active,
+.menu-button:hover {
+    color: #E6BB4D; /* Mantén el color dorado en el estado activo o hover */
+}
+
+/* Navegación para dispositivos móviles */
+.nav {
+    max-height: 0; /* Altura inicial */
+    overflow: hidden; /* Oculta el contenido cuando está cerrado */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 15vh; /* Justo debajo del header */
+    left: 21px;
+    width: 90%;
+    background-color: #0F1D15;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+    opacity: 0;
+    z-index: 100;
+}
+
+.nav.show {
+    max-height: 300px; /* Ajusta esto dependiendo del contenido del menú */
+    opacity: 1;
+}
+
+.nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Asegura que ocupe el ancho */
+}
+
+.nav a {
+    color: #FFD700; /* Texto en amarillo */
+    font-size: 1.25rem;
+    text-decoration: none;
+}
+
+/* Header general */
+header {
+    display: flex;
+    justify-content: space-between; /* Ajusta para que el logo y el resto del contenido estén a los extremos */
+    align-items: center;
+    width: 90%; /* Asegura que el header ocupe el 90% */
+    height: 10vh;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Ajuste para pantallas grandes (Tablet en adelante) */
+@media (min-width: 768px) {
+    .nav {
+        max-height: none; /* Quitar restricciones de altura */
+        opacity: 1;
+        display: flex;
+        flex-direction: row; /* Alinear los enlaces en fila */
+        justify-content: center;
+        gap: 0px;
+        position: relative;
+        background-color: transparent; /* Fondo transparente */
+        width: auto; /* Dejar que el ancho se ajuste automáticamente */
+        border: none; /* Sin borde */
+        top: 0;
+        left: -100px;
+        width: 60%;
+    }
+
+    .nav ul {
+        flex-direction: row; /* Alinear los enlaces en fila */
+        justify-content: center; /* Centrar los enlaces */
+        gap: 33px; /* Espacio entre enlaces */
+    }
+
+    .menu-button {
+        display: none; /* Ocultar el botón de menú en pantallas grandes */
+    }
+}
+
+@media (min-width: 1024px) {
+    .nav{
+        left: -110px;
+    }
+
+    .nav ul{
+        gap: 60px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .nav{
+        left: -120px;
+        width: 63%;
+    }
+
+    .nav ul{
+        gap: 180px;
+    }
+}

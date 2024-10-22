@@ -284,7 +284,7 @@ function TimeInfoComponent() {
                     </div>
                     <button
                         onClick={handleButtonClick}
-                        className="text-[20px] text-yellow-400 border-2 border-yellow-500 p-[10px] hover:bg-[#0000002c] hover:text-yellow-400 w-full mt-4">
+                        className="text-[12px] text-yellow-400 border-2 border-yellow-500 p-[10px] hover:bg-[#0000002c] hover:text-yellow-400 w-full mt-2">
                         <span>Make a reservation</span>
                     </button>
                 </div>

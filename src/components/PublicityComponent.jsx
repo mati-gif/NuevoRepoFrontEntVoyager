@@ -94,23 +94,23 @@ function PublicityComponent() {
     
     return (
 
-        <div className="rock-business-container mt-[-50px]" ref={containerRef} style={{ opacity }}>
-            <div className="left-content-container-publicity">
+        <div className="rock-business-container mt-[-50px] xl:flex xl:w-xl:w-[100%] xl:justify-center" ref={containerRef} style={{ opacity }}>
+            <div className="left-content-container-publicity xl:w-[50%]">
                 <h3>Business</h3>
                 <h1 className='h1-container-publicity'>Rock & Business</h1>
-                <p className='w-[400px] '>
+                <p className='w-[100%] '>
                 Exclusive spaces for business meetings and private events, equipped with a 4K UHD screen, WiFi, audio equipment and an exclusive menu for every occasion.
                 </p>
                 <button 
                 onClick={handleButtonClick}
-                className="reserve-button-container-publicity">
+                className="reserve-button-container-publicity md:w-[60%]">
                     <span>Make a reservation</span>
                     <div className="liquid-container-publicity"></div>
                 </button>
             </div>
-            <div className="right-content-container-publicity">
+            <div className="right-content-container-publicity xl:w-[50%]">
                 <div className="image-container-publicity">
-                    <div className="overlay-container-publicity">
+                    <div className="overlay-container-publicity text-center">
                         <h2>Events</h2>
                         <h1 className='h1-container-publicity'>Rock & Business</h1>
                         <button 

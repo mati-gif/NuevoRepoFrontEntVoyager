@@ -363,7 +363,7 @@ const TablePB = ({ token }) => {
 
 
 
-    <div className="flex flex-col lg:flex-row justify-center items-center">
+    <div className=" w-[100%] flex flex-col lg:flex-row justify-center items-center">
   <div className="flex flex-col justify-center items-center w-full lg:flex-row-reverse gap-[20px] lg:gap-[30px] mt-[20px]">
     <form className="w-[90%] lg:w-[50%] flex flex-col gap-[30px] lg:gap-[45px] items-center pt-[30px] lg:pt-[50px] relative">
       <h2 className="text-2xl lg:text-3xl font-bold text-yellow-500">
@@ -424,7 +424,7 @@ const TablePB = ({ token }) => {
       </p>
     </form>
 
-    <div className="bgTablePB border-2 border-yellow-500 relative h-[50vh] lg:h-[75vh] w-[90%] lg:w-[500px] rounded-xl">
+    <div className="bgTablePB border-2 border-yellow-500 relative h-[50vh] lg:h-[50vh] w-[90%] lg:w-[500px] rounded-xl">
       <div className="bg-yellow-500 p-2 rounded-lg absolute right-0 text-[10px] lg:text-[11.5px]">
         <p className="flex items-center gap-0.5">
           <i className="fa-solid fa-chair"></i> Capacity

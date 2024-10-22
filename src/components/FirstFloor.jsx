@@ -274,8 +274,9 @@ const FirstFloor = () => {
 
 
     <div className="flex flex-col w-full lg:flex-row justify-center items-center">
-      <div className="flex flex-col lg:flex-row-reverse w-full justify-around items-center mt-[20px]">
+      <div className="flex flex-col lg:flex-row-reverse w-full justify-around items-center mt-[20px] border-2 border-green-600">
         {/* Formulario - Ocupando el 40% */}
+
         <form className="w-full lg:w-[30%] flex flex-col gap-[30px] lg:gap-[45px] items-center justify-center pt-[30px] lg:pt-[50px] relative">
           <h2 className="text-2xl lg:text-3xl font-bold text-yellow-500">
             Table Reservation
@@ -320,6 +321,9 @@ const FirstFloor = () => {
           >
             Reserve
           </button>
+          <p className="w-[90%] text-yellow-500 text-[12px] lg:text-[14px] text-center lg:text-left">
+          (*) Reservations can be made with a maximum of two hours in advance and are available from the current day up to 7 days ahead. We offer three dinner shifts, starting at 20:00 (8 PM) and running until 02:00 (2 AM). If you need to cancel your reservation, please do so with two hours' notice. Thank you for choosing us for your dining experience.
+        </p>
         </form>
 
         {/* Mapa de mesas - Ocupando el 60% */}
@@ -398,9 +402,7 @@ const FirstFloor = () => {
             );
           })}
         </div>
-        <p className="w-[90%] text-yellow-500 text-[12px] lg:text-[14px] text-center lg:text-left">
-          (*) Reservations can be made with a maximum of two hours in advance and are available from the current day up to 7 days ahead. We offer three dinner shifts, starting at 20:00 (8 PM) and running until 02:00 (2 AM). If you need to cancel your reservation, please do so with two hours' notice. Thank you for choosing us for your dining experience.
-        </p>
+        
       </div>
     </div>
 

@@ -363,8 +363,8 @@ const TablePB = ({ token }) => {
 
 
 
-    <div className="flex flex-col lg:flex-row justify-center items-center gap-[20px] lg:gap-[30px]">
-  <div className="flex flex-col lg:flex-row-reverse gap-[20px] lg:gap-[30px] mt-[20px]">
+    <div className="flex flex-col lg:flex-row justify-center items-center">
+  <div className="flex flex-col justify-center items-center w-full lg:flex-row-reverse gap-[20px] lg:gap-[30px] mt-[20px]">
     <form className="w-[90%] lg:w-[50%] flex flex-col gap-[30px] lg:gap-[45px] items-center pt-[30px] lg:pt-[50px] relative">
       <h2 className="text-2xl lg:text-3xl font-bold text-yellow-500">
         Table Reservation
@@ -415,7 +415,7 @@ const TablePB = ({ token }) => {
       >
         Reserve
       </button>
-      <p className="w-[90%] lg:w-[550px] text-yellow-500 text-[12px] lg:text-[14px] text-center lg:text-left">
+      <p className="w-[90%] lg:w-[450px] text-yellow-500 text-[12px] lg:text-[14px] text-center lg:text-left">
         (*) Reservations can be made with a maximum of two hours in advance and
         are available from the current day up to 7 days ahead. We offer three
         dinner shifts, starting at 20:00 (8 PM) and running until 02:00 (2 AM).
@@ -424,7 +424,7 @@ const TablePB = ({ token }) => {
       </p>
     </form>
 
-    <div className="bgTablePB border-2 border-yellow-500 relative h-[50vh] lg:h-[75vh] w-[90%] lg:w-[600px] rounded-xl">
+    <div className="bgTablePB border-2 border-yellow-500 relative h-[50vh] lg:h-[75vh] w-[90%] lg:w-[500px] rounded-xl">
       <div className="bg-yellow-500 p-2 rounded-lg absolute right-0 text-[10px] lg:text-[11.5px]">
         <p className="flex items-center gap-0.5">
           <i className="fa-solid fa-chair"></i> Capacity

@@ -197,13 +197,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    padding: 0.5rem;
     transform: translateX(100%);
     transition: transform 0.5s ease-out;
 }
 
 .h2-container-time-info {
-    font-size: 3rem;
+    font-size: 2rem;
     color: #ffd700;
     margin-bottom: 1rem;
 }
@@ -217,12 +217,12 @@
 .schedule-container-time-info {
     display: flex;
     justify-content: space-around;
+    gap: 20px;
     width: 100%;
-    margin: 2rem 0;
 }
 
 .location-container-time-info h4 {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-bottom: 0.5rem;
 }
 

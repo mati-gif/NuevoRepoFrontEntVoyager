@@ -60,7 +60,7 @@ function Reservation() {
 
 
     //   <div className='mb-[50px]'>
-        
+
     //     <div className={`${showPb}`}>
     //       <TablePB />
     //     </div>
@@ -85,58 +85,58 @@ function Reservation() {
 
 
 
-    <div className='bgViewReservation flex flex-col min-h-screen'>
-  <div className='my-[30px]'>
-    <h1 className="text-[32px] sm:text-[40px] block text-center font-bold text-[white] mb-[30px] sm:mb-[50px]">
-      Seating Area
-    </h1>
-    <div className='w-full flex flex-col items-center'>
-      <div className="w-[95%] sm:w-[90%] flex justify-center"> {/* Contenedor centrado responsive */}
-        <div className="text-white flex flex-col sm:flex-row gap-[10px]"> {/* Flex column en móviles, fila en pantallas mayores */}
-          <button
-            className={`${selectedSectorGroundFloor} p-3 sm:p-4 w-[180px] sm:w-[200px] border bg-gray-700 text-white border-amber-300 rounded-md hover:bg-amber-50 hover:text-black transition duration-150 ease-in-out flex flex-col items-center`}
-            onClick={() => {
-              setSelectedSectorOutDoor('');
-              setSelectedSectorFirstFloor('');
-              setSelectedSectorGroundFloor('border-[3px] border-amber-500');
-              setSector('pb');
-              setShowPb('');
-              setShowFirstFloor('hidden');
-              setShowOutDoor('hidden');
-            }}
-          >
-            <MapPin className="text-[#dd9000] mb-2" />
-            <span>Ground Floor</span>
-          </button>
-          <button
-            className={`${selectedSectorFirstFloor} p-3 sm:p-4 w-[180px] sm:w-[200px] border bg-gray-700 text-white border-amber-300 rounded-md hover:bg-amber-50 hover:text-black transition duration-150 ease-in-out flex flex-col items-center`}
-            onClick={() => {
-              setSelectedSectorOutDoor('');
-              setSelectedSectorGroundFloor('');
-              setSelectedSectorFirstFloor('border-[3px] border-amber-500');
-              setSector('firstFloor');
-              setShowPb('hidden');
-              setShowFirstFloor('');
-              setShowOutDoor('hidden');
-            }}
-          >
-            <Utensils className="text-[#dd9000] mb-2" />
-            <span>First Floor</span>
-          </button>
+    <div className='bgViewReservation flex flex-col min-h-screen justify-center items-center w-full'>
+      <div className='my-[30px]'>
+        <h1 className="text-[32px] sm:text-[40px] block text-center font-bold text-[white] mb-[30px] sm:mb-[50px]">
+          Seating Area
+        </h1>
+        <div className='w-full flex flex-col items-center'>
+          <div className="w-[95%] sm:w-[90%] flex justify-center"> {/* Contenedor centrado responsive */}
+            <div className="text-white flex flex-col sm:flex-row gap-[10px]"> {/* Flex column en móviles, fila en pantallas mayores */}
+              <button
+                className={`${selectedSectorGroundFloor} p-3 sm:p-4 w-[180px] sm:w-[200px] border bg-gray-700 text-white border-amber-300 rounded-md hover:bg-amber-50 hover:text-black transition duration-150 ease-in-out flex flex-col items-center`}
+                onClick={() => {
+                  setSelectedSectorOutDoor('');
+                  setSelectedSectorFirstFloor('');
+                  setSelectedSectorGroundFloor('border-[3px] border-amber-500');
+                  setSector('pb');
+                  setShowPb('');
+                  setShowFirstFloor('hidden');
+                  setShowOutDoor('hidden');
+                }}
+              >
+                <MapPin className="text-[#dd9000] mb-2" />
+                <span>Ground Floor</span>
+              </button>
+              <button
+                className={`${selectedSectorFirstFloor} p-3 sm:p-4 w-[180px] sm:w-[200px] border bg-gray-700 text-white border-amber-300 rounded-md hover:bg-amber-50 hover:text-black transition duration-150 ease-in-out flex flex-col items-center`}
+                onClick={() => {
+                  setSelectedSectorOutDoor('');
+                  setSelectedSectorGroundFloor('');
+                  setSelectedSectorFirstFloor('border-[3px] border-amber-500');
+                  setSector('firstFloor');
+                  setShowPb('hidden');
+                  setShowFirstFloor('');
+                  setShowOutDoor('hidden');
+                }}
+              >
+                <Utensils className="text-[#dd9000] mb-2" />
+                <span>First Floor</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className='mb-[30px] sm:mb-[50px]'>
+        <div className={`${showPb}`}>
+          <TablePB />
+        </div>
+        <div className={`${showFirstFloor}`}>
+          <FirstFloor />
         </div>
       </div>
     </div>
-  </div>
-
-  <div className='mb-[30px] sm:mb-[50px]'>
-    <div className={`${showPb}`}>
-      <TablePB />
-    </div>
-    <div className={`${showFirstFloor}`}>
-      <FirstFloor />
-    </div>
-  </div>
-</div>
 
   );
 }

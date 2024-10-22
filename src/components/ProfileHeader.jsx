@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
 import { logoutAction } from '../redux/actions/authAction'
 import { authReducer } from '../redux/reducers/authReducer'
+import "../styles/profileHeader.css";
 
 // interface Address {
 //   street: string;
@@ -106,9 +107,10 @@ function ProfileHeader() {
 
 
     const viewAllAddress = () => {
-        setIsOpen(false)
+        setIsOpen(false);
+        
         const htmlContent = address.map((address, index) => (
-            `<div key=${index} class="flex items-start mb-2">
+            `<div key=${index} class="flex justify-center items-start mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 mt-1" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M8 0C5.791 0 4 1.791 4 4c0 3.48 4 8 4 8s4-4.52 4-8c0-2.209-1.791-4-4-4zm0 6a2 2 0 1 1 .001-3.999A2 2 0 0 1 8 6z"/>
                 </svg>
@@ -117,19 +119,22 @@ function ProfileHeader() {
                     <div><span class="font-bold">Postal Code:</span> ${address.zipCode}</div>
                 </div>
             </div>`
-        )).join(""); // Usamos join para convertir el array en una única cadena de HTML
-    
+        )).join(""); 
+        
         Swal.fire({
-            title: 'List of Items',
-            html: htmlContent, // Aquí va el HTML generado
+            title: 'List of Addresses',
+            html: htmlContent,
             icon: 'info',
-            confirmButtonText: 'Close'
+            confirmButtonText: 'Close',
+            position: 'center',  // Para centrar el modal en la pantalla horizontal y verticalmente
+            customClass: {
+                popup: 'swal-custom-popup',  // Clase personalizada para el contenedor del popup
+                title: 'swal-custom-title',  // Clase personalizada para el título
+                confirmButton: 'swal-custom-confirm'  // Clase personalizada para el botón de confirmación
+            }
         });
     };
-
-
-
-
+    
     const handleClick = () => {
 
         dispatch(logoutAction())
@@ -148,7 +153,7 @@ function ProfileHeader() {
 
     }
     return (
-        <header className="flex justify-evenly items-center p-4   text-white">
+        <header className="flex justify-center items-center p-4 text-white mb-6">
             {/* <h1 className="text-2xl font-bold">My Website</h1> */}
             <div className="relative ">
                 <button
@@ -161,7 +166,7 @@ function ProfileHeader() {
 
                 </button>
                 {isOpen && (
-                    <div className="absolute top-full right-0 w-96 bg-white rounded-lg shadow-lg p-4 text-gray-800 z-10">
+                    <div className="absolute top-[160%] right-0 left-[-70px] md:left-[-180px] w-96 bg-white rounded-lg shadow-lg p-4 text-gray-800 z-10">
                         {/* Botones de Login y Register */}
                         <div className="flex items-center justify-end gap-4">
                             <CustomerButton
